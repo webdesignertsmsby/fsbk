@@ -1,9 +1,9 @@
 /* ========================================
-   GLOBAL DESIGN SYSTEM (BASED ON YOUR SPEC)
+   GLOBAL DESIGN SYSTEM (FIXED VERSION)
    ======================================== */
 
 /* --------------------------------------- */
-/* 1. ROOT VARIABLES (TYPOGRAPHY + DEVICES) */
+/* 1. ROOT VARIABLES                        */
 /* --------------------------------------- */
 
 :root {
@@ -18,20 +18,19 @@
   --h1-desktop: 140px;
   --h1-tablet: 112px;
   --h1-mobile: 64px;
-  
+
   /* Heading 2 */
-  --h2-desktop: 140px;
+  --h2-desktop: 74px;
   --h2-tablet: 64px;
-  --h2-mobile: 74px;
+  --h2-mobile: 48px;
 
   /* Heading 3 */
-  --h3-desktop: 140px;
-  --h3-tablet: 59px;
-  --h3-mobile: 47px;
+  --h3-desktop: 59px;
+  --h3-tablet: 47px;
+  --h3-mobile: 36px;
 
   /* Heading 4 */
   --h4-desktop: 40px;
-  --h4-tablet: 40px;
   --h4-mobile: 33px;
 
   /* Heading 5 & 6 */
@@ -54,11 +53,10 @@
 }
 
 /* --------------------------------------- */
-/* 2. COLOR BASE                            */
+/* 2–3. COLORS (unchanged)                  */
 /* --------------------------------------- */
 
 :root {
-  /* Neutral */
   --neutral-50: #fafafa;
   --neutral-100: #f5f5f5;
   --neutral-200: #e5e5e5;
@@ -70,7 +68,6 @@
   --neutral-800: #262626;
   --neutral-900: #0a0a0a;
 
-  /* Brand */
   --brand-50: #eaf5ff;
   --brand-100: #bdddff;
   --brand-200: #9ec1f5;
@@ -81,13 +78,7 @@
   --brand-700: #24456f;
   --brand-800: #002266;
   --brand-900: #05215b;
-}
 
-/* --------------------------------------- */
-/* 3. COLOR TOKENS                          */
-/* --------------------------------------- */
-
-:root {
   --text-primary: var(--neutral-900);
   --text-secondary: var(--neutral-600);
   --text-tertiary: var(--neutral-500);
@@ -100,139 +91,92 @@
 }
 
 /* --------------------------------------- */
-/* 4. TYPOGRAPHY CLASSES                     */
+/* 4. TYPOGRAPHY FIXED                      */
 /* --------------------------------------- */
 
-h1,h2,h3,h4,h5,h6,p,span,button {
+h1, h2, h3, h4, h5, h6, p, span, button {
   font-family: var(--font-sans);
   margin: 0;
 }
 
-/* Heading 1 */
-h1 {
-  font-weight: 700;
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-default);
-  font-size: var(--h1-desktop);
-}
-@media (max-width: var(--desktop-max)) {
-  h1 { font-size: var(--h1-tablet); }
-}
-@media (max-width: var(--mobile-max)) {
-  h1 { font-size: var(--h1-mobile); }
-}
+/* H1 */
+h1 { font-size: var(--h1-desktop); font-weight:700; letter-spacing:var(--ls-heading); line-height:var(--lh-default); }
+@media (max-width: 1024px) { h1 { font-size: var(--h1-tablet); } }
+@media (max-width: 480px)  { h1 { font-size: var(--h1-mobile); } }
 
-/* Heading 2 */
-h2 {
-  font-weight: 700;
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-default);
-  font-size: var(--h2-desktop);
-}
-@media (max-width: var(--desktop-max)) {
-  h2 { font-size: var(--h2-tablet); }
-}
-@media (max-width: var(--mobile-max)) {
-  h2 { font-size: var(--h2-mobile); }
-}
+/* H2 */
+h2 { font-size: var(--h2-desktop); font-weight:700; letter-spacing:var(--ls-heading); line-height:var(--lh-default); }
+@media (max-width: 1024px) { h2 { font-size: var(--h2-tablet); } }
+@media (max-width: 480px)  { h2 { font-size: var(--h2-mobile); } }
 
-/* Heading 3 */
-h3 {
-  font-weight: 700;
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-default);
-  font-size: var(--h3-desktop);
-}
-@media (max-width: var(--desktop-max)) {
-  h3 { font-size: var(--h3-tablet); }
-}
-@media (max-width: var(--mobile-max)) {
-  h3 { font-size: var(--h3-mobile); }
-}
+/* H3 */
+h3 { font-size: var(--h3-desktop); font-weight:700; letter-spacing:var(--ls-heading); line-height:var(--lh-default); }
+@media (max-width: 1024px) { h3 { font-size: var(--h3-tablet); } }
+@media (max-width: 480px)  { h3 { font-size: var(--h3-mobile); } }
 
-/* Heading 4 */
-h4 {
-  font-weight: 700;
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-default);
-  font-size: var(--h4-desktop);
-}
-@media (max-width: var(--mobile-max)) {
-  h4 { font-size: var(--h4-mobile); }
-}
+/* H4 */
+h4 { font-size: var(--h4-desktop); font-weight:700; letter-spacing:var(--ls-heading); }
+@media (max-width: 480px) { h4 { font-size: var(--h4-mobile); } }
 
-/* Heading 5 */
-h5 {
-  font-weight: 700;
-  font-size: var(--h5-size);
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-default);
-}
-
-/* Heading 6 */
-h6 {
-  font-weight: 700;
-  font-size: var(--h6-size);
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-default);
-}
+/* H5 & H6 */
+h5 { font-size: var(--h5-size); font-weight:700; letter-spacing:var(--ls-heading); }
+h6 { font-size: var(--h6-size); font-weight:700; letter-spacing:var(--ls-heading); }
 
 /* Body */
-.body-xl { font-size: var(--body-xl); letter-spacing: var(--ls-body); line-height: var(--lh-body); }
-.body-l  { font-size: var(--body-l);  letter-spacing: var(--ls-body); line-height: var(--lh-body); }
-.body-m  { font-size: var(--body-m);  letter-spacing: var(--ls-body); line-height: var(--lh-body); }
-.body-s  { font-size: var(--body-s);  letter-spacing: var(--ls-body); line-height: var(--lh-body); }
+.body-xl { font-size: var(--body-xl); line-height: var(--lh-body); }
+.body-l  { font-size: var(--body-l); line-height: var(--lh-body); }
+.body-m  { font-size: var(--body-m); line-height: var(--lh-body); }
+.body-s  { font-size: var(--body-s); line-height: var(--lh-body); }
 
 /* --------------------------------------- */
-/* 5. BUTTON STYLES                          */
+/* 5. BUTTON FIXED (NOW MATCH test.html)     */
 /* --------------------------------------- */
 
 button {
-  font-family: var(--font-family);
-  font-size: var(--font-button);
+  font-family: var(--font-sans);
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: var(--ls-button);
-  padding: 24px 16px;
+  padding: 16px 24px;
   border-radius: 8px;
   cursor: pointer;
+  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border: none;
-  text-decoration: none;
 }
 
-.button-primary {
-  background-color: var(--brand-500);
+/* Primary */
+.btn-primary {
+  background: var(--brand-500);
   color: var(--text-invert);
-  border: none;
 }
-.button-primary:hover {
-  background-color: var(--brand-600);
+.btn-primary:hover {
+  background: var(--brand-600);
 }
 
-.button-secondary {
+/* Secondary */
+.btn-secondary {
   background: transparent;
   color: var(--text-primary);
   border: 2px solid var(--border-default);
 }
-.button-secondary:hover {
+.btn-secondary:hover {
   background: var(--neutral-100);
 }
 
-.button-tertiary {
+/* Tertiary */
+.btn-tertiary {
   background: transparent;
   color: var(--brand-500);
-  border: none;
   text-decoration: underline;
 }
-.button-tertiary:hover {
+.btn-tertiary:hover {
   color: var(--brand-600);
 }
 
 /* --------------------------------------- */
-/* 6. SPACING SYSTEM                         */
+/* 6. SPACING & UTILITIES                   */
 /* --------------------------------------- */
 
 :root {
@@ -244,13 +188,7 @@ button {
   --space-xxl: 64px;
 }
 
-.section {
-  padding: var(--space-xxl) 0;
-}
-
-/* --------------------------------------- */
-/* 7. PAGE WIDTH + UTILITIES                 */
-/* --------------------------------------- */
+.section { padding: var(--space-xxl) 0; }
 
 .container {
   width: 100%;
@@ -259,10 +197,13 @@ button {
   padding: 0 16px;
 }
 
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.flex { display: flex; }
-.flex-center { align-items: center; justify-content: center; }
-.flex-between { align-items: center; justify-content: space-between; }
-.grid { display: grid; gap: var(--space-lg); }
+.text-center { text-align:center; }
+.text-left { text-align:left; }
+.text-right { text-align:right; }
+
+.flex { display:flex; }
+.flex-center { justify-content:center; align-items:center; }
+.flex-between { justify-content:space-between; align-items:center; }
+
+.grid { display:grid; gap:var(--space-lg); }
+
