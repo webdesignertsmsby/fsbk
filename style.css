@@ -52,6 +52,16 @@
   --lh-body: 1.5;
 }
 
+/* ===================== GLOBAL RESET ===================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0; /* Hapus margin default pada body */
+    padding: 0; /* Hapus padding default pada body */
+}
+
 /* --------------------------------------- */
 /* 2–3. COLORS (unchanged)                  */
 /* --------------------------------------- */
