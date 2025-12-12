@@ -8,17 +8,6 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /*
-      ===============================================
-      HERO BACKGROUND (Replace with your video element later)
-      ===============================================
-    */
-    #hero {
-        /* Temporary background image from your screenshot */
-        background-image: url("image_c9f25e.png"); 
-        background-size: cover;
-        background-position: center;
-    }
 
     /* DELETE THE PLACEHOLDER STYLES BELOW WHEN YOU ADD REAL SECTIONS */
     .container {
@@ -29,15 +18,13 @@
 
     /* ===================== HERO SECTION ===================== */
     .hero {
-      /* Set a fixed height for the hero */
       height: 100vh; 
       position: relative;
-      /* Use Flexbox to easily center content */
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      overflow: hidden; /* Important for background video/image */
+      overflow: hidden; 
     }
     
     /* Overlay for better text readability */
@@ -50,8 +37,7 @@
       background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
       z-index: 1;
     }
-    
-    /* Content wrapper to ensure text is above the overlay */
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -92,6 +78,33 @@
       background-color: var(--brand-500); /* Active indicator color */
       width: 48px; /* Make active dot wider */
     }
+
+    /* --------------------------------------- */
+    /* YOUTUBE VIDEO BACKGROUND STYLES         */
+    /* --------------------------------------- */
+    /* Full-screen iframe container */
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    /* Make the iframe cover the entire container and be slightly oversized
+       to prevent any gaps on different screen sizes */
+    .video-background iframe {
+      width: 100vw;
+      height: 56.25vw; /* 16:9 ratio (9/16 * 100) */
+      min-height: 100vh;
+      min-width: 177.77vh; /* 100 / (9/16) */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none; /* Prevents clicks/controls on the video */
+    }
     
   </style>
 </head>
@@ -101,6 +114,15 @@
   <main>
     <section id="hero" class="hero">
         
+        <div class="video-background">
+          <iframe 
+              src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=YOUR_YOUTUBE_VIDEO_ID&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+              frameborder="0" 
+              allow="autoplay; encrypted-media" 
+              allowfullscreen>
+          </iframe>
+        </div>
+
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
