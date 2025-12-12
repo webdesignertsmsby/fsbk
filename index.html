@@ -78,26 +78,27 @@
       bottom: 40px; 
       left: 50%;
       transform: translateX(-50%);
-      z-index: 3; 
+      z-index: 10; /* Z-index tinggi agar di atas overlay */
       display: flex;
-      gap: var(--space-sm);
+      gap: 8px;
     }
 
-    /* INI KUNCI AGAR DOT MUNCUL */
+    /* Dot Bawaan Swiper */
     .swiper-pagination-bullet {
-      height: 8px;
       width: 24px;
+      height: 8px;
+      background-color: var(--brand-50, #eaf5ff); 
       border-radius: 4px;
-      background-color: var(--brand-50); 
-      opacity: 1; /* Wajib opacity 1 agar terlihat jelas */
+      opacity: 1 !important; /* Paksa muncul */
       transition: all 0.3s ease;
+      display: block; /* Pastikan dianggap blok */
       cursor: pointer;
     }
 
-    /* INI GAYA SAAT AKTIF */
+    /* Dot Aktif */
     .swiper-pagination-bullet-active {
-      background-color: var(--brand-500); 
-      width: 48px; 
+      width: 48px;
+      background-color: var(--brand-500, #476fad); 
     }
 
     /* --------------------------------------- */
@@ -133,24 +134,19 @@
   <main>
     <section id="hero" class="hero">
         <div class="swiper hero-slider">
-            <div class="swiper-wrapper">
+           <div class="swiper-wrapper">
                 <div class="swiper-slide hero-slide">
                     <div class="video-background">
                         <iframe 
                             data-youtube-id="LcF6ut-1M94" 
                             src="https://www.youtube.com/embed/LcF6ut-1M94?autoplay=1&mute=1&loop=1&playlist=LcF6ut-1M94&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
-                            frameborder="0" 
-                            allow="autoplay; encrypted-media" 
-                            allowfullscreen>
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
-    
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h2>Bikin Roti Jadi Lebih Mudah</h2>
-                        <p class="body-xl">
-                            Mesin bakery yang dirancang untuk membuat proses produksi lebih cepat, stabil, dan efisien
-                        </p>
+                        <p class="body-xl">Mesin bakery yang dirancang untuk membuat proses produksi lebih cepat, stabil, dan efisien</p>
                         <button class="btn-secondary">JELAJAHI MESIN →</button>
                     </div>
                 </div>
@@ -158,20 +154,16 @@
                 <div class="swiper-slide hero-slide">
                     <div class="video-background">
                         <iframe 
+                            loading="lazy"
                             data-youtube-id="ftOTCFMpSWA" 
-                            data-src="https://www.youtube.com/embed/ftOTCFMpSWA?autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
-                            frameborder="0" 
-                            allow="autoplay; encrypted-media" 
-                            allowfullscreen>
+                            src="https://www.youtube.com/embed/ftOTCFMpSWA?autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
-    
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h2>Fresh Tanpa Ribet</h2>
-                        <p class="body-xl">
-                            Operasional mudah, hemat waktu, dan tetap menghasilkan kualitas terbaik.
-                        </p>
+                        <p class="body-xl">Operasional mudah, hemat waktu, dan tetap menghasilkan kualitas terbaik.</p>
                         <button class="btn-secondary">JELAJAHI MESIN →</button>
                     </div>
                 </div>
@@ -179,24 +171,19 @@
                 <div class="swiper-slide hero-slide">
                     <div class="video-background">
                         <iframe 
+                            loading="lazy"
                             data-youtube-id="qBXjSlkpwFk" 
-                            data-src="https://www.youtube.com/embed/qBXjSlkpwFk?autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
-                            frameborder="0" 
-                            allow="autoplay; encrypted-media" 
-                            allowfullscreen>
+                            src="https://www.youtube.com/embed/qBXjSlkpwFk?autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
-    
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h2>Konsisten di Setiap Hidangan</h2>
-                        <p class="body-xl">
-                            Mesin berkualitas premium yang mampu menjaga konsistensi rasa, tekstur, dan tampilan hidangan.
-                        </p>
+                        <p class="body-xl">Mesin berkualitas premium yang mampu menjaga konsistensi rasa, tekstur, dan tampilan hidangan.</p>
                         <button class="btn-secondary">JELAJAHI MESIN →</button>
                     </div>
                 </div>
-                
             </div>
             
             <div class="hero-slider-indicators">
@@ -214,97 +201,67 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
-    // ----------------------------------------------------
-    // YOUTUBE VIDEO CONTROL FUNCTIONS
-    // ----------------------------------------------------
-    
+    // --- FUNGSI VIDEO ---
     function restartActiveYoutubeVideo(slideEl) {
         const iframe = slideEl.querySelector('iframe');
         if (!iframe) return;
-
         const youtubeId = iframe.getAttribute('data-youtube-id');
-        // Cek data-src untuk lazy loading atau src biasa
-        if ((!iframe.src && !iframe.getAttribute('data-src')) || !youtubeId) return;
+        if (!youtubeId) return;
 
-        // Reset src untuk restart video
-        const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
-        iframe.src = newSrc;
+        // Restart video dengan autoplay=1
+        iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
     }
 
     function stopYoutubeVideo(slideEl) {
         const iframe = slideEl.querySelector('iframe');
         if (!iframe) return;
-
         const youtubeId = iframe.getAttribute('data-youtube-id');
         if (!youtubeId) return;
         
-        // Matikan video
-        const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=0&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
-        iframe.src = newSrc;
+        // Stop video dengan autoplay=0
+        iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=0&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
     }
 
-
-    // ----------------------------------------------------
-    // HERO SLIDER CONFIGURATION
-    // ----------------------------------------------------
+    // --- KONFIGURASI SWIPER ---
     const heroSwiper = new Swiper('.hero-slider', {
-      
-      modules: [Swiper.Lazy], // Mengaktifkan modul lazy
+      // HAPUS 'modules' DAN 'lazy' DISINI KARENA BIKIN ERROR DI V11
       
       speed: 800,
       loop: true,
       effect: 'slide',
 
-      // Lazy load configuration
-      lazy: {
-        loadPrevNext: true, 
-      },
-      
-      // AUTOPLAY: 10 Detik
       autoplay: {
         delay: 10000, 
         disableOnInteraction: false, 
       },
       
-      // PAGINASI (DOTS)
       pagination: {
         el: '.hero-slider-indicators',
         clickable: true,
-        // HAPUS renderBullet! Biarkan Swiper membuatnya secara otomatis
-        // agar sesuai dengan CSS .swiper-pagination-bullet
       },
     });
 
-    // ----------------------------------------------------
-    // EVENT LISTENERS (LOGIKA UTAMA)
-    // ----------------------------------------------------
-
-    // Saat slide berubah (Swipe atau Autoplay)
+    // --- LOGIKA UTAMA ---
+    
+    // Saat slide berubah
     heroSwiper.on('slideChangeTransitionEnd', function () {
         const activeSlide = this.slides[this.activeIndex];
-        const previousSlide = this.slides[this.previousIndex];
-        
-        // 1. Matikan video slide sebelumnya
-        stopYoutubeVideo(previousSlide); 
-
-        // 2. Nyalakan video slide aktif
-        restartActiveYoutubeVideo(activeSlide);
-    });
-
-    // Saat Swiper pertama kali siap (Init)
-    heroSwiper.on('init', function () {
-        // Matikan semua video selain yang aktif (untuk mencegah suara bocor)
+        // previousIndex kadang tidak akurat saat loop, jadi kita stop semua slide lain
         this.slides.forEach((slide, index) => {
             if (index !== this.activeIndex) {
                 stopYoutubeVideo(slide);
             }
         });
         
-        // Nyalakan video di slide pertama
-        const initialSlide = this.slides[this.activeIndex];
-        restartActiveYoutubeVideo(initialSlide); 
+        restartActiveYoutubeVideo(activeSlide);
     });
-    
+
+    // Saat inisialisasi awal
+    heroSwiper.on('init', function () {
+        const activeSlide = this.slides[this.activeIndex];
+        restartActiveYoutubeVideo(activeSlide);
+    });
+
   </script>
 
   </body>
