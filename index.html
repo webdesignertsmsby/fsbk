@@ -83,15 +83,18 @@
       gap: var(--space-sm);
     }
 
+    /* INI KUNCI AGAR DOT MUNCUL */
     .swiper-pagination-bullet {
       height: 8px;
       width: 24px;
       border-radius: 4px;
       background-color: var(--brand-50); 
-      opacity: 1; /* PENTING */
+      opacity: 1; /* Wajib opacity 1 agar terlihat jelas */
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
+    /* INI GAYA SAAT AKTIF */
     .swiper-pagination-bullet-active {
       background-color: var(--brand-500); 
       width: 48px; 
@@ -220,8 +223,10 @@
         if (!iframe) return;
 
         const youtubeId = iframe.getAttribute('data-youtube-id');
-        if (!iframe.src || !youtubeId) return;
+        // Cek data-src untuk lazy loading atau src biasa
+        if ((!iframe.src && !iframe.getAttribute('data-src')) || !youtubeId) return;
 
+        // Reset src untuk restart video
         const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
         iframe.src = newSrc;
     }
@@ -233,27 +238,29 @@
         const youtubeId = iframe.getAttribute('data-youtube-id');
         if (!youtubeId) return;
         
+        // Matikan video
         const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=0&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
         iframe.src = newSrc;
     }
 
 
     // ----------------------------------------------------
-    // HERO SLIDER INITIATION & CONFIGURATION
+    // HERO SLIDER CONFIGURATION
     // ----------------------------------------------------
     const heroSwiper = new Swiper('.hero-slider', {
       
-      modules: [Swiper.Lazy], 
+      modules: [Swiper.Lazy], // Mengaktifkan modul lazy
       
       speed: 800,
       loop: true,
       effect: 'slide',
 
+      // Lazy load configuration
       lazy: {
         loadPrevNext: true, 
       },
       
-      // FIX AUTOPLAY (Nilai sudah benar, 10000ms)
+      // AUTOPLAY: 10 Detik
       autoplay: {
         delay: 10000, 
         disableOnInteraction: false, 
@@ -263,40 +270,37 @@
       pagination: {
         el: '.hero-slider-indicators',
         clickable: true,
-        // Ini yang menjamin dot muncul dengan styling CSS lokal
-        renderBullet: function (index, className) {
-          return '<div class="' + className + ' indicator-dot"></div>';
-        },
+        // HAPUS renderBullet! Biarkan Swiper membuatnya secara otomatis
+        // agar sesuai dengan CSS .swiper-pagination-bullet
       },
     });
 
     // ----------------------------------------------------
-    // EVENT LISTENERS
+    // EVENT LISTENERS (LOGIKA UTAMA)
     // ----------------------------------------------------
 
-    // Ketika slide berubah (SWIPE/AUTOPLAY)
+    // Saat slide berubah (Swipe atau Autoplay)
     heroSwiper.on('slideChangeTransitionEnd', function () {
         const activeSlide = this.slides[this.activeIndex];
         const previousSlide = this.slides[this.previousIndex];
         
-        // Hentikan video slide sebelumnya (PENTING untuk performa)
+        // 1. Matikan video slide sebelumnya
         stopYoutubeVideo(previousSlide); 
 
-        // Restart video pada slide yang baru aktif
+        // 2. Nyalakan video slide aktif
         restartActiveYoutubeVideo(activeSlide);
     });
 
-    // Ketika Swiper siap (Hanya terjadi SEKALI)
+    // Saat Swiper pertama kali siap (Init)
     heroSwiper.on('init', function () {
-        
-        // 1. Matikan video di semua slide non-aktif (agar Autoplay berjalan lancar)
+        // Matikan semua video selain yang aktif (untuk mencegah suara bocor)
         this.slides.forEach((slide, index) => {
             if (index !== this.activeIndex) {
                 stopYoutubeVideo(slide);
             }
         });
         
-        // 2. Pastikan slide pertama dimulai
+        // Nyalakan video di slide pertama
         const initialSlide = this.slides[this.activeIndex];
         restartActiveYoutubeVideo(initialSlide); 
     });
