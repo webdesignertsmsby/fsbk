@@ -276,22 +276,6 @@
         const initialSlide = this.slides[this.activeIndex];
         restartActiveYoutubeVideo(initialSlide); 
     });
-    
-    // ----------------------------------------------------
-    // LOGIC WHEN SLIDE CHANGES (Rules 1 & 2)
-    // ----------------------------------------------------
-
-    heroSwiper.on('slideChangeTransitionEnd', function () {
-      // 1. Dapatkan index slide yang baru aktif dan slide yang baru non-aktif
-      const activeSlide = heroSwiper.slides[heroSwiper.activeIndex];
-      const previousSlide = heroSwiper.slides[heroSwiper.previousIndex];
-
-      // 2. Hentikan video pada slide yang baru saja ditinggalkan
-      stopYoutubeVideo(previousSlide);
-      
-      // 3. Mulai/restart video pada slide yang baru aktif (Rule 2)
-      restartYoutubeVideo(activeSlide);
-    });
 
     // Inisialisasi awal: pastikan hanya slide pertama yang autoplay
     heroSwiper.on('init', function () {
