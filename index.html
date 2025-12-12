@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feaspack</title>
+  <title>Feasbake</title>
 
   <link rel="stylesheet" href="style.css" />
 
@@ -36,6 +36,11 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
       z-index: 1;
+    }
+
+    .hero-slider {
+      width: 100%;
+      height: 100%;
     }
 
     .hero-content {
@@ -113,35 +118,76 @@
 
   <main>
     <section id="hero" class="hero">
-        
-        <div class="video-background">
-          <iframe 
-              src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
-              frameborder="0" 
-              allow="autoplay; encrypted-media" 
-              allowfullscreen>
-          </iframe>
-        </div>
-
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
+        <div class="swiper hero-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide hero-slide">
+                    <div class="video-background">
+                        <iframe 
+                            data-youtube-id="LcF6ut-1M94" 
+                            src="https://www.youtube.com/embed/LcF6ut-1M94?autoplay=1&mute=1&loop=1&playlist=LcF6ut-1M94&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            frameborder="0" 
+                            allow="autoplay; encrypted-media" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+    
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h2>Bikin Roti Jadi Lebih Mudah</h2>
+                        <p class="body-xl">
+                            Mesin bakery yang dirancang untuk membuat proses produksi lebih cepat, stabil, dan efisien
+                        </p>
+                        <button class="btn-secondary">JELAJAHI MESIN →</button>
+                    </div>
+                </div>
+    
+                <div class="swiper-slide hero-slide">
+                    <div class="video-background">
+                        <iframe 
+                            data-youtube-id="ftOTCFMpSWA" 
+                            src="https://www.youtube.com/embed/ftOTCFMpSWA?autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            frameborder="0" 
+                            allow="autoplay; encrypted-media" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+    
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h2>Fresh Tanpa Ribet</h2>
+                        <p class="body-xl">
+                            Operasional mudah, hemat waktu, dan tetap menghasilkan kualitas terbaik.
+                        </p>
+                        <button class="btn-secondary">JELAJAHI MESIN →</button>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide hero-slide">
+                    <div class="video-background">
+                        <iframe 
+                            data-youtube-id="qBXjSlkpwFk" 
+                            src="https://www.youtube.com/embed/qBXjSlkpwFk?autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            frameborder="0" 
+                            allow="autoplay; encrypted-media" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+    
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h2>Konsisten di Setiap Hidangan</h2>
+                        <p class="body-xl">
+                            Mesin berkualitas premium yang mampu menjaga konsistensi rasa, tekstur, dan tampilan hidangan.
+                        </p>
+                        <button class="btn-secondary">JELAJAHI MESIN →</button>
+                    </div>
+                </div>
+                
+            </div>
             
-            <h2 class="text-invert">Bikin Roti Jadi Lebih Mudah</h2>
-            
-            <p class="body-xl text-invert-secondary">
-                Mesin bakery yang dirancang untuk membuat proses produksi lebih cepat, stabil, dan efisien
-            </p>
-            
-            <button class="btn-secondary">JELAJAHI MESIN →</button>
+            <div class="hero-slider-indicators">
+                </div>
         </div>
-
-        <div class="hero-slider-indicators">
-            <div class="indicator-dot active"></div> 
-            <div class="indicator-dot"></div>
-            <div class="indicator-dot"></div>
-        </div>
-
     </section>
     
     <section id="typography" class="container section"></section>
@@ -150,6 +196,93 @@
     <section id="components" class="container section"></section>
 
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // ----------------------------------------------------
+    // HERO SLIDER AND VIDEO LOGIC
+    // ----------------------------------------------------
+    const heroSwiper = new Swiper('.hero-slider', {
+      // Configuration untuk Swiper
+      speed: 800,
+      loop: true,
+      effect: 'slide',
+      autoplay: {
+        delay: 5000, // Otomatis geser setiap 5 detik
+        disableOnInteraction: false,
+      },
+      
+      // Paginasi (Dots)
+      pagination: {
+        el: '.hero-slider-indicators',
+        clickable: true,
+        renderBullet: function (index, className) {
+          // Menggunakan struktur dot yang kita buat di CSS
+          return '<div class="' + className + ' indicator-dot"></div>';
+        },
+      },
+    });
+
+    // Fungsi untuk me-restart video YouTube
+    function restartYoutubeVideo(slideEl) {
+        const iframe = slideEl.querySelector('iframe');
+        if (!iframe) return;
+
+        const youtubeId = iframe.getAttribute('data-youtube-id');
+        if (!youtubeId) return;
+
+        // Mendapatkan URL asli (yang berisi autoplay=0 untuk slide non-aktif)
+        const originalSrc = iframe.src;
+        
+        // Membangun URL baru dengan autoplay=1 dan start=0
+        const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
+        
+        // Set src baru untuk me-restart video
+        iframe.src = newSrc;
+    }
+
+    // Fungsi untuk menghentikan video
+    function stopYoutubeVideo(slideEl) {
+        const iframe = slideEl.querySelector('iframe');
+        if (!iframe) return;
+
+        const youtubeId = iframe.getAttribute('data-youtube-id');
+        if (!youtubeId) return;
+        
+        // Mengganti src ke autoplay=0 dan tanpa start time (menghentikan dan mereset)
+        const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=0&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
+        iframe.src = newSrc;
+    }
+    
+    // ----------------------------------------------------
+    // LOGIC WHEN SLIDE CHANGES (Rules 1 & 2)
+    // ----------------------------------------------------
+
+    heroSwiper.on('slideChangeTransitionEnd', function () {
+      // 1. Dapatkan index slide yang baru aktif dan slide yang baru non-aktif
+      const activeSlide = heroSwiper.slides[heroSwiper.activeIndex];
+      const previousSlide = heroSwiper.slides[heroSwiper.previousIndex];
+
+      // 2. Hentikan video pada slide yang baru saja ditinggalkan
+      stopYoutubeVideo(previousSlide);
+      
+      // 3. Mulai/restart video pada slide yang baru aktif (Rule 2)
+      restartYoutubeVideo(activeSlide);
+    });
+
+    // Inisialisasi awal: pastikan hanya slide pertama yang autoplay
+    heroSwiper.on('init', function () {
+      // Hentikan video di semua slide kecuali slide aktif saat inisialisasi
+      this.slides.forEach((slide, index) => {
+          if (index !== this.activeIndex) {
+              stopYoutubeVideo(slide);
+          }
+      });
+      // Slide aktif sudah diatur autoplay=1 di HTML, jadi tidak perlu restart di sini.
+    });
+    
+  </script>
 
   </body>
 </html>
