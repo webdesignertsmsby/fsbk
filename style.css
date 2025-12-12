@@ -217,7 +217,6 @@ button {
 }
 
 .navbar-container {
-  max-width: 1280px;
   margin: auto;
   padding: 20px 40px;
   display: flex;
