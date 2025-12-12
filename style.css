@@ -172,7 +172,8 @@ button {
   border: 2px solid var(--border-default);
 }
 .btn-secondary:hover {
-  background: var(--neutral-900);
+  background: var(--neutral-50);
+  color: var(--text-primary);
 }
 
 /* Tertiary */
