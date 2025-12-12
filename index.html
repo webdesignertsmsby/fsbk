@@ -145,7 +145,7 @@
                     <div class="video-background">
                         <iframe 
                             data-youtube-id="ftOTCFMpSWA" 
-                            src="https://www.youtube.com/embed/ftOTCFMpSWA?autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            data-src="https://www.youtube.com/embed/ftOTCFMpSWA?autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" 
                             allow="autoplay; encrypted-media" 
                             allowfullscreen>
@@ -166,7 +166,7 @@
                     <div class="video-background">
                         <iframe 
                             data-youtube-id="qBXjSlkpwFk" 
-                            src="https://www.youtube.com/embed/qBXjSlkpwFk?autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            data-src="https://www.youtube.com/embed/qBXjSlkpwFk?autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" 
                             allow="autoplay; encrypted-media" 
                             allowfullscreen>
@@ -205,11 +205,17 @@
     // ----------------------------------------------------
     const heroSwiper = new Swiper('.hero-slider', {
       // Configuration untuk Swiper
+      modules: [Swiper.Lazy],
+      
       speed: 800,
       loop: true,
       effect: 'slide',
+
+      lazy: {
+        loadPrevNext: true, 
+      },
       autoplay: {
-        delay: 5000, // Otomatis geser setiap 5 detik
+        delay: 10000,
         disableOnInteraction: false,
       },
       
@@ -224,36 +230,42 @@
       },
     });
 
-    // Fungsi untuk me-restart video YouTube
-    function restartYoutubeVideo(slideEl) {
+    // Fungsi untuk me-restart video YouTube di slide yang sudah dimuat
+    function restartActiveYoutubeVideo(slideEl) {
         const iframe = slideEl.querySelector('iframe');
         if (!iframe) return;
-
+    
         const youtubeId = iframe.getAttribute('data-youtube-id');
-        if (!youtubeId) return;
-
-        // Mendapatkan URL asli (yang berisi autoplay=0 untuk slide non-aktif)
-        const originalSrc = iframe.src;
-        
-        // Membangun URL baru dengan autoplay=1 dan start=0
+        // Jika iframe belum memiliki src (lazy loaded), skip
+        if (!iframe.src || !youtubeId) return;
+    
+        // Membangun URL baru dengan autoplay=1 dan start=0 untuk memastikan restart
         const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
         
         // Set src baru untuk me-restart video
         iframe.src = newSrc;
     }
-
-    // Fungsi untuk menghentikan video
-    function stopYoutubeVideo(slideEl) {
-        const iframe = slideEl.querySelector('iframe');
-        if (!iframe) return;
-
-        const youtubeId = iframe.getAttribute('data-youtube-id');
-        if (!youtubeId) return;
-        
-        // Mengganti src ke autoplay=0 dan tanpa start time (menghentikan dan mereset)
-        const newSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=0&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
-        iframe.src = newSrc;
-    }
+    
+    // ----------------------------------------------------
+    // LOGIC WHEN SLIDE CHANGES
+    // ----------------------------------------------------
+    
+    // Ketika slide berubah
+    heroSwiper.on('slideChangeTransitionEnd', function () {
+        // 1. Dapatkan index slide yang baru aktif
+        const activeSlide = this.slides[this.activeIndex];
+    
+        // 2. Restart video pada slide yang baru aktif (Rule 2)
+        // Swiper Lazy Loading akan memastikan iframe memiliki src saat ini dipanggil
+        restartActiveYoutubeVideo(activeSlide);
+    });
+    
+    // Ketika Swiper siap, pastikan hanya slide pertama yang aktif.
+    heroSwiper.on('init', function () {
+        // Panggil restart di slide pertama agar video mulai jika tidak dimulai secara otomatis
+        const initialSlide = this.slides[this.activeIndex];
+        restartActiveYoutubeVideo(initialSlide); 
+    });
     
     // ----------------------------------------------------
     // LOGIC WHEN SLIDE CHANGES (Rules 1 & 2)
