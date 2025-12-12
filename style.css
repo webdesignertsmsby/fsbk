@@ -240,7 +240,7 @@ button {
 }
 
 .nav-link {
-  font-size: var(--body-l);
+  font-size: var(--body-s);
   font-weight: 400;
   color: var(--text-invert);
   text-decoration: none;
