@@ -195,73 +195,7 @@
     <section id="components" class="container section"></section>
 
   </main>
-<!--
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <script>
-    // --- FUNGSI VIDEO ---
-    function restartActiveYoutubeVideo(slideEl) {
-        const iframe = slideEl.querySelector('iframe');
-        if (!iframe) return;
-        const youtubeId = iframe.getAttribute('data-youtube-id');
-        if (!youtubeId) return;
-
-        // Restart video dengan autoplay=1
-        iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
-    }
-
-    function stopYoutubeVideo(slideEl) {
-        const iframe = slideEl.querySelector('iframe');
-        if (!iframe) return;
-        const youtubeId = iframe.getAttribute('data-youtube-id');
-        if (!youtubeId) return;
-        
-        // Stop video dengan autoplay=0
-        iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=0&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&start=0&vq=hd1080`;
-    }
-
-    // --- KONFIGURASI SWIPER ---
-    const heroSwiper = new Swiper('.hero-slider', {
-      // HAPUS 'modules' DAN 'lazy' DISINI KARENA BIKIN ERROR DI V11
-      
-      speed: 800,
-      loop: true,
-      effect: 'slide',
-
-      autoplay: {
-        delay: 10000, 
-        disableOnInteraction: false, 
-      },
-      
-      pagination: {
-        el: '.hero-slider-indicators',
-        clickable: true,
-      },
-    });
-
-    // --- LOGIKA UTAMA ---
-    
-    // Saat slide berubah
-    heroSwiper.on('slideChangeTransitionEnd', function () {
-        const activeSlide = this.slides[this.activeIndex];
-        // previousIndex kadang tidak akurat saat loop, jadi kita stop semua slide lain
-        this.slides.forEach((slide, index) => {
-            if (index !== this.activeIndex) {
-                stopYoutubeVideo(slide);
-            }
-        });
-        
-        restartActiveYoutubeVideo(activeSlide);
-    });
-
-    // Saat inisialisasi awal
-    heroSwiper.on('init', function () {
-        const activeSlide = this.slides[this.activeIndex];
-        restartActiveYoutubeVideo(activeSlide);
-    });
-
-  </script>
-  -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
