@@ -73,33 +73,32 @@
     /* --------------------------------------- */
     /* Slider Indicators (Dots)                */
     /* --------------------------------------- */
+    /* 1. WADAH/CONTAINER INDICATOR (PENTING untuk posisi) */
     .hero-slider-indicators {
       position: absolute;
       bottom: 40px; /* Jarak dari bawah */
       left: 50%;
       transform: translateX(-50%);
-      z-index: 10; /* Pastikan Z-Index tinggi agar di atas video */
-      display: flex;
+      z-index: 10; /* Pastikan di atas overlay */
+      display: flex; /* Untuk merapikan dots */
       gap: 12px; /* Jarak antar dot */
-      pointer-events: auto; /* Agar bisa diklik */
+      /* Hapus pointer-events: none jika sebelumnya ada di sini */
     }
 
-    /* 2. Style Dot Default (Inactive) */
-    /* Sesuai kode yang Anda berikan */
+    /* 2. STYLE DOT DEFAULT (Inactive - Lingkaran/Lonjong Kecil) */
     .swiper-pagination-bullet {
       width: 24px; 
       height: 8px;
       background-color: var(--brand-50, #eaf5ff); 
-      border-radius: 4px;
-      opacity: 1 !important; /* Paksa muncul (override default swiper) */
+      border-radius: 4px; /* Membuat lonjong */
+      opacity: 1 !important; /* Paksa muncul */
       transition: all 0.3s ease;
-      display: block; 
       cursor: pointer;
-      margin: 0 !important; /* Reset margin bawaan Swiper agar rapi */
+      margin: 0 !important; /* Reset margin bawaan Swiper */
+      display: inline-block; /* Pastikan dia muncul */
     }
 
-    /* 3. Style Dot Aktif */
-    /* Sesuai kode yang Anda berikan */
+    /* 3. STYLE DOT AKTIF (Active - Lonjong Panjang) */
     .swiper-pagination-bullet-active {
       width: 48px; /* Lebih lebar */
       background-color: var(--brand-500, #476fad); 
@@ -199,122 +198,64 @@
     <section id="components" class="container section"></section>
 
   </main>
-  <!--
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
     <script>
-      // --- FUNGSI KONTROL VIDEO (INSTANT) ---
-      // Menggunakan postMessage agar tidak perlu reload iframe
+      // --- 1. FUNGSI KONTROL VIDEO (INSTANT & BACKGROUND) ---
+      // Menggunakan postMessage agar video tidak perlu reload (loading="lazy" dihapus di HTML)
       function controlSlideVideo(slideEl, action) {
           const iframe = slideEl.querySelector('iframe');
           if (!iframe) return;
           
-          // Mengirim perintah Play/Pause ke YouTube API
+          // Mengirim perintah Play/Pause ke YouTube API tanpa mereset source
           iframe.contentWindow.postMessage(JSON.stringify({
               'event': 'command',
               'func': action === 'play' ? 'playVideo' : 'pauseVideo',
               'args': []
           }), '*');
       }
-    
-      // --- KONFIGURASI SWIPER ---
+  
+      // --- 2. KONFIGURASI SWIPER ---
       const heroSwiper = new Swiper('.hero-slider', {
+        // PENTING: Jangan gunakan 'modules: [Swiper.Lazy]' di versi 11 (Bikin Crash)
+        
         speed: 800,
         loop: true,
         effect: 'slide',
-        
-        // Autoplay configuration
+  
         autoplay: {
           delay: 10000, 
           disableOnInteraction: false, 
         },
         
+        // Indikator otomatis menggunakan class .swiper-pagination-bullet dari CSS Anda
         pagination: {
           el: '.hero-slider-indicators',
           clickable: true,
         },
       });
-    
-      // --- LOGIKA UTAMA ---
+  
+      // --- 3. LOGIKA UTAMA (VIDEO & SLIDE) ---
       
-      // Saat slide berubah
+      // Saat slide berubah (Swipe atau Autoplay)
       heroSwiper.on('slideChange', function () {
-          // 1. Pause video di slide sebelumnya (agar tidak ada suara bocor/double play)
-          // Kita loop semua slide untuk memastikan yang lain mati
+          // Matikan video di semua slide (agar suara tidak bocor)
           this.slides.forEach((slide) => {
               controlSlideVideo(slide, 'pause');
           });
           
-          // 2. Play video di slide yang baru aktif secara instan
+          // Nyalakan video di slide yang baru aktif secara instan
           const activeSlide = this.slides[this.activeIndex];
           controlSlideVideo(activeSlide, 'play');
       });
-    
+  
       // Saat inisialisasi awal (Play slide pertama)
       heroSwiper.on('init', function () {
           const activeSlide = this.slides[this.activeIndex];
           controlSlideVideo(activeSlide, 'play');
       });
-    
-    </script> -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <script>
-    // --- 1. FUNGSI KONTROL VIDEO (INSTANT & BACKGROUND) ---
-    // Menggunakan postMessage agar video tidak perlu reload (loading="lazy" dihapus di HTML)
-    function controlSlideVideo(slideEl, action) {
-        const iframe = slideEl.querySelector('iframe');
-        if (!iframe) return;
-        
-        // Mengirim perintah Play/Pause ke YouTube API tanpa mereset source
-        iframe.contentWindow.postMessage(JSON.stringify({
-            'event': 'command',
-            'func': action === 'play' ? 'playVideo' : 'pauseVideo',
-            'args': []
-        }), '*');
-    }
-
-    // --- 2. KONFIGURASI SWIPER ---
-    const heroSwiper = new Swiper('.hero-slider', {
-      // PENTING: Jangan gunakan 'modules: [Swiper.Lazy]' di versi 11 (Bikin Crash)
-      
-      speed: 800,
-      loop: true,
-      effect: 'slide',
-
-      autoplay: {
-        delay: 10000, 
-        disableOnInteraction: false, 
-      },
-      
-      // Indikator otomatis menggunakan class .swiper-pagination-bullet dari CSS Anda
-      pagination: {
-        el: '.hero-slider-indicators',
-        clickable: true,
-      },
-    });
-
-    // --- 3. LOGIKA UTAMA (VIDEO & SLIDE) ---
-    
-    // Saat slide berubah (Swipe atau Autoplay)
-    heroSwiper.on('slideChange', function () {
-        // Matikan video di semua slide (agar suara tidak bocor)
-        this.slides.forEach((slide) => {
-            controlSlideVideo(slide, 'pause');
-        });
-        
-        // Nyalakan video di slide yang baru aktif secara instan
-        const activeSlide = this.slides[this.activeIndex];
-        controlSlideVideo(activeSlide, 'play');
-    });
-
-    // Saat inisialisasi awal (Play slide pertama)
-    heroSwiper.on('init', function () {
-        const activeSlide = this.slides[this.activeIndex];
-        controlSlideVideo(activeSlide, 'play');
-    });
-
-  </script>
+  
+    </script>
 
   </body>
 </html>
