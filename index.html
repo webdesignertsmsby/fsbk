@@ -142,14 +142,14 @@
                     <div class="video-background">
                         <iframe 
                             data-youtube-id="LcF6ut-1M94" 
-                            src="https://www.youtube.com/embed/LcF6ut-1M94?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=LcF6ut-1M94&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            /* PENTING: Hapus autoplay=1 dan ganti ke default (autoplay=0 atau kosong). Kita gunakan loop dan mute */
+                            src="https://www.youtube.com/embed/LcF6ut-1M94?enablejsapi=1&mute=1&loop=1&playlist=LcF6ut-1M94&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h2>Bikin Roti Jadi Lebih Mudah</h2>
-                        <p class="body-xl">Mesin bakery yang dirancang untuk membuat proses produksi lebih cepat, stabil, dan efisien</p>
                         <button class="btn-secondary">JELAJAHI MESIN →</button>
                     </div>
                 </div>
@@ -158,33 +158,23 @@
                     <div class="video-background">
                         <iframe 
                             data-youtube-id="ftOTCFMpSWA" 
-                            src="https://www.youtube.com/embed/ftOTCFMpSWA?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            /* PENTING: Pastikan tidak ada autoplay=1/0 */
+                            src="https://www.youtube.com/embed/ftOTCFMpSWA?enablejsapi=1&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <h2>Fresh Tanpa Ribet</h2>
-                        <p class="body-xl">Operasional mudah, hemat waktu, dan tetap menghasilkan kualitas terbaik.</p>
-                        <button class="btn-secondary">JELAJAHI MESIN →</button>
                     </div>
-                </div>
                 
                 <div class="swiper-slide hero-slide">
                     <div class="video-background">
                         <iframe 
                             data-youtube-id="qBXjSlkpwFk" 
-                            src="https://www.youtube.com/embed/qBXjSlkpwFk?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            /* PENTING: Pastikan tidak ada autoplay=1/0 */
+                            src="https://www.youtube.com/embed/qBXjSlkpwFk?enablejsapi=1&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <h2>Konsisten di Setiap Hidangan</h2>
-                        <p class="body-xl">Mesin berkualitas premium yang mampu menjaga konsistensi rasa, tekstur, dan tampilan hidangan.</p>
-                        <button class="btn-secondary">JELAJAHI MESIN →</button>
                     </div>
-                </div>
             </div>
             
             <div class="hero-slider-indicators">
@@ -198,6 +188,7 @@
     <section id="components" class="container section"></section>
 
   </main>
+  <!--
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   
     <script>
@@ -256,6 +247,81 @@
       });
   
     </script>
+-->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+  <script>
+    // --- 1. FUNGSI KONTROL VIDEO (INSTANT & KUAT) ---
+    function controlSlideVideo(slideEl, action) {
+        const iframe = slideEl.querySelector('iframe');
+        if (!iframe) return;
+        
+        // Host untuk postMessage
+        const host = '*'; 
+
+        if (action === 'play') {
+            // PENTING: Reset (seekTo(0)) dulu agar video tidak stuck di tengah
+            iframe.contentWindow.postMessage(JSON.stringify({
+                'event': 'command',
+                'func': 'seekTo',
+                'args': [0, true] // [detik_ke_0, allow_seek_ahead=true]
+            }), host);
+            
+            // Beri jeda sebentar (50ms) sebelum play
+            setTimeout(() => {
+                iframe.contentWindow.postMessage(JSON.stringify({
+                    'event': 'command',
+                    'func': 'playVideo',
+                    'args': []
+                }), host);
+            }, 50);
+
+        } else if (action === 'pause') {
+            iframe.contentWindow.postMessage(JSON.stringify({
+                'event': 'command',
+                'func': 'pauseVideo',
+                'args': []
+            }), host);
+        }
+    }
+
+    // --- 2. KONFIGURASI SWIPER ---
+    const heroSwiper = new Swiper('.hero-slider', {
+      speed: 800,
+      loop: true, // Biarkan loop tetap aktif
+      effect: 'slide',
+
+      autoplay: {
+        delay: 10000, 
+        disableOnInteraction: false, 
+      },
+      
+      pagination: {
+        el: '.hero-slider-indicators',
+        clickable: true,
+      },
+    });
+
+    // --- 3. LOGIKA UTAMA (VIDEO & SLIDE) ---
+    
+    // Saat slide berubah (Swipe atau Autoplay)
+    heroSwiper.on('slideChange', function () {
+        // Matikan semua video (termasuk kloning)
+        this.slides.forEach((slide) => {
+            controlSlideVideo(slide, 'pause');
+        });
+        
+        // Nyalakan video di slide yang baru aktif (dengan seekTo(0))
+        const activeSlide = this.slides[this.activeIndex];
+        controlSlideVideo(activeSlide, 'play');
+    });
+
+    // Saat inisialisasi awal (Play slide pertama)
+    heroSwiper.on('init', function () {
+        const activeSlide = this.slides[this.activeIndex];
+        controlSlideVideo(activeSlide, 'play');
+    });
+
+  </script>
   </body>
 </html>
