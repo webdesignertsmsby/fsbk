@@ -139,7 +139,7 @@
                     <div class="video-background">
                         <iframe 
                             data-youtube-id="LcF6ut-1M94" 
-                            src="https://www.youtube.com/embed/LcF6ut-1M94?autoplay=1&mute=1&loop=1&playlist=LcF6ut-1M94&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            src="https://www.youtube.com/embed/LcF6ut-1M94?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=LcF6ut-1M94&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
@@ -154,9 +154,8 @@
                 <div class="swiper-slide hero-slide">
                     <div class="video-background">
                         <iframe 
-                            loading="lazy"
                             data-youtube-id="ftOTCFMpSWA" 
-                            src="https://www.youtube.com/embed/ftOTCFMpSWA?autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            src="https://www.youtube.com/embed/ftOTCFMpSWA?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
@@ -171,9 +170,8 @@
                 <div class="swiper-slide hero-slide">
                     <div class="video-background">
                         <iframe 
-                            loading="lazy"
                             data-youtube-id="qBXjSlkpwFk" 
-                            src="https://www.youtube.com/embed/qBXjSlkpwFk?autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
+                            src="https://www.youtube.com/embed/qBXjSlkpwFk?enablejsapi=1&autoplay=0&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
@@ -197,7 +195,7 @@
     <section id="components" class="container section"></section>
 
   </main>
-
+<!--
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
@@ -263,6 +261,64 @@
     });
 
   </script>
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  // --- FUNGSI KONTROL VIDEO (INSTANT) ---
+  // Menggunakan postMessage agar tidak perlu reload iframe
+  function controlSlideVideo(slideEl, action) {
+      const iframe = slideEl.querySelector('iframe');
+      if (!iframe) return;
+      
+      // Mengirim perintah Play/Pause ke YouTube API
+      iframe.contentWindow.postMessage(JSON.stringify({
+          'event': 'command',
+          'func': action === 'play' ? 'playVideo' : 'pauseVideo',
+          'args': []
+      }), '*');
+  }
+
+  // --- KONFIGURASI SWIPER ---
+  const heroSwiper = new Swiper('.hero-slider', {
+    speed: 800,
+    loop: true,
+    effect: 'slide',
+    
+    // Autoplay configuration
+    autoplay: {
+      delay: 10000, 
+      disableOnInteraction: false, 
+    },
+    
+    pagination: {
+      el: '.hero-slider-indicators',
+      clickable: true,
+    },
+  });
+
+  // --- LOGIKA UTAMA ---
+  
+  // Saat slide berubah
+  heroSwiper.on('slideChange', function () {
+      // 1. Pause video di slide sebelumnya (agar tidak ada suara bocor/double play)
+      // Kita loop semua slide untuk memastikan yang lain mati
+      this.slides.forEach((slide) => {
+          controlSlideVideo(slide, 'pause');
+      });
+      
+      // 2. Play video di slide yang baru aktif secara instan
+      const activeSlide = this.slides[this.activeIndex];
+      controlSlideVideo(activeSlide, 'play');
+  });
+
+  // Saat inisialisasi awal (Play slide pertama)
+  heroSwiper.on('init', function () {
+      const activeSlide = this.slides[this.activeIndex];
+      controlSlideVideo(activeSlide, 'play');
+  });
+
+</script>
 
   </body>
 </html>
