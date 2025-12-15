@@ -199,7 +199,7 @@
     <section id="components" class="container section"></section>
 
   </main>
-
+  <!--
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
@@ -256,7 +256,65 @@
           controlSlideVideo(activeSlide, 'play');
       });
     
-    </script>
+    </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // --- 1. FUNGSI KONTROL VIDEO (INSTANT & BACKGROUND) ---
+    // Menggunakan postMessage agar video tidak perlu reload (loading="lazy" dihapus di HTML)
+    function controlSlideVideo(slideEl, action) {
+        const iframe = slideEl.querySelector('iframe');
+        if (!iframe) return;
+        
+        // Mengirim perintah Play/Pause ke YouTube API tanpa mereset source
+        iframe.contentWindow.postMessage(JSON.stringify({
+            'event': 'command',
+            'func': action === 'play' ? 'playVideo' : 'pauseVideo',
+            'args': []
+        }), '*');
+    }
+
+    // --- 2. KONFIGURASI SWIPER ---
+    const heroSwiper = new Swiper('.hero-slider', {
+      // PENTING: Jangan gunakan 'modules: [Swiper.Lazy]' di versi 11 (Bikin Crash)
+      
+      speed: 800,
+      loop: true,
+      effect: 'slide',
+
+      autoplay: {
+        delay: 10000, 
+        disableOnInteraction: false, 
+      },
+      
+      // Indikator otomatis menggunakan class .swiper-pagination-bullet dari CSS Anda
+      pagination: {
+        el: '.hero-slider-indicators',
+        clickable: true,
+      },
+    });
+
+    // --- 3. LOGIKA UTAMA (VIDEO & SLIDE) ---
+    
+    // Saat slide berubah (Swipe atau Autoplay)
+    heroSwiper.on('slideChange', function () {
+        // Matikan video di semua slide (agar suara tidak bocor)
+        this.slides.forEach((slide) => {
+            controlSlideVideo(slide, 'pause');
+        });
+        
+        // Nyalakan video di slide yang baru aktif secara instan
+        const activeSlide = this.slides[this.activeIndex];
+        controlSlideVideo(activeSlide, 'play');
+    });
+
+    // Saat inisialisasi awal (Play slide pertama)
+    heroSwiper.on('init', function () {
+        const activeSlide = this.slides[this.activeIndex];
+        controlSlideVideo(activeSlide, 'play');
+    });
+
+  </script>
 
   </body>
 </html>
