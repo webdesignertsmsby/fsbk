@@ -75,29 +75,33 @@
     /* --------------------------------------- */
     .hero-slider-indicators {
       position: absolute;
-      bottom: 40px; 
+      bottom: 40px; /* Jarak dari bawah */
       left: 50%;
       transform: translateX(-50%);
-      z-index: 10; /* Z-index tinggi agar di atas overlay */
+      z-index: 10; /* Pastikan Z-Index tinggi agar di atas video */
       display: flex;
-      gap: 8px;
+      gap: 12px; /* Jarak antar dot */
+      pointer-events: auto; /* Agar bisa diklik */
     }
 
-    /* Dot Bawaan Swiper */
+    /* 2. Style Dot Default (Inactive) */
+    /* Sesuai kode yang Anda berikan */
     .swiper-pagination-bullet {
-      width: 24px;
+      width: 24px; 
       height: 8px;
       background-color: var(--brand-50, #eaf5ff); 
       border-radius: 4px;
-      opacity: 1 !important; /* Paksa muncul */
+      opacity: 1 !important; /* Paksa muncul (override default swiper) */
       transition: all 0.3s ease;
-      display: block; /* Pastikan dianggap blok */
+      display: block; 
       cursor: pointer;
+      margin: 0 !important; /* Reset margin bawaan Swiper agar rapi */
     }
 
-    /* Dot Aktif */
+    /* 3. Style Dot Aktif */
+    /* Sesuai kode yang Anda berikan */
     .swiper-pagination-bullet-active {
-      width: 48px;
+      width: 48px; /* Lebih lebar */
       background-color: var(--brand-500, #476fad); 
     }
 
