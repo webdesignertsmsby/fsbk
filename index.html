@@ -102,28 +102,45 @@
     }
 
     /* --------------------------------------- */
-    /* YOUTUBE VIDEO BACKGROUND STYLES         */
+    /* HERO BACKGROUND STYLES         */
     /* --------------------------------------- */
-    /* Full-screen iframe container */
-    .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+    /* 1. KONTEN LATAR BELAKANG (Tempat Zoom Diterapkan) */
+    .slide-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; 
+        z-index: 0; /* Di bawah overlay */
+    
+        /* Pengaturan gambar latar belakang */
+        background-size: cover; 
+        background-position: center center;
+        
+        /* PENTING: Mendefinisikan transisi zoom selama 9 detik (9000ms) */
+        /* Ini adalah durasi pergerakan dari 140% ke 100% */
+        transition: transform 9s ease-out; 
+        
+        /* PENTING: Status Awal (Semua latar belakang dimulai dari zoom 140%) */
+        transform: scale(1.4); 
     }
     
-    /* Make the iframe cover the entire container and be slightly oversized
-       to prevent any gaps on different screen sizes */
-    .video-background iframe {
-      width: 300vw;
-      height: 300vh; 
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none; /* Prevents clicks/controls on the video */
+    /* 2. DEFINISI URL GAMBAR (Ganti URL Placeholder dengan Imgur Anda) */
+    .bg-slide-1 {
+        background-image: url('https://i.imgur.com/PLACEHOLDER_1.jpg');
+    }
+    .bg-slide-2 {
+        background-image: url('https://i.imgur.com/PLACEHOLDER_2.jpg');
+    }
+    .bg-slide-3 {
+        background-image: url('https://i.imgur.com/PLACEHOLDER_3.jpg');
+    }
+    
+    
+    /* 3. Status Target: Zoom 100% (Dipicu saat Swiper menambahkan kelas aktif) */
+    .swiper-slide-active .slide-background {
+        transform: scale(1.0); /* Di slide aktif, zoom menjadi 100% secara smooth */
     }
     
   </style>
@@ -135,14 +152,10 @@
     <section id="hero" class="hero">
         <div class="swiper hero-slider">
            <div class="swiper-wrapper">
+                
                 <div class="swiper-slide hero-slide">
-                    <div class="video-background">
-                        <iframe 
-                            data-youtube-id="LcF6ut-1M94" 
-                            src="https://www.youtube.com/embed/LcF6ut-1M94?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=LcF6ut-1M94&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
-                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                        </iframe>
-                    </div>
+                    <div class="slide-background bg-slide-1"></div>
+
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h2>Bikin Roti Jadi Lebih Mudah</h2>
@@ -152,13 +165,8 @@
                 </div>
     
                 <div class="swiper-slide hero-slide">
-                    <div class="video-background">
-                        <iframe 
-                            data-youtube-id="ftOTCFMpSWA" 
-                            src="https://www.youtube.com/embed/ftOTCFMpSWA?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=ftOTCFMpSWA&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
-                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                        </iframe>
-                    </div>
+                    <div class="slide-background bg-slide-2"></div>
+
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h2>Fresh Tanpa Ribet</h2>
@@ -168,13 +176,8 @@
                 </div>
                 
                 <div class="swiper-slide hero-slide">
-                    <div class="video-background">
-                        <iframe 
-                            data-youtube-id="qBXjSlkpwFk" 
-                            src="https://www.youtube.com/embed/qBXjSlkpwFk?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=qBXjSlkpwFk&controls=0&showinfo=0&rel=0&start=0&vq=hd1080"
-                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                        </iframe>
-                    </div>
+                    <div class="slide-background bg-slide-3"></div>
+
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h2>Konsisten di Setiap Hidangan</h2>
@@ -198,61 +201,50 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <script>
-      // --- FUNGSI KONTROL VIDEO (INSTANT) ---
-      // Menggunakan postMessage agar tidak perlu reload iframe
-      function controlSlideVideo(slideEl, action) {
-          const iframe = slideEl.querySelector('iframe');
-          if (!iframe) return;
-          
-          // Mengirim perintah Play/Pause ke YouTube API
-          iframe.contentWindow.postMessage(JSON.stringify({
-              'event': 'command',
-              'func': action === 'play' ? 'playVideo' : 'pauseVideo',
-              'args': []
-          }), '*');
-      }
-    
-      // --- KONFIGURASI SWIPER ---
-      const heroSwiper = new Swiper('.hero-slider', {
-        speed: 800,
-        loop: true,
-        effect: 'slide',
-        
-        // Autoplay configuration
-        autoplay: {
-          delay: 10000, 
-          disableOnInteraction: false, 
-        },
-        
-        pagination: {
-          el: '.hero-slider-indicators',
-          clickable: true,
-        },
-      });
-    
-      // --- LOGIKA UTAMA ---
+  <script>
+    // FUNGSI KONTROL VIDEO DIHAPUS SEMUA
+
+    // --- KONFIGURASI SWIPER ---
+    const heroSwiper = new Swiper('.hero-slider', {
+      speed: 800,
+      loop: true,
+      effect: 'slide',
+
+      autoplay: {
+        delay: 9500, // 9.5 detik (Pastikan lebih lama dari durasi transisi CSS 9s)
+        disableOnInteraction: false, 
+      },
       
-      // Saat slide berubah
-      heroSwiper.on('slideChange', function () {
-          // 1. Pause video di slide sebelumnya (agar tidak ada suara bocor/double play)
-          // Kita loop semua slide untuk memastikan yang lain mati
-          this.slides.forEach((slide) => {
-              controlSlideVideo(slide, 'pause');
-          });
-          
-          // 2. Play video di slide yang baru aktif secara instan
-          const activeSlide = this.slides[this.activeIndex];
-          controlSlideVideo(activeSlide, 'play');
-      });
-    
-      // Saat inisialisasi awal (Play slide pertama)
-      heroSwiper.on('init', function () {
-          const activeSlide = this.slides[this.activeIndex];
-          controlSlideVideo(activeSlide, 'play');
-      });
-    
-    </script>
+      pagination: {
+        el: '.hero-slider-indicators',
+        clickable: true,
+      },
+    });
+
+    // --- LOGIKA UTAMA (KEN BURNS RESET) ---
+
+    // Ketika slide mulai bergerak
+    heroSwiper.on('slideChangeTransitionStart', function() {
+        this.slides.forEach((slide) => {
+            // Jika slide tidak aktif, paksa reset ke scale 1.4
+            if (!slide.classList.contains('swiper-slide-active')) {
+                const background = slide.querySelector('.slide-background');
+                if (background) {
+                    // 1. Paksa reset ke scale 1.4 tanpa transisi
+                    background.style.transition = 'none'; 
+                    background.style.transform = 'scale(1.4)';
+                    
+                    // 2. Kembalikan transisi setelah jeda sangat singkat (penting untuk memicu zoom berikutnya)
+                    setTimeout(() => {
+                        background.style.transition = 'transform 9s ease-out';
+                    }, 50); 
+                }
+            }
+        });
+    });
+
+    // Event 'init' dan 'slideChange' (untuk video) DIBUANG
+  </script>
 
   </body>
 </html>
