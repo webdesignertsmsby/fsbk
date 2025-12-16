@@ -203,8 +203,6 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
-    // FUNGSI KONTROL VIDEO DIHAPUS SEMUA
-
     // --- KONFIGURASI SWIPER ---
     const heroSwiper = new Swiper('.hero-slider', {
       speed: 800,
@@ -212,7 +210,7 @@
       effect: 'slide',
 
       autoplay: {
-        delay: 9500, // 9.5 detik (Pastikan lebih lama dari durasi transisi CSS 9s)
+        delay: 9500,
         disableOnInteraction: false, 
       },
       
@@ -222,29 +220,47 @@
       },
     });
 
-    // --- LOGIKA UTAMA (KEN BURNS RESET) ---
-
-    // Ketika slide mulai bergerak
-    heroSwiper.on('slideChangeTransitionStart', function() {
-        this.slides.forEach((slide) => {
-            // Jika slide tidak aktif, paksa reset ke scale 1.4
-            if (!slide.classList.contains('swiper-slide-active')) {
-                const background = slide.querySelector('.slide-background');
-                if (background) {
-                    // 1. Paksa reset ke scale 1.4 tanpa transisi
-                    background.style.transition = 'none'; 
+    // FUNGSI UTAMA UNTUK MENGELOLA ANIMASI ZOOM
+    function handleZoomAnimation(swiperInstance) {
+        swiperInstance.slides.forEach((slide) => {
+            const background = slide.querySelector('.slide-background');
+            if (background) {
+                // 1. Reset: Paksa semua slide non-aktif ke zoom awal (1.4)
+                if (!slide.classList.contains('swiper-slide-active')) {
+                    background.style.transition = 'none'; // Matikan transisi
                     background.style.transform = 'scale(1.4)';
+                } 
+                
+                // 2. Terapkan Transisi Kembali (siap untuk zoom)
+                // Timeout penting agar browser sempat me-render reset scale(1.4)
+                setTimeout(() => {
+                    background.style.transition = 'transform 9s ease-out';
                     
-                    // 2. Kembalikan transisi setelah jeda sangat singkat (penting untuk memicu zoom berikutnya)
-                    setTimeout(() => {
-                        background.style.transition = 'transform 9s ease-out';
-                    }, 50); 
-                }
+                    // 3. Zoom In: Terapkan scale(1.0) hanya pada slide aktif
+                    if (slide.classList.contains('swiper-slide-active')) {
+                        background.style.transform = 'scale(1.0)';
+                    }
+                }, 100); 
             }
         });
+    }
+
+    // --- LOGIKA UTAMA SWIPER ---
+
+    // 1. Saat slide berubah
+    heroSwiper.on('slideChange', function() {
+        // Kita hanya perlu memanggil fungsi utama
+        handleZoomAnimation(this);
     });
 
-    // Event 'init' dan 'slideChange' (untuk video) DIBUANG
+    // 2. Saat inisialisasi awal
+    heroSwiper.on('init', function() {
+        // Panggil fungsi untuk slide pertama
+        handleZoomAnimation(this);
+    });
+
+    // EVENT slideChangeTransitionStart DIHAPUS
+
   </script>
 
   </body>
