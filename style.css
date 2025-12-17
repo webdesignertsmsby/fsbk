@@ -416,7 +416,7 @@ button {
   transform: translateY(0);
 }
 
-.mobile-only-btn {
+.nav-actions .mobile-only-btn {
   display: none;
 }
 
@@ -430,7 +430,7 @@ button {
      display: none;
   } 
 
-   .mobile-only-btn {
+   .nav-actions .mobile-only-btn {
     display: flex; 
   }
 
