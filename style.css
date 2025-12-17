@@ -267,6 +267,10 @@ button {
   padding: 4px 0;
 }
 
+.mobile-only-btn {
+  display: none;
+}
+
 /* Underline Animation (Desktop Only) */
 @media (min-width: 1025px) {
   .nav-link::after {
@@ -418,15 +422,36 @@ button {
 
 /* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 1024px) {
-  .navbar-container { padding: 16px 40px; }
-  .nav-menu, .nav-link-contact { display: none; } /* Sembunyikan link di desktop */
+  .navbar-container {
+     padding: 16px 40px;
+  }
+   
+  .nav-menu, .nav-link-contact {
+     display: none;
+  } 
+
+   .mobile-only-btn {
+    display: flex; 
+  }
+
+  .nav-link-contact {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
-  .navbar-container { padding: 16px 24px; }
-  .nav-btn { width: 32px; height: 32px; }
-  .nav-btn svg { width: 16px; height: 16px; }
-  .cart-sidebar { width: 100%; }
+  .navbar-container {
+     padding: 16px 24px;
+  }
+  .nav-btn {
+     width: 32px; height: 32px;
+  }
+  .nav-btn svg {
+     width: 16px; height: 16px;
+  }
+  .cart-sidebar {
+     width: 100%;
+  }
 }
 
 
