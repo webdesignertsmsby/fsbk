@@ -50,6 +50,11 @@
   /* Line Height */
   --lh-default: 1.2;
   --lh-body: 1.5;
+
+  /* Z-index Management */
+  --z-navbar: 1000;
+  --z-overlay: 2000;
+  --z-sidebar: 3000;
 }
 
 /* ===================== GLOBAL RESET ===================== */
@@ -218,32 +223,34 @@ button {
 
 .grid { display:grid; gap:var(--space-lg); }
 
-/* ===================== NAVBAR ===================== */
+/* Base Navbar State */
 .navbar {
   width: 100%;
-  position: absolute;
+  position: fixed; /* Berubah menjadi fixed agar bisa discroll */
   top: 0;
   left: 0;
   background: transparent;
-  z-index: 10;
+  transition: background-color 0.4s ease, padding 0.4s ease;
+  z-index: var(--z-navbar);
+}
+
+/* Scrolled State (Akan dipicu via JS) */
+.navbar.scrolled, 
+.navbar.menu-open, 
+.navbar.cart-open {
+  background-color: var(--brand-900);
 }
 
 .navbar-container {
-  margin: auto;
-  padding: 48px 120px;
+  max-width: 100%;
+  padding: 24px 120px; /* Padding default desktop */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: padding 0.4s ease;
 }
 
-/* LEFT */
-.logo-placeholder {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-invert);
-}
-
-/* MIDDLE MENU */
+/* Nav Links Desktop */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -252,40 +259,172 @@ button {
 
 .nav-link {
   font-size: var(--body-s);
-  font-weight: 400;
   color: var(--text-invert);
   text-decoration: none;
-  padding-bottom: 4px;
   position: relative;
+  padding: 4px 0;
 }
 
-.nav-link:hover::after,
+/* Underline Animation (Desktop Only) */
+@media (min-width: 1025px) {
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-invert);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Active State Underline */
 .nav-link.active::after {
   content: "";
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 2px;
   background: var(--text-invert);
+  transform: scaleX(1);
 }
 
-/* RIGHT */
-.nav-right {
+/* Action Buttons (Cart & Menu) */
+.nav-actions {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
 }
 
-/* Cart Button */
-.nav-cart {
+.nav-btn {
   width: 40px;
   height: 40px;
   padding: 0;
-  font-size: 20px;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  color: var(--text-invert);
+  transition: all 0.3s ease;
+}
+
+/* Cart Badge */
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--brand-500);
+  color: var(--text-invert);
+  font-size: 10px; /* body-s adjustment */
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ===================== SIDEBARS & OVERLAYS ===================== */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: var(--z-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar Cart */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 400px;
+  height: 100%;
+  background: var(--neutral-50);
+  z-index: var(--z-sidebar);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-sidebar.active {
+  right: 0;
+}
+
+.cart-header {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.cart-footer {
+  padding: 24px;
+  background: var(--neutral-50); /* Background sesuai konfirmasi Anda */
+  border-top: 1px solid var(--neutral-200);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--brand-900);
+  z-index: calc(var(--z-navbar) - 1);
+  padding: 120px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease;
+}
+
+.mobile-menu-overlay.active {
+  transform: translateY(0);
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 1024px) {
+  .navbar-container { padding: 16px 40px; }
+  .nav-menu, .nav-link-contact { display: none; } /* Sembunyikan link di desktop */
+}
+
+@media (max-width: 480px) {
+  .navbar-container { padding: 16px 24px; }
+  .nav-btn { width: 32px; height: 32px; }
+  .nav-btn svg { width: 16px; height: 16px; }
+  .cart-sidebar { width: 100%; }
 }
 
 
