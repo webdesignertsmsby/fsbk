@@ -232,6 +232,7 @@ button {
   background: transparent;
   transition: background-color 0.4s ease, padding 0.4s ease;
   z-index: var(--z-navbar);
+  font-family: var(--font-sans);
 }
 
 /* Scrolled State (Akan dipicu via JS) */
