@@ -416,41 +416,41 @@ button {
   transform: translateY(0);
 }
 
+/* 1. Secara default di desktop, sembunyikan tombol menu */
 .nav-actions .mobile-only-btn {
-  display: none;
+  display: none !important;
 }
 
-/* RESPONSIVE ADJUSTMENTS */
+/* 2. Sembunyikan link 'Hubungi Kami' di layar kecil (tablet & mobile) */
 @media (max-width: 1024px) {
-  .navbar-container {
-     padding: 16px 40px;
-  }
-   
-  .nav-menu, .nav-link-contact {
-     display: none;
-  } 
-
-   .nav-actions .mobile-only-btn {
-    display: flex; 
-  }
-
   .nav-link-contact {
-    display: none;
+    display: none !important;
+  }
+
+  /* Munculkan kembali tombol menu hanya di layar kecil */
+  .nav-actions .mobile-only-btn {
+    display: flex !important;
+  }
+
+  .navbar-container {
+    padding: 16px 40px;
   }
 }
 
 @media (max-width: 480px) {
   .navbar-container {
-     padding: 16px 24px;
+    padding: 16px 24px;
   }
   .nav-btn {
-     width: 32px; height: 32px;
+    width: 32px;
+    height: 32px;
   }
   .nav-btn svg {
-     width: 16px; height: 16px;
+    width: 16px;
+    height: 16px;
   }
   .cart-sidebar {
-     width: 100%;
+    width: 100%;
   }
 }
 
