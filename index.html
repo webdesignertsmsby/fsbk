@@ -269,6 +269,71 @@
 </head>
 
 <body>
+  <nav class="navbar" id="mainNavbar">
+    <div class="navbar-container">
+      <a href="#" class="logo">
+        <svg width="120" height="40" viewBox="0 0 125 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.4281 4.54053C7.45601 4.54053 3.4281 8.56844 3.4281 13.5405C3.4281 18.5126 7.45601 22.5405 12.4281 22.5405C17.4002 22.5405 21.4281 18.5126 21.4281 13.5405C21.4281 8.56844 17.4002 4.54053 12.4281 4.54053Z" fill="#E33E26"/>
+            <text x="30" y="25" fill="white" style="font-family: Arial; font-weight: bold; font-size: 18px;">FEASBAKE</text>
+        </svg>
+      </a>
+
+      <div class="nav-menu">
+        <a href="#" class="nav-link active">BERANDA</a>
+        <a href="#" class="nav-link">MESIN</a>
+        <a href="#" class="nav-link">TENTANG KAMI</a>
+        <a href="#" class="nav-link">RESEP</a>
+        <a href="#" class="nav-link">ARTIKEL</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#" class="nav-link nav-link-contact">HUBUNGI KAMI</a>
+        
+        <button class="nav-btn" id="cartBtn" aria-label="Buka Keranjang">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+
+        <button class="nav-btn" id="menuBtn" aria-label="Menu">
+          <svg id="hamburgerIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <a href="#" class="nav-link active">BERANDA</a>
+    <a href="#" class="nav-link">MESIN</a>
+    <a href="#" class="nav-link">TENTANG KAMI</a>
+    <a href="#" class="nav-link">RESEP</a>
+    <a href="#" class="nav-link">ARTIKEL</a>
+    <a href="#" class="nav-link">HUBUNGI KAMI</a>
+  </div>
+
+  <div class="overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <span class="body-xl" style="font-weight: 700;">Keranjang</span>
+      <button id="closeCart" style="background:none; padding:0; border:none; color:var(--text-primary); cursor:pointer;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    
+    <div class="cart-items" id="cartItemsContainer">
+      <p class="body-s text-secondary">Keranjang Anda kosong.</p>
+    </div>
+
+    <div class="cart-footer">
+      <div class="flex-between" style="margin-bottom: 24px;">
+        <span class="body-l text-secondary">Total</span>
+        <h6 id="cartTotalPrice" style="color: var(--brand-500);">Rp0</h6>
+      </div>
+      <button class="btn-primary" style="width: 100%;">
+        BELI SEKARANG 
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </aside>
 
   <main>
     <section id="hero" class="hero">
@@ -355,6 +420,50 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
+    // --- LOGIKA NAVBAR SCROLL ---
+    const navbar = document.getElementById('mainNavbar');
+    const heroSection = document.getElementById('hero');
+
+    window.addEventListener('scroll', () => {
+      // Jika posisi scroll melewati tinggi Hero
+      if (window.scrollY > heroSection.offsetHeight - 80) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // --- LOGIKA BUKA/TUTUP CART ---
+    const cartBtn = document.getElementById('cartBtn');
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const closeCart = document.getElementById('closeCart');
+
+    cartBtn.addEventListener('click', () => {
+      cartSidebar.classList.add('active');
+      cartOverlay.classList.add('active');
+      navbar.classList.add('cart-open');
+    });
+
+    [closeCart, cartOverlay].forEach(el => {
+      el.addEventListener('click', () => {
+        cartSidebar.classList.remove('active');
+        cartOverlay.classList.remove('active');
+        navbar.classList.remove('cart-open');
+      });
+    });
+
+    // --- LOGIKA MOBILE MENU ---
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      navbar.classList.toggle('menu-open');
+      
+      // Ganti icon hamburger ke close nantinya di sini
+    });
+    
     // --- KONFIGURASI SWIPER ---
     const heroSwiper = new Swiper('.hero-slider', {
       speed: 800,
