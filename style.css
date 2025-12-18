@@ -420,12 +420,63 @@ button {
   transform: translateY(0);
 }
 
-/* 1. Secara default di desktop, sembunyikan tombol menu */
+/* ===================== RESPONSIVE ADJUSTMENTS ===================== */
+
+/* Secara default di desktop: Sembunyikan tombol menu hamburger */
+.mobile-only-btn {
+  display: none !important;
+}
+
+/* Tablet & Mobile (Max 1024px) */
+@media (max-width: 1024px) {
+  
+  /* 1. SEMBUNYIKAN MENU TENGAH & LINK KONTAK */
+  .nav-menu, 
+  .nav-link-contact {
+    display: none !important;
+  }
+
+  /* 2. MUNCULKAN TOMBOL MENU HAMBURGER */
+  .nav-actions .mobile-only-btn {
+    display: flex !important;
+  }
+
+  /* 3. RESET POSISI LOGO & ACTIONS (Hapus Absolute Center) */
+  .navbar-container {
+    padding: 16px 40px;
+    position: relative;
+    justify-content: space-between; /* Logo kiri, Actions kanan */
+  }
+
+  /* Reset nav-menu agar tidak mengganggu layout meskipun display: none */
+  .nav-menu {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+  }
+}
+
+/* Mobile Small (Max 480px) */
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 16px 24px;
+  }
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+/*
+/* 1. Secara default di desktop, sembunyikan tombol menu 
 .nav-actions .mobile-only-btn {
   display: none !important;
 }
 
-/* 2. Sembunyikan link 'Hubungi Kami' di layar kecil (tablet & mobile) */
+/* 2. Sembunyikan link 'Hubungi Kami' di layar kecil (tablet & mobile) 
 @media (max-width: 1024px) {
   .nav-menu .nav-link active {
     display: none !important;
@@ -435,7 +486,7 @@ button {
     display: none !important;
   }
 
-  /* Munculkan kembali tombol menu hanya di layar kecil */
+  /* Munculkan kembali tombol menu hanya di layar kecil 
   .nav-actions .mobile-only-btn {
     display: flex !important;
   }
@@ -461,5 +512,6 @@ button {
     width: 100%;
   }
 }
+*/
 
 
