@@ -370,13 +370,15 @@ button {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 400px;
+  width: 400px; /* Lebar maksimal di desktop */
+  max-width: 100%; /* Mencegah meluap di layar kecil/mobile */
   height: 100%;
   background: var(--neutral-50);
   z-index: var(--z-sidebar);
   display: flex;
   flex-direction: column;
   transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -10px 0 30px rgba(0,0,0,0.1);
 }
 
 .cart-sidebar.active {
@@ -462,6 +464,9 @@ button {
   }
   .nav-btn svg {
      width: 16px; height: 16px;
+  }
+  .cart-sidebar {
+    width: 100%; /* Di HP, cart akan memenuhi lebar layar */
   }
 }
 
