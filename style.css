@@ -370,7 +370,7 @@ button {
   position: fixed;
   top: 0;
   /* Gunakan -110% atau -500px untuk memastikan benar-benar tersembunyi */
-  right: -500px; 
+  right: -600px; 
   width: 400px;
   max-width: 100%;
   height: 100%;
