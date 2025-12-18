@@ -427,7 +427,7 @@ button {
 
 /* 2. Sembunyikan link 'Hubungi Kami' di layar kecil (tablet & mobile) */
 @media (max-width: 1024px) {
-  .nav-menu {
+  .nav-menu .nav-link active {
     display: none !important;
   }
    
