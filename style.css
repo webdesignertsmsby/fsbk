@@ -57,17 +57,19 @@
   --z-sidebar: 3000;
 }
 
-/* ===================== GLOBAL RESET ===================== */
+/* 1. RESET GLOBAL & ANTI-WHITE SPACE */
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: "DM Sans", sans-serif !important;
 }
 
 html, body {
+  width: 100%;
   max-width: 100%;
-  overflow-x: hidden; /* Solusi ampuh untuk white space di kanan */
+  overflow-x: hidden; /* Menghilangkan scroll horizontal */
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 /* --------------------------------------- */
