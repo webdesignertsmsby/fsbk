@@ -427,7 +427,11 @@ button {
 
 /* 2. Sembunyikan link 'Hubungi Kami' di layar kecil (tablet & mobile) */
 @media (max-width: 1024px) {
-  .nav-link-contact {
+  .nav-menu {
+    display: none !important;
+  }
+   
+   .nav-link-contact {
     display: none !important;
   }
 
