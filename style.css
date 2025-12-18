@@ -248,20 +248,20 @@ button {
 }
 
 .navbar-container {
+  width: 100%;
   max-width: 100%;
   padding: 24px 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: padding 0.4s ease;
-  position: relative; /* Wajib ada untuk centering */
+  position: relative; /* Menjadi patokan untuk nav-menu */
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
   gap: 48px;
-  /* Membuat menu teks tepat di tengah layar */
+  /* Teknik Absolute Centering */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -432,24 +432,21 @@ button {
 }
 
 @media (max-width: 1024px) {
-  /* Sembunyikan menu tengah & link kontak di tablet/mobile */
-  .nav-menu, .nav-link-contact {
+  .nav-menu, 
+  .nav-link-contact {
     display: none !important;
   }
 
-  /* Munculkan tombol hamburger */
   .nav-actions .mobile-only-btn {
     display: flex !important;
   }
 
-  /* Reset layout navbar */
   .navbar-container {
     padding: 16px 40px;
-    position: relative;
     justify-content: space-between;
   }
 
-  /* Memastikan menu tengah tidak memakan space meski tersembunyi */
+  /* Penting: Matikan posisi absolute di mobile agar tidak merusak lebar */
   .nav-menu {
     position: static !important;
     transform: none !important;
