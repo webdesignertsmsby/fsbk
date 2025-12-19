@@ -228,6 +228,142 @@
         background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%);
         z-index: 1;
     }
+
+    /* ===================== POPULAR MACHINES SECTION ===================== */
+    #popular-section {
+      background-color: var(--brand-50);
+      position: relative;
+      overflow: hidden; /* Agar hiasan background tidak keluar container */
+    }
+
+    /* Background SVG Decoration */
+    .popular-bg-decoration {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1440px; /* Batas lebar ilustrasi */
+      z-index: 0;
+      pointer-events: none; /* Agar tidak mengganggu klik */
+      opacity: 0.5; /* Placeholder visibility */
+    }
+
+    .popular-container {
+      position: relative;
+      z-index: 1; /* Konten di atas background */
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header Group */
+    .popular-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end; /* Button sejajar dengan teks bawah */
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .header-content {
+      max-width: 600px;
+    }
+
+    .popular-label {
+      /* Menggunakan style category-icon-label + body-m */
+      display: inline-block;
+      font-size: var(--body-m);
+      font-weight: 700;
+      color: var(--brand-600); /* Asumsi warna label dari brand */
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .popular-title {
+      /* Menggunakan style category-title */
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .popular-desc {
+      font-size: var(--body-l);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Grid Layout */
+    .popular-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    /* Card Component */
+    .machine-card {
+      background-color: var(--neutral-50);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .machine-img-wrapper {
+      width: 100%;
+      height: 280px; /* Fixed height agar layout rapi */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .machine-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek memantul sedikit */
+    }
+
+    .card-info {
+      transition: transform 0.4s ease;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .machine-category {
+      font-size: var(--body-m);
+      color: var(--text-secondary); /* Text secondary agar kontras dengan judul */
+      margin-bottom: 8px;
+    }
+
+    .machine-name {
+      font-size: var(--body-xl);
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    /* Hover Interactions */
+    .machine-card:hover .machine-img {
+      transform: scale(1.1); /* Foto membesar */
+    }
+
+    .machine-card:hover .card-info {
+      transform: translateY(12px); /* Mendorong teks ke bawah */
+    }
+    
+    .machine-card:hover .btn-tertiary::after {
+        transform: translateX(6px); /* Panah button bergerak */
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -245,6 +381,10 @@
       
       .category-card-item {
         height: 350px; 
+      }
+
+      .popular-grid {
+        gap: 24px;
       }
     } 
 
@@ -264,6 +404,18 @@
       
       .category-card-item {
         height: 300px; 
+      }
+
+      .popular-header {
+        flex-direction: column; align-items: flex-start; gap: 24px;
+      }
+      
+      .popular-grid { 
+        grid-template-columns: 1fr; /* 3 menyamping jadi 1 menurun (stack) */
+      }
+      
+      .machine-card {
+        padding: 32px 24px;
       }
     }
     
@@ -443,6 +595,67 @@
         </a>
       </div>
 
+    </div>
+  </section>
+    
+  <section id="popular-section" class="section-padding">
+    <div class="popular-bg-decoration">
+       <svg width="100%" height="400" viewBox="0 0 1440 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+         <path d="M0 400H1440V200C1440 200 1100 400 720 400C340 400 0 200 0 200V400Z" fill="currentColor" style="color: var(--brand-100); opacity: 0.3;"/>
+       </svg>
+    </div>
+
+    <div class="popular-container">
+      
+      <div class="popular-header">
+        <div class="header-content">
+          <span class="popular-label">MESIN POPULER</span>
+          <h2 class="popular-title">Mesin Favorit<br>Pelanggan Kami</h2>
+          <p class="popular-desc">
+            Dipilih langsung berdasarkan performa, durabilitas, dan kepuasan pelanggan. 
+            Ini adalah mesin yang paling banyak digunakan oleh bakery, café, dan hotel.
+          </p>
+        </div>
+        
+        <a href="#" class="btn btn-primary">Lihat Semua Katalog</a>
+      </div>
+
+      <div class="popular-grid" id="popularMachineGrid">
+        
+        <div class="machine-card">
+          <div class="machine-img-wrapper">
+            <img src="https://placehold.co/400x400/png?text=Mixer+Roti" alt="Mesin" class="machine-img">
+          </div>
+          <div class="card-info">
+            <span class="machine-category">Mixer</span>
+            <h3 class="machine-name">Planetary Mixer 20L</h3>
+            <button class="btn-tertiary">Lihat Mesin</button>
+          </div>
+        </div>
+
+        <div class="machine-card">
+          <div class="machine-img-wrapper">
+             <img src="https://placehold.co/400x400/png?text=Oven+Gas" alt="Mesin" class="machine-img">
+          </div>
+          <div class="card-info">
+            <span class="machine-category">Oven</span>
+            <h3 class="machine-name">Deck Oven 2 Tray</h3>
+            <button class="btn-tertiary">Lihat Mesin</button>
+          </div>
+        </div>
+
+        <div class="machine-card">
+          <div class="machine-img-wrapper">
+             <img src="https://placehold.co/400x400/png?text=Proofer" alt="Mesin" class="machine-img">
+          </div>
+          <div class="card-info">
+            <span class="machine-category">Proofer</span>
+            <h3 class="machine-name">Digital Proofer 16 Tray</h3>
+            <button class="btn-tertiary">Lihat Mesin</button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
