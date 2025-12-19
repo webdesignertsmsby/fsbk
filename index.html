@@ -243,6 +243,7 @@
 
     #popular .container {
       background-color: transparent !important;
+      z-index: 10;
     }
 
     /* Background SVG Decoration */
@@ -255,7 +256,12 @@
       max-width: 1440px; /* Batas lebar ilustrasi */
       z-index: 0;
       pointer-events: none; /* Agar tidak mengganggu klik */
-      opacity: 0.5; /* Placeholder visibility */
+    }
+
+    .popular-bg-decoration svg {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     /* Grid Layout */
