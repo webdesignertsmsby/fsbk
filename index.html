@@ -238,12 +238,12 @@
       overflow: hidden; /* Agar hiasan background tidak keluar container */
       justify-content: center;
       background-color: value;
-      z-index: 1;
+      isolation: isolate;
     }
 
     #popular .container {
       background-color: transparent !important;
-      z-index: 10;
+      z-index: 2;
     }
 
     /* Background SVG Decoration */
@@ -262,6 +262,7 @@
       display: block;
       width: 100%;
       height: auto;
+      vertical-align: bottom;
     }
 
     /* Grid Layout */
