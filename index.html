@@ -427,6 +427,15 @@
       .popular-grid {
         gap: 24px;
       }
+      
+      .about-wrapper {
+        flex-direction: column;
+      }
+      
+      .about-features-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2x2 di tablet agar tetap terbaca */
+      }
     } 
 
     @media (max-width: 480px) {
