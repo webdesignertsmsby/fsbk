@@ -454,22 +454,25 @@
     }
     
     .btn-recipe-secondary {
-      background: transparent;
-      padding: 12px 32px;
-      border-radius: 100px;
-      font-weight: 600;
-      font-size: var(--body-s);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 24px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      
-      /* JAWABAN PASTI REQUIREMENT */
-      border: 1.5px solid var(--brand-500); /* Border Primary */
-      color: var(--text-tertiary);        /* Content Text Tertiary */
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--text-tertiary);
+      border: 2px solid var(--border-default);
     }
     
     .btn-recipe-secondary:hover {
       background-color: var(--brand-50);
-      transform: translateY(-2px);
+      color: var(--brand-500);
     }
     
     @media (max-width: 1024px) {
