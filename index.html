@@ -363,17 +363,26 @@
 
     .about-content {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* INI KUNCINYA: Membuat semua elemen di dalamnya rapat kiri */
       text-align: left;
     }
     
     #about .section-header {
       text-align: left;
+      margin: 0; /* Menghapus margin auto jika ada yang membuatnya ke tengah */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Memastikan icon, title, dan desc rapat kiri */
     }
 
     /* Flexbox untuk baris fitur mendatar */
     .about-features-row {
       display: flex;
       justify-content: flex-start;
+      width: 100%;
       gap: 24px;
       margin: 40px 0;
     }
