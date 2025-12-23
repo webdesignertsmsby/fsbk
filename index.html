@@ -410,13 +410,14 @@
     
     .recipe-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px; /* Jarak antar blok */
+      /* JAWABAN PASTI: Membuat 6 kolom sama besar */
+      grid-template-columns: repeat(6, 1fr); 
+      gap: 4px;
       width: 100%;
     }
     
     .grid-item {
-      aspect-ratio: 1 / 1; /* Rasio 1:1 untuk kotak tunggal */
+      aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -425,8 +426,9 @@
     
     /* Gabungan Blok 9 & 10 */
     .item-9-10 {
-      grid-column: span 2; /* Memakan 2 kolom */
-      aspect-ratio: auto; /* Rasio mengikuti isi karena lebar sudah 2x lipat */
+      /* Tetap memakan jatah 2 kotak (span 2 dari 6 kolom) */
+      grid-column: span 2; 
+      aspect-ratio: auto; 
     }
     
     .merged-content {
