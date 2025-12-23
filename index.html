@@ -336,6 +336,66 @@
     .machine-card:hover .btn-tertiary::after {
         transform: translateX(6px); /* Panah button bergerak */
     }
+
+    /* ===================== ABOUT SECTION ===================== */
+    #about {
+      background-color: var(--neutral-50);
+      width: 100%;
+    }
+
+    .about-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+    }
+    
+    .about-image {
+      flex: 1;
+    }
+    
+    .image-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: var(--neutral-200);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .about-content {
+      flex: 1;
+      text-align: left;
+    }
+    
+    #about .section-header {
+      text-align: left;
+    }
+
+    /* Flexbox untuk baris fitur mendatar */
+    .about-features-row {
+      display: flex;
+      justify-content: flex-start;
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .feature-item {
+      flex: 1; /* Memberikan lebar yang sama rata */
+    }
+    
+    .feature-item h6 {
+      color: var(--text-secondary);
+      font-size: var(--h6-desktop); /* Mengambil size H6 dari style.css */
+      margin-bottom: 8px;
+    }
+    
+    .feature-item .first-letter {
+      color: var(--brand-500);
+    }
+    
+    .feature-item p.body-s {
+      color: var(--text-secondary);
+      font-size: var(--body-s); /* Mengambil size body-s dari style.css */
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -707,6 +767,50 @@
       </div>
     </div>
   </section>
+
+  <section id="about" class="section-padding">
+  <div class="container about-wrapper">
+    <div class="about-image">
+      <div class="image-placeholder">
+        <img src="https://via.placeholder.com/600x600" alt="About Feasbake">
+      </div>
+    </div>
+
+    <div class="about-content">
+      <div class="section-header">
+        <span class="section-icon-label body-m">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.92 2.86758C11.4021 2.03975 12.5981 2.03975 13.0802 2.86758L15.8753 7.6663L21.3028 8.84162C22.2391 9.04438 22.6087 10.1818 21.9704 10.8962L18.2702 15.0373L18.8296 20.5624C18.9261 21.5155 17.9586 22.2185 17.0819 21.8322L12.0001 19.5928L6.91828 21.8322C6.04161 22.2185 5.07407 21.5155 5.17058 20.5624L5.72999 15.0373L2.02984 10.8962C1.39152 10.1818 1.76109 9.04438 2.6974 8.84162L8.12496 7.6663L10.92 2.86758ZM12.0001 4.98687L9.68685 8.95849C9.51022 9.26174 9.21425 9.47678 8.87126 9.55105L4.37919 10.5238L7.44159 13.9511C7.67542 14.2128 7.78847 14.5608 7.75311 14.9099L7.29012 19.4827L11.496 17.6293C11.8172 17.4878 12.183 17.4878 12.5042 17.6293L16.7101 19.4827L16.2471 14.9099C16.2118 14.5608 16.3248 14.2128 16.5586 13.9511L19.621 10.5238L15.129 9.55105C14.786 9.47678 14.49 9.26174 14.3134 8.95849L12.0001 4.98687Z" fill="#476FAD"/>
+          </svg>
+          KEUNGGULAN FEASPACK
+        </span>
+        <h4 class="section-title">Kenapa Memilih Kami?</h4>
+        <p class="body-l">Kami berkomitmen menghadirkan solusi terbaik untuk mendukung bisnis bakery, café, maupun hotel Anda.</p>
+        
+        <div class="about-features-row">
+          <div class="feature-item">
+            <h6><span class="first-letter">F</span>AST</h6>
+            <p class="body-s">Memiliki kecepatan tinggi</p>
+          </div>
+          <div class="feature-item">
+            <h6><span class="first-letter">E</span>ASY</h6>
+            <p class="body-s">Mudah dioperasikan</p>
+          </div>
+          <div class="feature-item">
+            <h6><span class="first-letter">A</span>CCURATE</h6>
+            <p class="body-s">Memiliki hasil akurat dan presisi</p>
+          </div>
+          <div class="feature-item">
+            <h6><span class="first-letter">S</span>AVING MONEY</h6>
+            <p class="body-s">Daya tahan tinggi untuk jangka panjang</p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary">TENTANG KAMI →</button>
+      </div>
+    </div>
+  </div>
+</section>
 
   </main>
 
