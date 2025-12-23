@@ -526,11 +526,13 @@
         grid-template-columns: repeat(2, 1fr); /* 2x2 di tablet agar tetap terbaca */
       }
 
+      /* Sesuai instruksi sebelumnya: sembunyikan 1, 7, 6, 12 */
       .item-1, .item-7, .item-6, .item-12 {
         display: none;
       }
       .recipe-grid {
-        grid-template-columns: repeat(3, 1fr); /* Menyesuaikan grid agar tetap rapat */
+        /* Saat 4 kotak hilang, sisa 8 kotak. Kita bisa pakai 4 kolom */
+        grid-template-columns: repeat(4, 1fr);
       }
     } 
 
@@ -578,10 +580,11 @@
         display: none;
       }
       .recipe-grid {
-        grid-template-columns: 1fr; /* 1 kolom saja di mobile */
+        /* Sisa kotak akan tampil 2 kolom di mobile agar tetap terlihat */
+        grid-template-columns: repeat(2, 1fr);
       }
       .item-9-10 {
-        grid-column: span 1;
+        grid-column: span 2; /* Tetap penuh jika di mobile */
       }
     }
     
