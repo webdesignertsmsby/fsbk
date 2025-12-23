@@ -403,6 +403,72 @@
       color: var(--text-secondary);
       font-size: var(--body-s); /* Mengambil size body-s dari style.css */
     }
+
+    #recipes {
+      background-color: var(--neutral-50);
+    }
+    
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px; /* Jarak antar blok */
+      width: 100%;
+    }
+    
+    .grid-item {
+      aspect-ratio: 1 / 1; /* Rasio 1:1 untuk kotak tunggal */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    /* Gabungan Blok 9 & 10 */
+    .item-9-10 {
+      grid-column: span 2; /* Memakan 2 kolom */
+      aspect-ratio: auto; /* Rasio mengikuti isi karena lebar sudah 2x lipat */
+    }
+    
+    .merged-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      gap: 16px;
+    }
+    
+    /* Background Colors */
+    .bg-neutral-100 { background-color: var(--neutral-100); }
+    .bg-brand-50 { background-color: var(--brand-50); }
+    .img { background-color: var(--neutral-200); } /* Placeholder warna sebelum ada gambar */
+
+    .recipe-action {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px; /* Jarak antara grid dan tombol */
+      width: 100%;
+    }
+    
+    .btn-recipe-secondary {
+      background: transparent;
+      padding: 12px 32px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: var(--body-s);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      /* JAWABAN PASTI REQUIREMENT */
+      border: 1.5px solid var(--brand-500); /* Border Primary */
+      color: var(--text-tertiary);        /* Content Text Tertiary */
+    }
+    
+    .btn-recipe-secondary:hover {
+      background-color: var(--brand-50);
+      transform: translateY(-2px);
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -454,6 +520,13 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* 2x2 di tablet agar tetap terbaca */
       }
+
+      .item-1, .item-7, .item-6, .item-12 {
+        display: none;
+      }
+      .recipe-grid {
+        grid-template-columns: repeat(3, 1fr); /* Menyesuaikan grid agar tetap rapat */
+      }
     } 
 
     @media (max-width: 480px) {
@@ -493,6 +566,17 @@
 
       .about-features-row {
         grid-template-columns: 1fr; /* 1 kolom di HP */
+      }
+
+      .item-1, .item-7, .item-6, .item-12,
+      .item-2, .item-8, .item-5, .item-11 {
+        display: none;
+      }
+      .recipe-grid {
+        grid-template-columns: 1fr; /* 1 kolom saja di mobile */
+      }
+      .item-9-10 {
+        grid-column: span 1;
       }
     }
     
@@ -851,6 +935,40 @@
 
         <button class="btn btn-primary">TENTANG KAMI →</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="recipes" class="section-padding">
+  <div class="container">
+    <div class="recipe-grid">
+      <div class="grid-item item-1 img"></div>
+      <div class="grid-item item-2 bg-neutral-100"></div>
+      <div class="grid-item item-3 img"></div>
+      <div class="grid-item item-4 img"></div>
+
+      <div class="grid-item item-5 bg-brand-50"></div>
+      <div class="grid-item item-6 img"></div>
+      <div class="grid-item item-7 bg-brand-50"></div>
+      <div class="grid-item item-8 img"></div>
+
+      <div class="grid-item item-9-10 bg-neutral-100">
+        <div class="merged-content">
+          <span class="section-icon-label body-m">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.92 2.86758C11.4021 2.03975 12.5981 2.03975 13.0802 2.86758L15.8753 7.6663L21.3028 8.84162C22.2391 9.04438 22.6087 10.1818 21.9704 10.8962L18.2702 15.0373L18.8296 20.5624C18.9261 21.5155 17.9586 22.2185 17.0819 21.8322L12.0001 19.5928L6.91828 21.8322C6.04161 22.2185 5.07407 21.5155 5.17058 20.5624L5.72999 15.0373L2.02984 10.8962C1.39152 10.1818 1.76109 9.04438 2.6974 8.84162L8.12496 7.6663L10.92 2.86758ZM12.0001 4.98687L9.68685 8.95849C9.51022 9.26174 9.21425 9.47678 8.87126 9.55105L4.37919 10.5238L7.44159 13.9511C7.67542 14.2128 7.78847 14.5608 7.75311 14.9099L7.29012 19.4827L11.496 17.6293C11.8172 17.4878 12.183 17.4878 12.5042 17.6293L16.7101 19.4827L16.2471 14.9099C16.2118 14.5608 16.3248 14.2128 16.5586 13.9511L19.621 10.5238L15.129 9.55105C14.786 9.47678 14.49 9.26174 14.3134 8.95849L12.0001 4.98687Z" fill="#476FAD"/>
+            </svg>
+            RESEP PILIHAN
+          </span>
+          <h6 class="text-primary">Kreasi Bakery Terbaik untuk Dapur Anda</h6>
+        </div>
+      </div>
+      <div class="grid-item item-11 img"></div>
+      <div class="grid-item item-12 bg-neutral-100"></div>
+    </div>
+
+    <div class="recipe-action">
+      <button class="btn-recipe-secondary">LIHAT SEMUA RESEP</button>
     </div>
   </div>
 </section>
