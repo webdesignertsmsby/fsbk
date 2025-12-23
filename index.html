@@ -423,6 +423,13 @@
       justify-content: center;
       overflow: hidden;
     }
+
+    .grid-item.img {
+      background-size: cover;      /* Gambar menutupi seluruh kotak */
+      background-position: center; /* Gambar fokus di tengah */
+      background-repeat: no-repeat;
+      background-color: var(--neutral-200); /* Warna cadangan jika gambar gagal load */
+    }
     
     /* Gabungan Blok 9 & 10 */
     .item-9-10 {
@@ -951,7 +958,8 @@
 <section id="recipes" class="section-padding">
   <div class="container">
     <div class="recipe-grid">
-      <div class="grid-item item-1 img" style="background-image: url('https://i.imgur.com/RXQuONz.jpeg');"></div> 
+      <div class="grid-item item-1 img" style="background-image: url('https://i.imgur.com/RXQuONz.jpeg');">
+      </div> 
       <div class="grid-item item-2 bg-neutral-100"></div>
       <div class="grid-item item-3 img"></div>
       <div class="grid-item item-4 img"></div>
