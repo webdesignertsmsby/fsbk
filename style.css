@@ -191,6 +191,7 @@ button {
   background: transparent;
   color: var(--brand-500);
   text-decoration: underline;
+  padding: 0px;
 }
 .btn-tertiary:hover {
   color: var(--brand-600);
