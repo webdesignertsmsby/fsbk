@@ -432,13 +432,13 @@ button {
 }
 
 #main-footer {
-    background-color: var(--neutral-900); /* Warna gelap footer */
-    padding: 80px 0 40px 0;
+    background-color: var(--neutral-900) !important;
 }
 
-.footer-container {
-    background: transparent !important; /* Override background container jika ada */
-    padding: 0 120px !important;
+/* Hilangkan background putih dari container khusus di dalam footer */
+#main-footer .container {
+    background: transparent !important;
+    padding: 0 120px !important; /* Gunakan padding footer sendiri */
 }
 
 .footer-top {
