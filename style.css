@@ -432,11 +432,9 @@ button {
 }
 
 #main-footer {
-    /* Menggunakan Brand-900 (Dark Blue) sesuai style.css */
     background-color: var(--brand-900);
+    padding: 60px 24px;
     color: var(--text-invert);
-    width: 100%;
-    padding: 60px 20px;
 }
 
 .footer-container {
@@ -501,8 +499,34 @@ button {
 .footer-info-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 24px; /* Jarak antar blok perusahaan */
     align-items: center;
+    text-align: center;
+}
+
+.company-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Jarak antara baris nama/telp dengan alamat */
+    color: var(--neutral-300); /* Sesuai request: neutral-300 */
+}
+
+.company-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap; /* Menjaga nama & telp tetap satu baris */
+}
+
+.company-address {
+    display: block;
+    width: 100%;
+}
+
+.company-group .bullet {
+    color: var(--neutral-300);
+    opacity: 0.8;
 }
 
 /* Baris Informasi Perusahaan */
@@ -630,6 +654,15 @@ button {
     .social-separator {
         width: 20px; 
         padding: 0 5px;
+    }
+
+   .company-main {
+        white-space: normal;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .company-main .bullet {
+        display: none;
     }
 }
 
