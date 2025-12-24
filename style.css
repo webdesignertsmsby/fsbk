@@ -431,6 +431,134 @@ button {
   transform: translateY(0);
 }
 
+#main-footer {
+    /* Menggunakan Brand-900 (Dark Blue) sesuai style.css */
+    background-color: var(--brand-900);
+    color: var(--text-invert);
+    width: 100%;
+    padding: 60px 20px;
+}
+
+.footer-container {
+    max-width: 1200px; /* Standard container width */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* --- BAGIAN ATAS --- */
+.footer-top {
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo img {
+    height: 50px; /* Sesuaikan tinggi logo */
+    margin-bottom: 30px;
+    display: block;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Link Navigasi */
+.footer-nav .nav-item {
+    text-decoration: none;
+    /* Menggunakan variabel warna text invert (putih) */
+    color: var(--text-invert);
+    position: relative;
+    padding: 0 10px;
+    /* Font size otomatis ter-apply dari class "body-l" di HTML */
+}
+
+/* Titik bullet antar menu (Kecuali item terakhir) */
+.footer-nav .nav-item:not(:last-child)::after {
+    content: "•";
+    position: absolute;
+    right: -10px;
+    color: var(--text-invert);
+    opacity: 0.6;
+}
+
+/* --- BAGIAN BAWAH --- */
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+}
+
+.footer-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Baris Informasi Perusahaan */
+.company-row {
+    /* Warna Neutral-300 sesuai request */
+    color: var(--neutral-300);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    /* Font size otomatis ter-apply dari class "body-s" di HTML */
+}
+
+.company-row .bullet {
+    margin: 0 4px;
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* --- SOSIAL MEDIA --- */
+.footer-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: var(--text-invert);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    transition: opacity 0.3s;
+}
+
+.social-icon:hover {
+    opacity: 0.8;
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Garis Pemisah (Separator) antar icon */
+.social-separator {
+    display: block;
+    width: 40px; /* Lebar garis */
+    height: 1px; /* Ketebalan garis */
+    background-color: var(--text-invert);
+    opacity: 0.5;
+}
+
 /* ===================== RESPONSIVE ADJUSTMENTS ===================== */
 
 /* Sembunyikan tombol hamburger di desktop */
@@ -478,6 +606,31 @@ button {
     /* Jika masih ada putih, coba ganti 0 ke -1px untuk sedikit "menelan" garis tersebut */
     right: 0px !important; 
   }
+
+   .footer-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* Hilangkan titik di menu saat mode mobile */
+    .footer-nav .nav-item:not(:last-child)::after {
+        content: none;
+    }
+
+    .company-row {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .company-row .bullet {
+        display: none;
+    }
+
+    /* Pendekkan garis sosmed di mobile */
+    .social-separator {
+        width: 20px; 
+        padding: 0 5px;
+    }
 }
 
 
