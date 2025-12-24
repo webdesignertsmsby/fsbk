@@ -441,7 +441,6 @@ button {
 
 .footer-container {
     max-width: 100%; /* Standard container width */
-    margin: 0 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
