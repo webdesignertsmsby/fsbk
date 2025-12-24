@@ -432,13 +432,16 @@ button {
 }
 
 #main-footer {
-    background-color: var(--neutral-900) !important;
+    background-color: var(--brand-900) !important; /* REVISI: Menggunakan Brand-900 */
+    padding: 80px 0 40px 0;
+    width: 100%;
+    color: white;
 }
 
-/* Hilangkan background putih dari container khusus di dalam footer */
-#main-footer .container {
-    background: transparent !important;
-    padding: 0 120px !important; /* Gunakan padding footer sendiri */
+.footer-container {
+    max-width: 1440px; /* Atur sesuai lebar maksimal konten Anda */
+    margin: 0 auto;
+    padding: 0 120px;
 }
 
 .footer-top {
@@ -455,11 +458,9 @@ button {
 
 .footer-nav a {
     text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-.footer-nav a:hover {
-    opacity: 0.7;
+    color: var(--neutral-50);
+    font-weight: 500;
+    transition: 0.3s;
 }
 
 .footer-divider {
@@ -474,35 +475,26 @@ button {
     align-items: flex-start;
 }
 
-.footer-info p {
-    margin-bottom: 8px;
-}
-
-.neutral-300 {
-    color: var(--neutral-300);
-}
-
-.text-invert {
-    color: var(--neutral-50); /* Putih/Terang untuk background gelap */
-}
-
-.footer-social {
-    text-align: right;
-}
-
 .footer-info-wrapper {
     display: flex;
-    gap: 60px; /* Jarak antar informasi PT */
-    flex: 1;
+    gap: 80px; /* Jarak antara dua PT */
 }
 
 .footer-company {
-    max-width: 350px; /* Agar teks alamat tidak terlalu melebar */
+    max-width: 400px;
 }
 
 .footer-company p {
     margin-bottom: 4px;
-    line-height: 1.5;
+    line-height: 1.6;
+}
+
+.neutral-300 {
+    color: var(--neutral-300) !important;
+}
+
+.footer-social {
+    text-align: right;
 }
 
 /* ===================== RESPONSIVE ADJUSTMENTS ===================== */
@@ -554,15 +546,10 @@ button {
   }
 
    .footer-container {
-        padding: 0 40px !important;
-    }
-
-   .footer-info-wrapper {
-        flex-direction: column; /* PT 1 dan PT 2 bertumpuk di mobile */
-        gap: 32px;
+        padding: 0 40px;
     }
     
-    .footer-top, .footer-bottom {
+    .footer-top {
         flex-direction: column;
         align-items: flex-start;
         gap: 32px;
@@ -572,7 +559,17 @@ button {
         flex-direction: column;
         gap: 16px;
     }
-    
+
+    .footer-info-wrapper {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 40px;
+    }
+
     .footer-social {
         text-align: left;
     }
