@@ -438,6 +438,21 @@ button {
   display: none !important;
 }
 
+.footer-info-wrapper {
+    display: flex;
+    gap: 60px; /* Jarak antar informasi PT */
+    flex: 1;
+}
+
+.footer-company {
+    max-width: 350px; /* Agar teks alamat tidak terlalu melebar */
+}
+
+.footer-company p {
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
 @media (max-width: 1024px) {
   .nav-menu, 
   .nav-link-contact {
@@ -478,6 +493,16 @@ button {
     /* Jika masih ada putih, coba ganti 0 ke -1px untuk sedikit "menelan" garis tersebut */
     right: 0px !important; 
   }
+
+   .footer-info-wrapper {
+        flex-direction: column; /* PT 1 dan PT 2 bertumpuk di mobile */
+        gap: 32px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 40px;
+    }
 }
 
 
