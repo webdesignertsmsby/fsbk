@@ -431,11 +431,63 @@ button {
   transform: translateY(0);
 }
 
-/* ===================== RESPONSIVE ADJUSTMENTS ===================== */
+#main-footer {
+    background-color: var(--neutral-900); /* Warna gelap footer */
+    padding: 80px 0 40px 0;
+}
 
-/* Sembunyikan tombol hamburger di desktop */
-.mobile-only-btn {
-  display: none !important;
+.footer-container {
+    background: transparent !important; /* Override background container jika ada */
+    padding: 0 120px !important;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 40px;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.footer-nav a:hover {
+    opacity: 0.7;
+}
+
+.footer-divider {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 40px;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-info p {
+    margin-bottom: 8px;
+}
+
+.neutral-300 {
+    color: var(--neutral-300);
+}
+
+.text-invert {
+    color: var(--neutral-50); /* Putih/Terang untuk background gelap */
+}
+
+.footer-social {
+    text-align: right;
 }
 
 .footer-info-wrapper {
@@ -451,6 +503,13 @@ button {
 .footer-company p {
     margin-bottom: 4px;
     line-height: 1.5;
+}
+
+/* ===================== RESPONSIVE ADJUSTMENTS ===================== */
+
+/* Sembunyikan tombol hamburger di desktop */
+.mobile-only-btn {
+  display: none !important;
 }
 
 @media (max-width: 1024px) {
