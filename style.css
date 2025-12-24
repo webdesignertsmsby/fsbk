@@ -553,14 +553,28 @@ button {
     right: 0px !important; 
   }
 
+   .footer-container {
+        padding: 0 40px !important;
+    }
+
    .footer-info-wrapper {
         flex-direction: column; /* PT 1 dan PT 2 bertumpuk di mobile */
         gap: 32px;
     }
     
-    .footer-bottom {
+    .footer-top, .footer-bottom {
         flex-direction: column;
-        gap: 40px;
+        align-items: flex-start;
+        gap: 32px;
+    }
+    
+    .footer-nav {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .footer-social {
+        text-align: left;
     }
 }
 
