@@ -431,72 +431,6 @@ button {
   transform: translateY(0);
 }
 
-#main-footer {
-    background-color: var(--brand-900) !important; /* REVISI: Menggunakan Brand-900 */
-    padding: 80px 0 40px 0;
-    width: 100%;
-    color: white;
-}
-
-.footer-container {
-    max-width: 1440px; /* Atur sesuai lebar maksimal konten Anda */
-    margin: 0 auto;
-    padding: 0 120px;
-}
-
-.footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.footer-nav {
-    display: flex;
-    gap: 40px;
-}
-
-.footer-nav a {
-    text-decoration: none;
-    color: var(--neutral-50);
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.footer-divider {
-    border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 40px;
-}
-
-.footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.footer-info-wrapper {
-    display: flex;
-    gap: 80px; /* Jarak antara dua PT */
-}
-
-.footer-company {
-    max-width: 400px;
-}
-
-.footer-company p {
-    margin-bottom: 4px;
-    line-height: 1.6;
-}
-
-.neutral-300 {
-    color: var(--neutral-300) !important;
-}
-
-.footer-social {
-    text-align: right;
-}
-
 /* ===================== RESPONSIVE ADJUSTMENTS ===================== */
 
 /* Sembunyikan tombol hamburger di desktop */
@@ -544,35 +478,6 @@ button {
     /* Jika masih ada putih, coba ganti 0 ke -1px untuk sedikit "menelan" garis tersebut */
     right: 0px !important; 
   }
-
-   .footer-container {
-        padding: 0 40px;
-    }
-    
-    .footer-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 32px;
-    }
-    
-    .footer-nav {
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .footer-info-wrapper {
-        flex-direction: column;
-        gap: 32px;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .footer-social {
-        text-align: left;
-    }
 }
 
 
