@@ -514,6 +514,7 @@ button {
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
+    white-space: nowrap;
     /* Font size otomatis ter-apply dari class "body-s" di HTML */
 }
 
