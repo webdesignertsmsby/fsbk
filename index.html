@@ -1200,33 +1200,35 @@
 </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="productData.js"></script>
+  <script src="cart.js"></script>
 
   <script>
-    // --- LOGIKA NAVBAR SCROLL ---
+    // --- 1. LOGIKA NAVBAR SCROLL ---
     const navbar = document.getElementById('mainNavbar');
     const heroSection = document.getElementById('hero');
-
+    
     window.addEventListener('scroll', () => {
-      // Jika posisi scroll melewati tinggi Hero
       if (window.scrollY > heroSection.offsetHeight - 80) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
     });
-
-    // --- LOGIKA BUKA/TUTUP CART ---
+    
+    // --- 2. LOGIKA BUKA/TUTUP CART ---
     const cartBtn = document.getElementById('cartBtn');
     const cartSidebar = document.getElementById('cartSidebar');
     const cartOverlay = document.getElementById('cartOverlay');
     const closeCart = document.getElementById('closeCart');
-
+    
     cartBtn.addEventListener('click', () => {
       cartSidebar.classList.add('active');
       cartOverlay.classList.add('active');
       navbar.classList.add('cart-open');
+      renderCartItems(); // TAMBAHAN: Update tampilan isi keranjang saat dibuka
     });
-
+    
     [closeCart, cartOverlay].forEach(el => {
       el.addEventListener('click', () => {
         cartSidebar.classList.remove('active');
@@ -1234,52 +1236,75 @@
         navbar.classList.remove('cart-open');
       });
     });
-
-    // --- LOGIKA MOBILE MENU ---
+    
+    // --- 3. LOGIKA MOBILE MENU ---
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     
     menuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('active');
       navbar.classList.toggle('menu-open');
-      
-      // Ganti icon hamburger ke close nantinya di sini
     });
     
-    // --- KONFIGURASI SWIPER ---
+    // --- 4. FUNGSI RENDER PRODUK OTOMATIS (TAMBAHAN BARU) ---
+    function displayProducts() {
+        const grid = document.getElementById('popularMachineGrid');
+        if (!grid) return;
+    
+        grid.innerHTML = ""; // Kosongkan grid statis
+    
+        products.forEach(product => {
+            const formattedPrice = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(product.price);
+    
+            grid.innerHTML += `
+                <div class="machine-card">
+                  <div class="machine-img-wrapper">
+                    <img src="${product.image}" alt="${product.name}" class="machine-img">
+                  </div>
+                  <div class="card-info">
+                    <span class="machine-category">${product.category}</span>
+                    <h3 class="machine-name">${product.name}</h3>
+                    <p class="price-tag" style="font-weight: 700; color: #476FAD; margin-bottom: 12px;">
+                        ${formattedPrice}
+                    </p>
+                    <button class="btn-tertiary" onclick="handleAddToCart(${product.id})">
+                        Tambah Keranjang
+                    </button>
+                  </div>
+                </div>
+            `;
+        });
+    }
+    
+    // Fungsi pembantu agar setelah klik tambah, tampilan keranjang langsung update
+    function handleAddToCart(id) {
+        addToCart(id); // Fungsi dari cart.js
+        renderCartItems(); // Fungsi yang akan kita buat di bawah/cart.js
+    }
+    
+    // --- 5. KONFIGURASI SWIPER ---
     const heroSwiper = new Swiper('.hero-slider', {
       speed: 800,
       loop: true,
       effect: 'slide',
-
-      autoplay: {
-        delay: 9500,
-        disableOnInteraction: false, 
-      },
-      
-      pagination: {
-        el: '.hero-slider-indicators',
-        clickable: true,
-      },
+      autoplay: { delay: 9500, disableOnInteraction: false },
+      pagination: { el: '.hero-slider-indicators', clickable: true },
     });
-
-    // FUNGSI UTAMA UNTUK MENGELOLA ANIMASI ZOOM
+    
     function handleZoomAnimation(swiperInstance) {
         swiperInstance.slides.forEach((slide) => {
             const background = slide.querySelector('.slide-background');
             if (background) {
-                // 1. Reset: Paksa semua slide non-aktif ke zoom awal (1.4)
                 if (!slide.classList.contains('swiper-slide-active')) {
-                    background.style.transition = 'none'; // Matikan transisi
+                    background.style.transition = 'none';
                     background.style.transform = 'scale(1.4)';
                 } 
-                
-                // 2. Terapkan Transisi Kembali (siap untuk zoom)
-                // Timeout penting agar browser sempat me-render reset scale(1.4)
                 setTimeout(() => {
                     background.style.transition = 'transform 9s ease-out';
-                    
-                    // 3. Zoom In: Terapkan scale(1.0) hanya pada slide aktif
                     if (slide.classList.contains('swiper-slide-active')) {
                         background.style.transform = 'scale(1.0)';
                     }
@@ -1287,22 +1312,14 @@
             }
         });
     }
-
-    // --- LOGIKA UTAMA SWIPER ---
-
-    // 1. Saat slide berubah
-    heroSwiper.on('slideChange', function() {
-        // Kita hanya perlu memanggil fungsi utama
-        handleZoomAnimation(this);
+    
+    heroSwiper.on('slideChange', function() { handleZoomAnimation(this); });
+    heroSwiper.on('init', function() { handleZoomAnimation(this); });
+    
+    // --- 6. JALANKAN SAAT HALAMAN DIMUAT ---
+    document.addEventListener('DOMContentLoaded', () => {
+        displayProducts(); // Render semua produk dari productData.js
     });
-
-    // 2. Saat inisialisasi awal
-    heroSwiper.on('init', function() {
-        // Panggil fungsi untuk slide pertama
-        handleZoomAnimation(this);
-    });
-
-    // EVENT slideChangeTransitionStart DIHAPUS
 
   </script>
 
