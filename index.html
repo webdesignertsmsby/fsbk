@@ -194,8 +194,8 @@
       /* Card style dasar */
       position: relative;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: column;
+      justify-content: flex-end;
       height: 480px; /* Tinggi card contoh */
       border-radius: 12px;
       overflow: hidden;
@@ -215,6 +215,18 @@
       height: 100%;
       z-index: 1; /* Di belakang teks */
     }
+
+    /* 3. Overlay Gelap agar teks terbaca */
+    .category-img-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 50%);
+      z-index: 2; /* Di atas gambar, di bawah teks */
+    }
     
     /* Paksa gambar menutupi seluruh container wrapper */
     .category-img {
@@ -229,7 +241,10 @@
       font-size: var(--h6-size);
       color: var(--text-invert);
       position: relative;
-      z-index: 2; /* Di atas overlay/gambar */
+      z-index: 3; /* Di atas overlay/gambar */
+      padding: 24px;
+      text-align: center;
+      width: 100%;
     }
 
     /* ===================== POPULAR MACHINES SECTION ===================== */
