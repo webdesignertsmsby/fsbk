@@ -32,3 +32,20 @@ function formatRupiah(number) {
         minimumFractionDigits: 0
     }).format(number);
 }
+
+function renderCartItems() {
+    const cartContainer = document.querySelector('.cart-items-container'); // Pastikan ID/Class ini ada di HTML sidebar-mu
+    if (!cartContainer) return;
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<p>Keranjang kosong</p>';
+        return;
+    }
+
+    cartContainer.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <p>${item.name} (x${item.quantity})</p>
+            <p>${formatRupiah(item.price * item.quantity)}</p>
+        </div>
+    `).join('');
+}
