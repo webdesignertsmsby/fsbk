@@ -194,21 +194,34 @@
       /* Card style dasar */
       position: relative;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end; /* Pindahkan teks ke bawah */
+      align-items: center;
+      justify-content: center;
       height: 480px; /* Tinggi card contoh */
-      padding: var(--space-lg);
       border-radius: 12px;
       overflow: hidden;
       text-decoration: none;
-      
-      /* Gambar Latar Belakang Placeholder - Ganti dengan gambar sungguhan nanti */
-      background: var(--neutral-700);
-      transition: transform 0.3s ease;
     }
     
     .category-card-item:hover {
         transform: translateY(-8px); /* Efek hover kecil */
+    }
+
+    /* Buat wrapper gambar mengisi seluruh area card */
+    .category-img-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Di belakang teks */
+    }
+    
+    /* Paksa gambar menutupi seluruh container wrapper */
+    .category-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .category-card-item h6 {
