@@ -1251,15 +1251,9 @@
         const grid = document.getElementById('popularMachineGrid');
         if (!grid) return;
     
-        grid.innerHTML = ""; // Kosongkan grid statis
+        grid.innerHTML = ""; // Bersihkan kontainer
     
         products.forEach(product => {
-            const formattedPrice = new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0
-            }).format(product.price);
-    
             grid.innerHTML += `
                 <div class="machine-card">
                   <div class="machine-img-wrapper">
@@ -1268,11 +1262,8 @@
                   <div class="card-info">
                     <span class="machine-category">${product.category}</span>
                     <h3 class="machine-name">${product.name}</h3>
-                    <p class="price-tag" style="font-weight: 700; color: #476FAD; margin-bottom: 12px;">
-                        ${formattedPrice}
-                    </p>
-                    <button class="btn-tertiary" onclick="handleAddToCart(${product.id})">
-                        Tambah Keranjang
+                    <button class="btn-tertiary" onclick="location.href='detail-mesin.html?id=${product.id}'">
+                      Lihat Mesin
                     </button>
                   </div>
                 </div>
