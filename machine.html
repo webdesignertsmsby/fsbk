@@ -68,14 +68,47 @@
       margin-bottom: 24px;
     }
     
-    /* Highlight merah tetap di belakang kata 'Efisiensi' */
+    /* Highlight merah miring di belakang kata 'Efisiensi' */
     .highlight-red {
-      background-color: #DC2626;
+      background-color: #EA3323;
       color: var(--text-invert);
-      padding: 0 10px;
+      padding: 0 15px; /* Tambah padding agar kemiringan tidak menabrak teks */
       border-radius: 4px;
       display: inline-block;
-      white-space: nowrap; /* Mencegah kata terpotong */
+      white-space: nowrap;
+      
+      /* Membuat kotak miring ke kiri (skew) */
+      transform: skewX(-15deg); 
+    }
+    
+    /* Mengembalikan teks agar tetap tegak */
+    .highlight-red span, 
+    .highlight-red {
+      /* Jika kamu membungkus kata 'Efisiensi' dengan span lagi di dalam .highlight-red */
+      /* Namun cara termudah adalah menerapkan anti-skew pada elemen inline-nya */
+    }
+    
+    /* Karena .highlight-red membungkus teks langsung, 
+       kita gunakan teknik pseudo-element agar lebih rapi dan teks tetap terbaca tajam */
+    
+    .highlight-red {
+      position: relative;
+      background: none; /* Hilangkan background asli */
+      padding: 0 20px;
+      z-index: 1;
+    }
+    
+    .highlight-red::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #DC2626;
+      border-radius: 4px;
+      transform: skewX(-15deg); /* Atur derajat kemiringan di sini */
+      z-index: -1; /* Letakkan di belakang teks */
     }
 
     .hero-content p {
