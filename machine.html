@@ -33,6 +33,46 @@
       gap: 8px;
     }
 
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 60vh; /* Request: 60% viewport height */
+      background-color: var(--brand-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 0 24px;
+    }
+    
+    .hero-bg-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* Paling belakang */
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1; /* Di atas SVG */
+      max-width: 850px;
+    }
+    
+    /* Highlight merah tetap di belakang kata 'Efisiensi' */
+    .highlight-red {
+      background-color: #DC2626;
+      color: var(--text-invert);
+      padding: 0 10px;
+      border-radius: 4px;
+      display: inline-block;
+      white-space: nowrap; /* Mencegah kata terpotong */
+    }
+
     /* ===================== MACHINE GRID ===================== */
     /* Card Component */
     .machine-card {
@@ -230,7 +270,51 @@
   </aside>
 
   <main>
-    <section id="hero" class="hero">
+    <section class="hero">
+      <svg class="hero-bg-pattern" viewBox="0 0 1440 580" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <g clip-path="url(#clip0_57_222)" filter="url(#filter0_f_57_222)">
+          <mask id="mask0_57_222" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-624" y="-446" width="1166" height="1340">
+            <g clip-path="url(#clip1_57_222)">
+              <path d="M132.679 445.185L179.497 763.577L368.807 620.937L456.869 410.054L417.992 368.482L191.551 389.856L-55.0452 368.186L-133.559 309.489L-104.314 227.254L22.1499 123.565L-327.853 89.5782L-416.802 -224.495L-520.103 72.5407L-327.863 90.9175L-170.493 646.895L132.679 445.185Z" fill="black"/>
+            </g>
+          </mask>
+          <g mask="url(#mask0_57_222)">
+            <rect opacity="0.3" x="-36.3066" y="-445.508" width="1155" height="678.004" transform="rotate(60 -36.3066 -445.508)" fill="url(#paint0_linear_57_222)"/>
+          </g>
+          <rect opacity="0.3" x="934.693" y="963.171" width="1155" height="678.004" transform="rotate(-84.0023 934.693 963.171)" fill="url(#paint1_linear_57_222)"/>
+        </g>
+        <defs>
+          <filter id="filter0_f_57_222" x="-64" y="-64" width="1568" height="644" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feGaussianBlur stdDeviation="32" result="effect1_foregroundBlur_57_222"/>
+          </filter>
+          <linearGradient id="paint0_linear_57_222" x1="245.195" y1="397.742" x2="837.197" y2="-610.751" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#05215B"/>
+            <stop offset="1" stop-color="#BDDDFF"/>
+          </linearGradient>
+          <linearGradient id="paint1_linear_57_222" x1="1216.2" y1="1806.42" x2="1808.2" y2="797.928" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#05215B"/>
+            <stop offset="1" stop-color="#BDDDFF"/>
+          </linearGradient>
+          <clipPath id="clip0_57_222">
+            <rect width="1440" height="516" fill="white"/>
+          </clipPath>
+          <clipPath id="clip1_57_222">
+            <rect width="1155" height="678.004" fill="white" transform="translate(-36.3066 -445.508) rotate(60)"/>
+          </clipPath>
+        </defs>
+      </svg>
+    
+      <div class="hero-content">
+        <h4 class="section-title">
+          Modernisasi Lini Produksi<br />
+          Untuk <span class="highlight-red">Efisiensi</span> Maksimal
+        </h4>
+        <p class="body-l">
+          Tingkatkan output produksi Anda dengan teknologi mesin terbaru yang dirancang untuk daya tahan dan presisi tinggi.
+        </p>
+      </div>
     </section>
     
     <section id="machine-grid" class="section-padding">
