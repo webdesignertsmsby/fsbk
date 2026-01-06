@@ -376,7 +376,7 @@
   </aside>
 
   <main>
-    <section class="hero">
+    <section class="hero" id="hero">
       <svg class="hero-bg-pattern" width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <g clip-path="url(#clip0_57_222)" filter="url(#filter0_f_57_222)">
           <mask id="mask0_57_222" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-624" y="-446" width="1166" height="1340">
@@ -550,109 +550,120 @@
   <script src="cart.js"></script>
 
   <script>
-    // --- 1. LOGIKA NAVBAR SCROLL ---
-    const navbar = document.getElementById('mainNavbar');
-    const heroSection = document.getElementById('hero');
-    
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > heroSection.offsetHeight - 80) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+      // --- 1. LOGIKA NAVBAR SCROLL ---
+      const navbar = document.getElementById('mainNavbar');
+      const heroSection = document.getElementById('hero');
+      
+      // Pengecekan safety agar tidak error jika hero belum ada
+      if (navbar && heroSection) {
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > heroSection.offsetHeight - 80) {
+                  navbar.classList.add('scrolled');
+              } else {
+                  navbar.classList.remove('scrolled');
+              }
+          });
       }
-    });
-    
-    // --- 2. LOGIKA BUKA/TUTUP CART ---
-    const cartBtn = document.getElementById('cartBtn');
-    const cartSidebar = document.getElementById('cartSidebar');
-    const cartOverlay = document.getElementById('cartOverlay');
-    const closeCart = document.getElementById('closeCart');
-    
-    cartBtn.addEventListener('click', () => {
-      cartSidebar.classList.add('active');
-      cartOverlay.classList.add('active');
-      navbar.classList.add('cart-open');
-      renderCartItems(); // TAMBAHAN: Update tampilan isi keranjang saat dibuka
-    });
-    
-    [closeCart, cartOverlay].forEach(el => {
-      el.addEventListener('click', () => {
-        cartSidebar.classList.remove('active');
-        cartOverlay.classList.remove('active');
-        navbar.classList.remove('cart-open');
+      
+      // --- 2. LOGIKA BUKA/TUTUP CART ---
+      const cartBtn = document.getElementById('cartBtn');
+      const cartSidebar = document.getElementById('cartSidebar');
+      const cartOverlay = document.getElementById('cartOverlay');
+      const closeCart = document.getElementById('closeCart');
+      
+      if(cartBtn) {
+          cartBtn.addEventListener('click', () => {
+              cartSidebar.classList.add('active');
+              cartOverlay.classList.add('active');
+              navbar.classList.add('cart-open');
+              // Pastikan fungsi renderCartItems ada (dari cart.js)
+              if (typeof renderCartItems === 'function') renderCartItems();
+          });
+      }
+      
+      [closeCart, cartOverlay].forEach(el => {
+          if(el) {
+              el.addEventListener('click', () => {
+                  cartSidebar.classList.remove('active');
+                  cartOverlay.classList.remove('active');
+                  navbar.classList.remove('cart-open');
+              });
+          }
       });
-    });
-    
-    // --- 3. LOGIKA MOBILE MENU ---
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-      navbar.classList.toggle('menu-open');
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('machine-grid');
-    const chips = document.querySelectorAll('.filter-chip');
-    
-    // 1. Fungsi Render Produk
-    function renderMachineGrid(categoryFilter) {
-        grid.innerHTML = ''; // Kosongkan grid sebelum render ulang
-
-        // Filter produk (Jika categoryFilter 'All', tampilkan semua, tapi disini kita default 'Bakery')
-        // Pastikan productData.js sudah di-load sebelumnya
-        const filteredProducts = products.filter(product => product.category === categoryFilter);
-
-        if (filteredProducts.length === 0) {
-            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Tidak ada produk di kategori ini.</p>';
-            return;
-        }
-
-        filteredProducts.forEach(product => {
-            // Kita gunakan struktur HTML yang sama dengan existing design .machine-card kamu
-            const cardHTML = `
-                <div class="machine-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
-                    <div style="height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-                         <img src="${product.image}" alt="${product.name}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-                    </div>
-                    
-                    <h5 style="margin-bottom: 8px;">${product.name}</h5>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px;">${formatRupiah(product.price)}</p>
-                    
-                    <button style="
-                        padding: 12px 24px; 
-                        background: var(--brand-500); 
-                        color: white; 
-                        border: none; 
-                        border-radius: 4px; 
-                        cursor: pointer;">
-                        Lihat Detail
-                    </button>
-                </div>
-            `;
-            grid.innerHTML += cardHTML;
-        });
-    }
-
-    // 2. Setup Event Listener untuk Chips
-    chips.forEach(chip => {
-        chip.addEventListener('click', () => {
-            // Remove active class from all chips
-            chips.forEach(c => c.classList.remove('active'));
-            // Add active class to clicked chip
-            chip.classList.add('active');
-
-            // Ambil kategori dari data-category
-            const category = chip.getAttribute('data-category');
-            renderMachineGrid(category);
-        });
-    });
-
-    // 3. Render Default saat halaman dimuat (Bakery)
-    renderMachineGrid('Bakery');
-});
-  </script>
+      
+      // --- 3. LOGIKA MOBILE MENU ---
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      if(menuBtn) {
+          menuBtn.addEventListener('click', () => {
+              mobileMenu.classList.toggle('active');
+              navbar.classList.toggle('menu-open');
+          });
+      }
+  
+      // --- 4. LOGIKA RENDER GRID MESIN ---
+      document.addEventListener('DOMContentLoaded', () => {
+          const grid = document.getElementById('machine-grid');
+          const chips = document.querySelectorAll('.filter-chip');
+          
+          // DEBUGGING: Cek apakah data products terbaca
+          console.log("Status Data Produk:", typeof products !== 'undefined' ? products : "TIDAK DITEMUKAN");
+  
+          function renderMachineGrid(categoryFilter) {
+              if (typeof products === 'undefined') {
+                  grid.innerHTML = '<p style="text-align:center; padding:20px;">Data produk tidak ditemukan. Cek productData.js</p>';
+                  return;
+              }
+  
+              console.log("Memfilter Kategori:", categoryFilter);
+              
+              // Filter produk
+              const filteredProducts = products.filter(product => product.category === categoryFilter);
+              console.log("Hasil Filter:", filteredProducts.length, "item ditemukan");
+  
+              grid.innerHTML = ''; // Reset grid
+  
+              if (filteredProducts.length === 0) {
+                  grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-secondary);">Tidak ada produk di kategori ini.</p>';
+                  return;
+              }
+  
+              filteredProducts.forEach(product => {
+                  // Pastikan formatRupiah tersedia, jika tidak gunakan fallback
+                  const priceDisplay = typeof formatRupiah === 'function' ? formatRupiah(product.price) : `Rp ${product.price}`;
+  
+                  const cardHTML = `
+                      <div class="machine-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
+                          <div class="machine-img-wrapper">
+                               <img src="${product.image}" alt="${product.name}" class="machine-img">
+                          </div>
+                          <div class="card-info">
+                              <span class="machine-category">${product.category}</span>
+                              <h3 class="machine-name">${product.name}</h3>
+                              <p style="color: var(--text-secondary); margin-bottom: 16px;">${priceDisplay}</p>
+                              <button class="btn-tertiary">Lihat Mesin →</button>
+                          </div>
+                      </div>
+                  `;
+                  grid.innerHTML += cardHTML;
+              });
+          }
+  
+          // Setup Event Listener untuk Chips
+          chips.forEach(chip => {
+              chip.addEventListener('click', () => {
+                  chips.forEach(c => c.classList.remove('active'));
+                  chip.classList.add('active');
+                  const category = chip.getAttribute('data-category');
+                  renderMachineGrid(category);
+              });
+          });
+  
+          // Render Default
+          renderMachineGrid('Bakery');
+      });
+    </script>
 
   </body>
 </html>
