@@ -258,38 +258,43 @@ button {
   position: relative; /* Menjadi patokan untuk nav-menu */
 }
 
-/* Keadaan Awal: Tampilkan logo 1, Sembunyikan logo 2 */
-.logo-default {
-  display: block;
-}
-
-.logo-scrolled {
-  display: none;
-}
-
-/* Keadaan Saat Di-scroll: Sembunyikan logo 1, Tampilkan logo 2 */
-#mainNavbar.scrolled .logo-default {
-  display: none;
-}
-
-#mainNavbar.scrolled .logo-scrolled {
-  display: block;
-}
-
 .logo {
   position: relative;
   display: block;
+  width: 98px; 
+  height: 40px;
 }
+
 .logo svg {
-  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  width: 100%;
+  height: auto;
 }
 
+/* --- STATE 1: Default (Saat di atas) --- */
+.logo-scrolled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.logo-default {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- STATE 2: Scrolled (Saat navbar punya class .scrolled) --- */
 #mainNavbar.scrolled .logo-default {
-   opacity: 0; position: absolute;
+  opacity: 0;
+  visibility: hidden;
 }
 
-#mainNavbar:not(.scrolled) .logo-scrolled {
-   opacity: 0; position: absolute;
+#mainNavbar.scrolled .logo-scrolled {
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav-menu {
