@@ -181,6 +181,8 @@
       text-align: center;
       transition: box-shadow 0.3s ease;
       cursor: pointer;
+      border: 1px solid var(--border-default); 
+      border-radius: 8px;
     }
 
     .machine-img-wrapper {
@@ -240,6 +242,10 @@
         padding: 60px 40px;
       }
 
+      .machine-grid-layout {
+        gap: 24px;
+      }
+
       .machine-card {
         padding: 20px 16px;
       }
@@ -268,7 +274,6 @@
 
       .machine-grid-layout {
         grid-template-columns: 1fr; /* 1 Kolom per row */
-        gap: 24px;
       }
       
       .machine-card {
