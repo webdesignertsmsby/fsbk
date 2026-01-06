@@ -117,7 +117,60 @@
       margin: 0 auto;
     }
 
-    /* ===================== MACHINE GRID ===================== */
+    /* ===================== FILTER CHIPS ===================== */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px; /* Jarak antara chip dan grid produk */
+      flex-wrap: wrap;
+    }
+    
+    .filter-chip {
+      /* Layout & Spacing */
+      padding: 12px 20px; /* Saya sesuaikan agar proporsional. Tukar jika ingin lebih tinggi */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      /* Text Style (Mengacu ke var style.css jika ada, atau fallback) */
+      font-family: var(--font-sans);
+      font-size: 16px; 
+      font-weight: 500;
+      color: var(--text-secondary);
+      
+      /* Border & Background */
+      background-color: transparent;
+      border: 1px solid var(--border-primary); /* Pastikan var ini ada di :root style.css */
+      border-radius: 8px;
+      
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    /* HOVER STATE: Brand 50, No Border */
+    .filter-chip:hover {
+      background-color: var(--brand-50);
+      border-color: transparent; /* Atau samakan dengan bg color */
+      color: var(--text-secondary);
+    }
+    
+    /* ACTIVE STATE (Clicked): Brand 500, Text Invert */
+    .filter-chip.active {
+      background-color: var(--brand-500);
+      color: var(--text-invert);
+      border-color: transparent;
+    }
+    
+    /* ===================== MACHINE GRID LAYOUT ===================== */
+    .machine-grid-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Default Desktop: 3 Kolom */
+      gap: 32px; /* Jarak antar kartu */
+      width: 100%;
+    }
+
     /* Card Component */
     .machine-card {
       background-color: var(--neutral-50);
@@ -211,6 +264,11 @@
 
       .hero {
         height: 80vh; 
+      }
+
+      .machine-grid-layout {
+        grid-template-columns: 1fr; /* 1 Kolom per row */
+        gap: 24px;
       }
       
       .machine-card {
@@ -364,9 +422,20 @@
         </p>
       </div>
     </section>
+
+    <section class="machine-list-section">
+      <div class="filter-container">
+        <button class="filter-chip active" data-category="Bakery">BAKERY</button>
+        <button class="filter-chip" data-category="Cafe">CAFE</button>
+        <button class="filter-chip" data-category="Hotel">HOTEL</button>
+      </div>
     
-    <section id="machine-grid" class="section-padding">
+      <div class="container" style="background: transparent; padding: 0;">
+        <div id="machine-grid" class="machine-grid-layout">
+          </div>
+      </div>
     </section>
+    
   </main>
 
   <footer id="main-footer">
@@ -522,6 +591,67 @@
       mobileMenu.classList.toggle('active');
       navbar.classList.toggle('menu-open');
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('machine-grid');
+    const chips = document.querySelectorAll('.filter-chip');
+    
+    // 1. Fungsi Render Produk
+    function renderMachineGrid(categoryFilter) {
+        grid.innerHTML = ''; // Kosongkan grid sebelum render ulang
+
+        // Filter produk (Jika categoryFilter 'All', tampilkan semua, tapi disini kita default 'Bakery')
+        // Pastikan productData.js sudah di-load sebelumnya
+        const filteredProducts = products.filter(product => product.category === categoryFilter);
+
+        if (filteredProducts.length === 0) {
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Tidak ada produk di kategori ini.</p>';
+            return;
+        }
+
+        filteredProducts.forEach(product => {
+            // Kita gunakan struktur HTML yang sama dengan existing design .machine-card kamu
+            const cardHTML = `
+                <div class="machine-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
+                    <div style="height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                         <img src="${product.image}" alt="${product.name}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                    </div>
+                    
+                    <h5 style="margin-bottom: 8px;">${product.name}</h5>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">${formatRupiah(product.price)}</p>
+                    
+                    <button style="
+                        padding: 12px 24px; 
+                        background: var(--brand-500); 
+                        color: white; 
+                        border: none; 
+                        border-radius: 4px; 
+                        cursor: pointer;">
+                        Lihat Detail
+                    </button>
+                </div>
+            `;
+            grid.innerHTML += cardHTML;
+        });
+    }
+
+    // 2. Setup Event Listener untuk Chips
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            // Remove active class from all chips
+            chips.forEach(c => c.classList.remove('active'));
+            // Add active class to clicked chip
+            chip.classList.add('active');
+
+            // Ambil kategori dari data-category
+            const category = chip.getAttribute('data-category');
+            renderMachineGrid(category);
+        });
+    });
+
+    // 3. Render Default saat halaman dimuat (Bakery)
+    renderMachineGrid('Bakery');
+});
   </script>
 
   </body>
