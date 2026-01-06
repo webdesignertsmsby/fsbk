@@ -432,9 +432,9 @@ button {
 }
 
 #main-footer {
-    background-color: var(--brand-900);
+    background-color: var(--neutral-100);
     padding: 60px 24px;
-    color: var(--text-invert);
+    color: var(--text-primary);
 }
 
 .footer-container {
@@ -472,7 +472,7 @@ button {
 .footer-nav .nav-item {
     text-decoration: none;
     /* Menggunakan variabel warna text invert (putih) */
-    color: var(--text-invert);
+    color: var(--text-primary);
     position: relative;
     padding: 0 10px;
     /* Font size otomatis ter-apply dari class "body-l" di HTML */
@@ -483,7 +483,7 @@ button {
     content: "•";
     position: absolute;
     right: -10px;
-    color: var(--text-invert);
+    color: var(--text-tertiary);
     opacity: 0.6;
 }
 
@@ -508,7 +508,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 4px; /* Jarak antara baris nama/telp dengan alamat */
-    color: var(--neutral-300); /* Sesuai request: neutral-300 */
+    color: var(--text-secondary); /* Sesuai request: neutral-300 */
 }
 
 .company-main {
@@ -525,14 +525,14 @@ button {
 }
 
 .company-group .bullet {
-    color: var(--neutral-300);
+    color: var(--text-tertiary);
     opacity: 0.8;
 }
 
 /* Baris Informasi Perusahaan */
 .company-row {
     /* Warna Neutral-300 sesuai request */
-    color: var(--neutral-300);
+    color: var(--text-secondary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -557,7 +557,7 @@ button {
 }
 
 .social-icon {
-    color: var(--text-invert);
+    color: var(--text-tertiary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -579,7 +579,7 @@ button {
     display: block;
     width: 40px; /* Lebar garis */
     height: 1px; /* Ketebalan garis */
-    background-color: var(--text-invert);
+    background-color: var(--text-tertiary);
     opacity: 0.5;
 }
 
