@@ -258,6 +258,40 @@ button {
   position: relative; /* Menjadi patokan untuk nav-menu */
 }
 
+/* Keadaan Awal: Tampilkan logo 1, Sembunyikan logo 2 */
+.logo-default {
+  display: block;
+}
+
+.logo-scrolled {
+  display: none;
+}
+
+/* Keadaan Saat Di-scroll: Sembunyikan logo 1, Tampilkan logo 2 */
+#mainNavbar.scrolled .logo-default {
+  display: none;
+}
+
+#mainNavbar.scrolled .logo-scrolled {
+  display: block;
+}
+
+.logo {
+  position: relative;
+  display: block;
+}
+.logo svg {
+  transition: opacity 0.3s ease;
+}
+
+#mainNavbar.scrolled .logo-default {
+   opacity: 0; position: absolute;
+}
+
+#mainNavbar:not(.scrolled) .logo-scrolled {
+   opacity: 0; position: absolute;
+}
+
 .nav-menu {
   display: flex;
   align-items: center;
