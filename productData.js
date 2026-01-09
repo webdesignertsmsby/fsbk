@@ -5,7 +5,7 @@ const products = [
         name: "Oven Single Deck",
         category: "Bakery",
         price: 000000,
-        image: "https://i.imgur.com/50yWcuA.png",
+        image: "https://i.imgur.com/z5ZtZK8.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -13,7 +13,7 @@ const products = [
         name: "Oven Double Deck",
         category: "Bakery",
         price: 000000,
-        image: "https://i.imgur.com/GZWWM0r.png",
+        image: "https://i.imgur.com/DigWh5J.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -21,7 +21,7 @@ const products = [
         name: "Proofer",
         category: "Bakery",
         price: 000000,
-        image: "https://i.imgur.com/UfklByO.png",
+        image: "https://i.imgur.com/SpF2rui.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -29,7 +29,7 @@ const products = [
         name: "Meja Tray",
         category: "Bakery",
         price: 000000,
-        image: "https://i.imgur.com/y1tbsuV.png",
+        image: "https://i.imgur.com/gwYXsER.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -37,7 +37,7 @@ const products = [
         name: "Blender",
         category: "Cafe",
         price: 000000,
-        image: "https://i.imgur.com/17kvXW8.png",
+        image: "https://i.imgur.com/eDWEjQR.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -45,7 +45,7 @@ const products = [
         name: "Meja Bar",
         category: "Cafe",
         price: 000000,
-        image: "https://i.imgur.com/VVBUOps.png",
+        image: "https://i.imgur.com/ZtMfxnp.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -53,7 +53,7 @@ const products = [
         name: "Mesin Es Serut",
         category: "Cafe",
         price: 000000,
-        image: "https://i.imgur.com/zi98cfA.png",
+        image: "https://i.imgur.com/AoR9ZV0.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -61,7 +61,7 @@ const products = [
         name: "Mesin Cup Sealer",
         category: "Cafe",
         price: 000000,
-        image: "https://i.imgur.com/tCc5ry2.png",
+        image: "https://i.imgur.com/lyLsAwA.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -85,7 +85,7 @@ const products = [
         name: "Kulkas",
         category: "Hotel",
         price: 000000,
-        image: "https://i.imgur.com/r0nlosP.png",
+        image: "https://i.imgur.com/snxe4ge.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -93,7 +93,7 @@ const products = [
         name: "Tray",
         category: "Aksesoris",
         price: 000000,
-        image: "https://i.imgur.com/IQygyDS.png",
+        image: "https://i.imgur.com/HJ4NGA6.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -101,7 +101,7 @@ const products = [
         name: "Sarung Tangan",
         category: "Aksesoris",
         price: 000000,
-        image: "https://i.imgur.com/tzNHDKr.png",
+        image: "https://i.imgur.com/U8S17RM.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
 ];
