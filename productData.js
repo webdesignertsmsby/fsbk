@@ -77,7 +77,7 @@ const products = [
         name: "Freezer",
         category: "Hotel",
         price: 000000,
-        image: "https://i.imgur.com/eZwq6tu.png",
+        image: "https://i.imgur.com/snxe4ge.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -85,7 +85,7 @@ const products = [
         name: "Kulkas",
         category: "Hotel",
         price: 000000,
-        image: "https://i.imgur.com/snxe4ge.png",
+        image: "https://i.imgur.com/kg9zkCM.png",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
