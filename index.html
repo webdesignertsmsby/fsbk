@@ -1272,10 +1272,11 @@
     const grid = document.getElementById('popularMachineGrid');
     if (!grid) return;
 
-    grid.innerHTML = '';
+    // Masukkan ID mesin sesuai arahan atasan di sini
+    const selectedIds = [2, 5, 8]; 
 
-    // .slice(0, 3) mengambil data dari index 0 sampai sebelum index 3 (total 3 data)
-    const popularProducts = products.slice(0, 3);
+    // Ambil data produk yang ID-nya ada di dalam list selectedIds
+    const popularProducts = products.filter(product => selectedIds.includes(product.id));
 
     popularProducts.forEach(product => {
         const card = `
