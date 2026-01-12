@@ -1269,28 +1269,31 @@
     
     // --- 4. FUNGSI RENDER PRODUK OTOMATIS (TAMBAHAN BARU) ---
     function displayProducts() {
-        const grid = document.getElementById('popularMachineGrid');
-        if (!grid) return;
-    
-        grid.innerHTML = ""; // Bersihkan kontainer
-    
-        products.forEach(product => {
-            grid.innerHTML += `
-                <div class="machine-card">
-                  <div class="machine-img-wrapper">
+    const grid = document.getElementById('popularMachineGrid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    // .slice(0, 3) mengambil data dari index 0 sampai sebelum index 3 (total 3 data)
+    const popularProducts = products.slice(0, 3);
+
+    popularProducts.forEach(product => {
+        const card = `
+            <div class="machine-card" onclick="window.location.href='product-detail.html?id=${product.id}'">
+                <div class="machine-img-wrapper">
                     <img src="${product.image}" alt="${product.name}" class="machine-img">
-                  </div>
-                  <div class="card-info">
+                </div>
+                <div class="card-info">
                     <span class="machine-category">${product.category}</span>
                     <h3 class="machine-name">${product.name}</h3>
-                    <button class="btn-tertiary" onclick="location.href='detail-mesin.html?id=${product.id}'">
-                      Lihat Mesin
-                    </button>
-                  </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">${formatRupiah(product.price)}</p>
+                    <button class="btn-tertiary">Lihat Mesin →</button>
                 </div>
-            `;
-        });
-    }
+            </div>
+        `;
+        grid.innerHTML += card;
+    });
+}
     
     // Fungsi pembantu agar setelah klik tambah, tampilan keranjang langsung update
     function handleAddToCart(id) {
