@@ -588,6 +588,25 @@
                 </div>
             </div>
         `;
+
+        // --- LOGIKA INPUT KEYBOARD QUANTITY ---
+        const qtyInput = document.getElementById('qtyValue');
+        
+        if (qtyInput) {
+            // 1. Hanya izinkan angka saat mengetik
+            qtyInput.addEventListener('input', function() {
+                // Hapus semua karakter yang bukan angka
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        
+            // 2. Validasi saat user selesai mengetik (klik di luar atau tekan enter)
+            qtyInput.addEventListener('blur', function() {
+                // Jika kosong atau kurang dari 1, paksa kembali ke 1
+                if (this.value === '' || parseInt(this.value) < 1) {
+                    this.value = 1;
+                }
+            });
+        }
             
         // --- RENDER THUMBNAILS ---
         // --- RENDER THUMBNAILS (UPDATED LOGIC) ---
