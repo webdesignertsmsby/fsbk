@@ -45,7 +45,7 @@ const products = [
         name: "Meja Bar",
         category: "Cafe",
         price: 000000,
-        image: { "https://i.imgur.com/ZtMfxnp.png", "https://i.imgur.com/ZtMfxnp.png" ],
+        image: [ "https://i.imgur.com/ZtMfxnp.png", "https://i.imgur.com/ZtMfxnp.png" ],
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -53,7 +53,7 @@ const products = [
         name: "Mesin Es Serut",
         category: "Cafe",
         price: 000000,
-        image: [ "https://i.imgur.com/AoR9ZV0.png", "https://i.imgur.com/AoR9ZV0.png" ].
+        image: [ "https://i.imgur.com/AoR9ZV0.png", "https://i.imgur.com/AoR9ZV0.png" ],
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
