@@ -638,7 +638,11 @@
           const input = document.getElementById('qtyValue');
           let val = parseInt(input.value) || 1;
           val += change;
+      
+          // Batasi minimal 1 dan maksimal 99
           if (val < 1) val = 1;
+          if (val > 99) val = 99;
+          
           input.value = val;
       }
   
