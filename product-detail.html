@@ -618,7 +618,7 @@
   
           // --- 6. RENDER SIMILAR PRODUCTS ---
           const similarContainer = document.getElementById('similarContainer');
-          const similarProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+          const similarProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 2);
           similarProducts.forEach(p => {
               const simImg = Array.isArray(p.images) ? p.images[0] : (Array.isArray(p.image) ? p.image[0] : p.image);
               similarContainer.innerHTML += `
