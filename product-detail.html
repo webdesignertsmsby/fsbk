@@ -36,8 +36,10 @@
 
     /* --- LEFT COLUMN (VISUALS) --- */
     .detail-left {
+      position: -webkit-sticky;
       position: sticky;
       top: 64px; /* Jarak dari navbar saat scroll */
+      align-self: start;
       width: 100%;
     }
 
@@ -174,6 +176,11 @@
       color: var(--text-primary);
       font-size: 16px;
       outline: none;
+    }
+    
+    .qty-input:focus {
+      outline: none;
+      background-color: var(--neutral-100);
     }
 
     .btn-add-cart {
