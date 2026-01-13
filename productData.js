@@ -5,7 +5,7 @@ const products = [
         name: "Oven Single Deck",
         category: "Bakery",
         price: 7000000,
-        image: [ "https://i.imgur.com/z5ZtZK8.png", "https://i.imgur.com/SDGFsK7.png" ],
+        image: [ "https://i.imgur.com/z5ZtZK8.png", "https://i.imgur.com/tizJB8F.png" ],
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
