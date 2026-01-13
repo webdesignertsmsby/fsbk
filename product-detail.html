@@ -173,6 +173,7 @@
       font-weight: 700;
       color: var(--text-primary);
       font-size: 16px;
+      outline: none;
     }
 
     .btn-add-cart {
@@ -250,6 +251,7 @@
       border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
+      background-color: var(--neutral-100);
     }
 
     .similar-img {
@@ -269,7 +271,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.9); /* White overlay */
+      /* background-color: rgba(255, 255, 255, 0.9); /* White overlay */
       padding: 12px;
       text-align: center;
     }
@@ -449,7 +451,9 @@
                         <div class="accordion-icon"></div>
                     </div>
                     <div class="accordion-content">
-                        <p>Placeholder: Dimensi, Daya Listrik, Kapasitas, Berat Mesin.</p>
+                        <div id="specsContainer">
+                            ${renderSpecs(product.specs)}
+                        </div>
                     </div>
                 </div>
 
@@ -502,6 +506,20 @@
             thumbContainer.appendChild(thumb);
         });
 
+          // --- RENDER SPECS --
+          function renderSpecs(specs) {
+              if (!specs) return "<p>Spesifikasi tidak tersedia.</p>";
+              let html = '<ul style="list-style: none; padding: 0;">';
+              for (const [key, value] of Object.entries(specs)) {
+                  html += `<li style="display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--neutral-200); padding-bottom: 4px;">
+                              <span style="font-weight: 600;">${key}</span>
+                              <span>${value}</span>
+                           </li>`;
+              }
+              html += '</ul>';
+              return html;
+          }
+
         // --- RENDER SIMILAR PRODUCTS ---
         const similarContainer = document.getElementById('similarContainer');
         const similarProducts = products
@@ -535,11 +553,17 @@
     // Quantity Logic
     function updateQty(change) {
         const input = document.getElementById('qtyValue');
-        let val = parseInt(input.value);
+        let val = parseInt(input.value) || 1;
         val += change;
         if(val < 1) val = 1;
         input.value = val;
     }
+
+    document.getElementById('qtyValue').addEventListener('input', function(e) {
+        // Hanya izinkan angka
+        this.value = this.value.replace(/[^0-9]/g, '');
+        if (this.value === '' || this.value === '0') this.value = 1;
+    });
 
     // Custom Add to Cart with Quantity
     function addToCartDetailed(id) {
