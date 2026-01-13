@@ -400,8 +400,8 @@
         }
 
         // Ambil gambar (jika array kosong atau string, handle fallback)
-        let imageList = Array.isArray(product.images) && product.images.length > 0 
-            ? product.images 
+        let imageList = Array.isArray(product.image) && product.image.length > 0 
+            ? product.image 
             : [product.image]; // Fallback ke property lama jika ada
 
         // RENDER HTML STRUCTURE
