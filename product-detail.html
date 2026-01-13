@@ -582,12 +582,24 @@
   
           // --- 4. LOGIKA KEYBOARD QUANTITY (WAJIB DI SINI) ---
           const qtyInput = document.getElementById('qtyValue');
-          qtyInput.addEventListener('input', function() {
-              this.value = this.value.replace(/[^0-9]/g, ''); // Hapus non-angka
-          });
-          qtyInput.addEventListener('blur', function() {
-              if (this.value === '' || parseInt(this.value) < 1) this.value = 1;
-          });
+            if (qtyInput) {
+                qtyInput.addEventListener('input', function() {
+                    // 1. Hanya izinkan angka
+                    this.value = this.value.replace(/[^0-9]/g, '');
+            
+                    // 2. Jika angka yang diketik lebih dari 99, paksa jadi 99
+                    if (parseInt(this.value) > 99) {
+                        this.value = 99;
+                    }
+                });
+            
+                qtyInput.addEventListener('blur', function() {
+                    // 3. Jika kosong atau 0 saat ditinggalkan, kembalikan ke 1
+                    if (this.value === '' || parseInt(this.value) < 1) {
+                        this.value = 1;
+                    }
+                });
+            }
   
           // --- 5. RENDER THUMBNAILS ---
           const thumbGallery = document.getElementById('thumbnailGallery');
