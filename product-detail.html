@@ -29,7 +29,7 @@
     /* ===================== PRODUCT DETAIL LAYOUT ===================== */
     .product-detail-wrapper {
       display: grid;
-      grid-template-columns: 45% 1fr; /* Kiri 45%, Kanan sisa */
+      grid-template-columns: 1fr 1fr; /* Kiri 45%, Kanan sisa */
       gap: 16px;
       align-items: start; /* Penting untuk Sticky */
     }
@@ -38,6 +38,7 @@
     .detail-left {
       position: sticky;
       top: 80px; /* Jarak dari navbar saat scroll */
+      width: 100%;
     }
 
     .main-image-wrapper {
@@ -47,7 +48,6 @@
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 16px;
-      border: 1px solid var(--neutral-200);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -57,19 +57,29 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 24px;
+      padding: 0px;
       transition: opacity 0.3s ease;
     }
 
     .thumbnail-gallery {
+      position: absolute; /* Mengambang di atas gambar */
+      bottom: 24px;       /* Jarak dari bawah */
+      left: 50%;          /* Posisi tengah horizontal */
+      transform: translateX(-50%); /* Trik centering absolute */
+      
       display: flex;
-      gap: 12px;
-      justify-content: center;
+      gap: 8px;
+      background-color: rgba(255, 255, 255, 0.8); /* Latar belakang semi-transparan (Glassy) */
+      backdrop-filter: blur(4px);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--neutral-200);
+      z-index: 10;
     }
 
     .thumb-item {
-      width: 80px;
-      height: 80px;
+      width: 120px;
+      height: 120px;
       background-color: var(--neutral-50);
       border-radius: 8px;
       cursor: pointer;
@@ -92,7 +102,7 @@
     .thumb-img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
 
     /* --- RIGHT COLUMN (CARDS STACK) --- */
@@ -399,13 +409,13 @@
             <div class="detail-left">
                 <div class="main-image-wrapper">
                     <img src="${imageList[0]}" alt="${product.name}" class="main-image" id="mainImage">
+                    
+                    <div class="thumbnail-gallery" id="thumbnailGallery">
+                        </div>
                 </div>
-                <div class="thumbnail-gallery" id="thumbnailGallery">
-                    </div>
             </div>
 
             <div class="detail-right">
-                
                 <div class="detail-card">
                     <h1 class="product-title">${product.name}</h1>
                     <div class="product-price">${formatRupiah(product.price)}</div>
@@ -457,21 +467,24 @@
                     <div class="similar-grid" id="similarContainer">
                         </div>
                 </div>
-
             </div>
         `;
-
+            
         // --- RENDER THUMBNAILS ---
+        // --- RENDER THUMBNAILS (UPDATED LOGIC) ---
         const thumbContainer = document.getElementById('thumbnailGallery');
+        
         imageList.forEach((imgSrc, index) => {
-            // Maksimal 2 thumbnail sesuai request
-            if(index > 1) return; 
-
+            // SAYA HAPUS BATASAN: if(index > 1) return; 
+            // Sekarang semua gambar di array akan muncul.
+            
             const thumb = document.createElement('div');
             thumb.className = `thumb-item ${index === 0 ? 'active' : ''}`;
             thumb.innerHTML = `<img src="${imgSrc}" class="thumb-img">`;
             
-            thumb.addEventListener('click', () => {
+            thumb.addEventListener('click', (e) => {
+                e.stopPropagation(); // Mencegah klik tembus ke container (opsional tapi good practice)
+
                 // Change main image
                 const mainImg = document.getElementById('mainImage');
                 mainImg.style.opacity = 0;
