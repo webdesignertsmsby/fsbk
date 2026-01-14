@@ -7,12 +7,6 @@
   
   <link rel="stylesheet" href="style.css" />
   <style>
-    * {
-      box-sizing: border-box; /* Padding tidak akan menambah lebar elemen */
-      margin: 0;
-      padding: 0;
-    }
-    
     /* ===================== OVERRIDE NAVBAR & CONTAINER ==================== */
     .navbar {
       width: 100%;
@@ -32,7 +26,6 @@
 
     .container {
       background: var(--neutral-50);
-      max-width: 100vw;
       padding: 100px 16px; /* Padding atas disesuaikan untuk navbar fixed */
       min-height: 100vh;
     }
@@ -313,11 +306,6 @@
     @media (max-width: 1024px) {
       .container { padding: 100px 40px; }
       .product-detail-wrapper { gap: 16px; }
-      
-      .thumb-item {
-        width: 120px;
-        height: 120px;
-      }
 
       .similar-grid {
           display: grid;
@@ -334,19 +322,18 @@
       }
       
       .container { 
-        padding: 100px 16px !important;
-        max-width: 100% !important;
-        overflow: hidden;
+        padding: 100px 16px;
+        width: 100%;
       }
       
       .product-detail-wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: 100%;
       }
       
       .detail-left {
-        position: static !important; /* Hilangkan sticky di mobile */
-        top: 0 !important;
+        position: static; /* Hilangkan sticky di mobile */
         width: 100%;
         height: auto;
       }
