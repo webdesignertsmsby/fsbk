@@ -7,6 +7,12 @@
   
   <link rel="stylesheet" href="style.css" />
   <style>
+    * {
+      box-sizing: border-box; /* Padding tidak akan menambah lebar elemen */
+      margin: 0;
+      padding: 0;
+    }
+    
     /* ===================== OVERRIDE NAVBAR & CONTAINER ==================== */
     .navbar {
       width: 100%;
@@ -26,6 +32,7 @@
 
     .container {
       background: var(--neutral-50);
+      max-width: 100vw;
       padding: 100px 16px; /* Padding atas disesuaikan untuk navbar fixed */
       min-height: 100vh;
     }
@@ -322,18 +329,19 @@
       }
       
       .container { 
-        padding: 100px 16px;
-        width: 100%;
+        padding: 100px 16px !important;
+        max-width: 100% !important;
+        overflow: hidden;
       }
       
       .product-detail-wrapper {
-        display: flex;
-        flex-direction: column;
+        display: block;
         width: 100%;
       }
       
       .detail-left {
-        position: static; /* Hilangkan sticky di mobile */
+        position: static !important; /* Hilangkan sticky di mobile */
+        top: 0 !important;
         width: 100%;
         height: auto;
       }
