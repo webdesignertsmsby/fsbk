@@ -305,7 +305,19 @@
     /* RESPONSIVE */
     @media (max-width: 1024px) {
       .container { padding: 100px 40px; }
-      .product-detail-wrapper { gap: 16px; }
+
+      .product-detail-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+      }
+
+      .detail-left {
+        position: static; /* Hilangkan sticky di mobile */
+        width: 100%;
+        height: auto;
+      }
 
       .similar-grid {
           display: grid;
@@ -325,18 +337,6 @@
         padding: 100px 16px;
         width: 100%;
       }
-      
-      .product-detail-wrapper {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
-      
-      .detail-left {
-        position: static; /* Hilangkan sticky di mobile */
-        width: 100%;
-        height: auto;
-      }
 
       .action-row {
         flex-direction: column; /* Tombol jadi di bawah quantity */
@@ -344,7 +344,7 @@
       }
 
       .qty-selector {
-          width: 100%; /* Full width */
+          width: 20%; /* Full width */
           justify-content: center; /* Angka di tengah */
       }
   
