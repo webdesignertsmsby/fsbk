@@ -79,55 +79,60 @@ function saveCart() {
 
 // --- 6. RENDER TAMPILAN (HTML) ---
 function renderCartItems() {
-    // Target ID sesuai dengan HTML kamu: id="cartItemsContainer"
     const cartContainer = document.getElementById('cartItemsContainer'); 
     const totalPriceEl = document.getElementById('cartTotalPrice');
+    const cartFooter = document.querySelector('.cart-footer'); // Ambil bagian footer
 
     if (!cartContainer) return;
 
-    cartContainer.innerHTML = ''; // Bersihkan isi lama
+    cartContainer.innerHTML = ''; 
     let totalPrice = 0;
 
     if (cart.length === 0) {
         cartContainer.innerHTML = `
-            <div style="text-align:center; padding:20px; color:var(--text-secondary);">
-                Keranjang masih kosong.
+            <div style="text-align:center; padding:40px 20px; color:var(--text-secondary);">
+                <i class="fas fa-shopping-cart" style="font-size: 48px; display:block; margin-bottom:16px; opacity:0.3;"></i>
+                <p>Keranjang Anda masih kosong.</p>
             </div>`;
+        
+        // Sembunyikan footer jika kosong (biar rapi)
+        if (cartFooter) cartFooter.style.display = 'none';
     } else {
-        cart.forEach(item => {
-            const itemTotal = item.price * item.qty;
-            totalPrice += itemTotal;
+        // Tampilkan footer jika ada barang
+        if (cartFooter) cartFooter.style.display = 'block';
 
-            // Masukkan HTML Card Item (sesuai style sidebar)
+        cart.forEach(item => {
+            totalPrice += item.price * item.qty;
+
             cartContainer.innerHTML += `
-                <div class="cart-item" style="display:flex; gap:12px; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid #eee;">
-                    <img src="${item.image}" alt="${item.name}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
+                <div class="cart-item" style="display:flex; gap:12px; margin-bottom:20px; padding:10px; background:#f9f9f9; border-radius:12px;">
+                    <img src="${item.image}" alt="${item.name}" style="width:70px; height:70px; object-fit:cover; border-radius:8px;">
                     
                     <div style="flex:1;">
-                        <h4 style="font-size:14px; margin-bottom:4px;">${item.name}</h4>
+                        <h4 style="font-size:14px; margin-bottom:4px; color:var(--brand-900);">${item.name}</h4>
                         <div style="color:var(--brand-500); font-weight:bold; font-size:14px; margin-bottom:8px;">
                             ${formatRupiah(item.price)}
                         </div>
                         
-                        <div style="display:flex; align-items:center; gap:8px;">
-                            <button onclick="updateCartQty(${item.id}, -1)" style="width:24px; height:24px; border:1px solid #ccc; background:none; cursor:pointer;">-</button>
-                            <span style="font-size:14px; font-weight:600;">${item.qty}</span>
-                            <button onclick="updateCartQty(${item.id}, 1)" style="width:24px; height:24px; border:1px solid #ccc; background:none; cursor:pointer;">+</button>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="display:flex; align-items:center; border:1px solid #ddd; border-radius:4px; overflow:hidden;">
+                                <button onclick="updateCartQty(${item.id}, -1)" style="padding:2px 8px; border:none; background:#eee; cursor:pointer;">-</button>
+                                <span style="padding:0 10px; font-size:13px; font-weight:600;">${item.qty}</span>
+                                <button onclick="updateCartQty(${item.id}, 1)" style="padding:2px 8px; border:none; background:#eee; cursor:pointer;">+</button>
+                            </div>
                         </div>
                     </div>
 
-                    <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:red; font-size:18px; cursor:pointer; height:fit-content;">&times;</button>
+                    <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:#ff4d4d; font-size:20px; cursor:pointer; align-self:flex-start;">&times;</button>
                 </div>
             `;
         });
     }
 
-    // Update Total Harga di Bawah
     if (totalPriceEl) {
         totalPriceEl.innerText = formatRupiah(totalPrice);
     }
 }
-
 // --- 7. UPDATE BADGE DI NAVBAR ---
 function updateCartCount() {
     const badge = document.getElementById('cartCount');
