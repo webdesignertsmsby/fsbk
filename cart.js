@@ -130,9 +130,9 @@ function renderCartItems() {
                     <span>Total</span>
                     <h6 id="cartTotalPrice" style="font-size:18px; font-weight:700; margin:0;">${formatRupiah(totalPrice)}</h6>
                 </div>
-                <button class="btn-primary" onclick="checkoutWhatsApp()" style="width:100%; padding:14px; border-radius:8px; border:none; background:var(--brand-900); color:white; font-weight:600; cursor:pointer;">
-                    CHECKOUT (WHATSAPP)
-                </button>
+                <a href="checkout.html" class="btn-primary" style="display: block; text-align: center; text-decoration: none; width: 100%;">
+                    BELANJA SEKARANG
+                </a>
             `;
         }
     }
