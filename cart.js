@@ -143,7 +143,6 @@ function renderCartItems() {
                         </div>
                     </div>
 
-                    /* 2. Tombol X Hapus dengan Absolute Positioning & Border */
                     <button onclick="removeFromCart(${item.id})" style="
                         position: absolute;
                         top: 10px;
