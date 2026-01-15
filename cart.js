@@ -127,11 +127,14 @@ function renderCartItems() {
         if (cartFooter) {
             cartFooter.innerHTML = `
                 <div class="flex-between" style="margin-bottom:16px;">
-                    <span>Total</span>
+                    <span style="font-family: var(--font-sans); font-weight: 500;">Total</span>
                     <h6 id="cartTotalPrice" style="font-size:18px; font-weight:700; margin:0;">${formatRupiah(totalPrice)}</h6>
                 </div>
-                <a href="checkout.html" class="btn-primary" style="display: block; text-align: center; text-decoration: none; width: 100%;">
-                    BELANJA SEKARANG
+                
+                <a href="checkout.html" style="text-decoration: none; display: block; width: 100%;">
+                    <button class="btn-primary" style="width: 100%;">
+                        BELANJA SEKARANG
+                    </button>
                 </a>
             `;
         }
