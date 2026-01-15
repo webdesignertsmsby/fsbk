@@ -114,10 +114,8 @@ function renderCartItems() {
                         <div style="display:flex; align-items:center; gap:8px;">
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <button onclick="updateCartQty(${item.id}, -1)" style="
-                                    width: 16px !important; 
-                                    height: 16px !important; 
-                                    min-width: 16px; 
-                                    min-height: 16px; 
+                                    width: 24px !important; 
+                                    height: 24px !important; 
                                     padding: 0 !important; 
                                     font-size: 10px; 
                                     display: flex; 
@@ -130,10 +128,8 @@ function renderCartItems() {
                                 ">-</button>
                                 <span style="font-weight:600; font-size: 12px;">${item.qty}</span>
                                 <button onclick="updateCartQty(${item.id}, 1)" style="
-                                    width: 20px !important; 
-                                    height: 20px !important; 
-                                    min-width: 20px; 
-                                    min-height: 20px; 
+                                    width: 24px !important; 
+                                    height: 24px !important; 
                                     padding: 0 !important; 
                                     font-size: 10px; 
                                     display: flex; 
