@@ -130,7 +130,7 @@ function renderCartItems() {
                         align-items: center; 
                         justify-content: center; 
                         background: white; 
-                        border: 1px solid #ff4d4d !important; 
+                        border: 1px solid var(--border-default) !important; 
                         color: #ff4d4d; 
                         border-radius: 4px; 
                         font-size: 16px; 
