@@ -81,7 +81,7 @@ function saveCart() {
 function renderCartItems() {
     const cartContainer = document.getElementById('cartItemsContainer'); 
     const totalPriceEl = document.getElementById('cartTotalPrice');
-    const cartFooter = document.querySelector('.cart-footer'); // Ambil bagian footer
+    const cartFooter = document.querySelector('.cart-footer');
 
     if (!cartContainer) return;
 
@@ -90,49 +90,67 @@ function renderCartItems() {
 
     if (cart.length === 0) {
         cartContainer.innerHTML = `
-            <div style="text-align:center; padding:40px 20px; color:var(--text-secondary);">
-                <i class="fas fa-shopping-cart" style="font-size: 48px; display:block; margin-bottom:16px; opacity:0.3;"></i>
-                <p>Keranjang Anda masih kosong.</p>
+            <div style="text-align:center; padding:40px 20px; color:#666;">
+                <p>Keranjang masih kosong.</p>
             </div>`;
         
-        // Sembunyikan footer jika kosong (biar rapi)
-        if (cartFooter) cartFooter.style.display = 'none';
+        // Di HTML kamu, footer mungkin hanya berisi total. 
+        // Kita kosongkan saja isinya jika keranjang kosong.
+        if (cartFooter) cartFooter.innerHTML = '<div class="flex-between"><span>Total</span><h6 id="cartTotalPrice">Rp0</h6></div>';
     } else {
-        // Tampilkan footer jika ada barang
-        if (cartFooter) cartFooter.style.display = 'block';
-
         cart.forEach(item => {
             totalPrice += item.price * item.qty;
 
             cartContainer.innerHTML += `
-                <div class="cart-item" style="display:flex; gap:12px; margin-bottom:20px; padding:10px; background:#f9f9f9; border-radius:12px;">
-                    <img src="${item.image}" alt="${item.name}" style="width:70px; height:70px; object-fit:cover; border-radius:8px;">
+                <div class="cart-item" style="display:flex; gap:12px; margin-bottom:16px; padding:10px; border-bottom:1px solid #eee;">
+                    <img src="${item.image}" alt="${item.name}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
                     
                     <div style="flex:1;">
-                        <h4 style="font-size:14px; margin-bottom:4px; color:var(--brand-900);">${item.name}</h4>
-                        <div style="color:var(--brand-500); font-weight:bold; font-size:14px; margin-bottom:8px;">
+                        <h4 style="font-size:14px; margin-bottom:4px; font-weight:600;">${item.name}</h4>
+                        <div style="color:var(--brand-600); font-weight:700; font-size:14px; margin-bottom:8px;">
                             ${formatRupiah(item.price)}
                         </div>
                         
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <div style="display:flex; align-items:center; border:1px solid #ddd; border-radius:4px; overflow:hidden;">
-                                <button onclick="updateCartQty(${item.id}, -1)" style="padding:2px 8px; border:none; background:#eee; cursor:pointer;">-</button>
-                                <span style="padding:0 10px; font-size:13px; font-weight:600;">${item.qty}</span>
-                                <button onclick="updateCartQty(${item.id}, 1)" style="padding:2px 8px; border:none; background:#eee; cursor:pointer;">+</button>
-                            </div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <button onclick="updateCartQty(${item.id}, -1)" style="width:24px; height:24px; border:1px solid #ddd; background:#fff; cursor:pointer;">-</button>
+                            <span style="font-weight:600;">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" style="width:24px; height:24px; border:1px solid #ddd; background:#fff; cursor:pointer;">+</button>
                         </div>
                     </div>
 
-                    <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:#ff4d4d; font-size:20px; cursor:pointer; align-self:flex-start;">&times;</button>
+                    <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:#ff4d4d; font-size:18px; cursor:pointer;">&times;</button>
                 </div>
             `;
         });
-    }
 
-    if (totalPriceEl) {
-        totalPriceEl.innerText = formatRupiah(totalPrice);
+        // UPDATE FOOTER DENGAN TOMBOL CHECKOUT
+        if (cartFooter) {
+            cartFooter.innerHTML = `
+                <div class="flex-between" style="margin-bottom:16px;">
+                    <span>Total</span>
+                    <h6 id="cartTotalPrice" style="font-size:18px; font-weight:700; margin:0;">${formatRupiah(totalPrice)}</h6>
+                </div>
+                <button class="btn-primary" onclick="checkoutWhatsApp()" style="width:100%; padding:14px; border-radius:8px; border:none; background:var(--brand-900); color:white; font-weight:600; cursor:pointer;">
+                    CHECKOUT (WHATSAPP)
+                </button>
+            `;
+        }
     }
 }
+
+// Tambahkan fungsi checkout sederhana biar keren
+function checkoutWhatsApp() {
+    let message = "Halo Feasbake, saya ingin memesan:\n\n";
+    cart.forEach(item => {
+        message += `- ${item.name} (x${item.qty})\n`;
+    });
+    const total = document.getElementById('cartTotalPrice').innerText;
+    message += `\nTotal: ${total}`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/628123456789?text=${encodedMessage}`, '_blank'); // Ganti nomor WA kamu
+}
+
 // --- 7. UPDATE BADGE DI NAVBAR ---
 function updateCartCount() {
     const badge = document.getElementById('cartCount');
