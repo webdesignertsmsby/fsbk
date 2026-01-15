@@ -112,9 +112,9 @@ function renderCartItems() {
                         </div>
                         
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <button onclick="updateCartQty(${item.id}, -1)" style="width:20px; height:20px; border:1px solid #ddd; background:#fff; cursor:pointer;">-</button>
-                            <span style="font-weight:600;">${item.qty}</span>
-                            <button onclick="updateCartQty(${item.id}, 1)" style="width:20px; height:20px; border:1px solid #ddd; background:#fff; cursor:pointer;">+</button>
+                            <button onclick="updateCartQty(${item.id}, -1)" style="width:16px; height:16px; border:1px solid #ddd; background:#fff; font-size: 10px; cursor:pointer;">-</button>
+                            <span style="font-weight:600; font-size: 12px;">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" style="width:20px; height:20px; border:1px solid #ddd; background:#fff; font-size: 10px; cursor:pointer;">+</button>
                         </div>
                     </div>
 
