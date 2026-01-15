@@ -563,158 +563,66 @@
   <script src="productData.js"></script>
   <script src="cart.js"></script>
   <script>
-      // --- 1. AMBIL DATA PRODUK ---
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = parseInt(urlParams.get('id'));
-      const product = products.find(p => p.id === productId);
-  
-      if (product) {
-          // --- 2. UPDATE TITLE ---
-          document.title = `${product.name} | Feasbake`;
-  
-          const imageList = Array.isArray(product.images) ? product.images : (Array.isArray(product.image) ? product.image : [product.image]);
-          const container = document.getElementById('productDetailContainer');
-          
-          // --- 3. RENDER HTML ---
-          container.innerHTML = `
-              <div class="detail-left">
-                  <div class="main-image-wrapper">
-                      <img src="${imageList[0]}" alt="${product.name}" class="main-image" id="mainImage">
-                      <div class="thumbnail-gallery" id="thumbnailGallery"></div>
-                  </div>
-              </div>
-  
-              <div class="detail-right">
-                  <div class="detail-card">
-                      <h1 class="product-title">${product.name}</h1>
-                      <div class="product-price">${formatRupiah(product.price)}</div>
-                      
-                      <div class="action-row">
-                          <div class="qty-selector">
-                              <button class="qty-btn" onclick="updateQty(-1)">-</button>
-                              <input type="text" class="qty-input" id="qtyValue" value="1">
-                              <button class="qty-btn" onclick="updateQty(1)">+</button>
-                          </div>
-                          <button class="btn-primary btn-add-cart" onclick="addToCartDetailed(${product.id})">
-                              MASUKKAN KERANJANG
-                          </button>
-                      </div>
-                  </div>
-  
-                  <div class="detail-card" onclick="toggleAccordion(this)">
-                      <div class="accordion-header">
-                          <span class="accordion-title">Deskripsi</span>
-                          <div class="accordion-icon"></div>
-                      </div>
-                      <div class="accordion-content">
-                          <p>${product.description || "Tidak ada deskripsi."}</p>
-                      </div>
-                  </div>
-  
-                  <div class="detail-card" onclick="toggleAccordion(this)">
-                      <div class="accordion-header">
-                          <span class="accordion-title">Spesifikasi</span>
-                          <div class="accordion-icon"></div>
-                      </div>
-                      <div class="accordion-content">
-                          <div class="specs-list">
-                              ${renderSpecs(product.specs)}
-                          </div>
-                      </div>
-                  </div>
-  
-                  <div class="detail-card" onclick="toggleAccordion(this)">
-                      <div class="accordion-header">
-                          <span class="accordion-title">Pengiriman</span>
-                          <div class="accordion-icon"></div>
-                      </div>
-                      <div class="accordion-content">
-                          <p>Gratis ongkir untuk wilayah Jakarta. Pengiriman luar kota menggunakan ekspedisi rekanan.</p>
-                      </div>
-                  </div>
-  
-                  <div class="detail-card">
-                      <span class="accordion-title" style="display:block; margin-bottom:16px;">Produk Serupa</span>
-                      <div class="similar-grid" id="similarContainer"></div>
-                  </div>
-              </div>
-          `;
-  
-          // --- 4. LOGIKA KEYBOARD QUANTITY (WAJIB DI SINI) ---
-          const qtyInput = document.getElementById('qtyValue');
-            if (qtyInput) {
-                qtyInput.addEventListener('input', function() {
-                    // 1. Hanya izinkan angka
-                    this.value = this.value.replace(/[^0-9]/g, '');
-            
-                    // 2. Jika angka yang diketik lebih dari 99, paksa jadi 99
-                    if (parseInt(this.value) > 99) {
-                        this.value = 99;
-                    }
-                });
-            
-                qtyInput.addEventListener('blur', function() {
-                    // 3. Jika kosong atau 0 saat ditinggalkan, kembalikan ke 1
-                    if (this.value === '' || parseInt(this.value) < 1) {
-                        this.value = 1;
-                    }
-                });
-            }
-  
-          // --- 5. RENDER THUMBNAILS ---
-          const thumbGallery = document.getElementById('thumbnailGallery');
-          imageList.forEach((imgSrc, index) => {
-              const thumb = document.createElement('div');
-              thumb.className = `thumb-item ${index === 0 ? 'active' : ''}`;
-              thumb.innerHTML = `<img src="${imgSrc}" class="thumb-img">`;
-              thumb.onclick = (e) => {
-                  e.stopPropagation();
-                  document.getElementById('mainImage').src = imgSrc;
-                  document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
-                  thumb.classList.add('active');
-              };
-              thumbGallery.appendChild(thumb);
+      // =================================================================
+      // 1. LOGIKA NAVBAR & CART (PRIORITAS UTAMA - DITARUH DI ATAS)
+      // =================================================================
+      const cartBtn = document.getElementById('cartBtn');
+      const cartSidebar = document.getElementById('cartSidebar');
+      const cartOverlay = document.getElementById('cartOverlay');
+      const closeCart = document.getElementById('closeCart');
+      const navbar = document.querySelector('.navbar'); // Pastikan class navbar benar
+      
+      // Fungsi buka cart
+      if(cartBtn) {
+          cartBtn.addEventListener('click', (e) => {
+              e.preventDefault(); // Mencegah link lompat
+              openCart();
           });
-  
-          // --- 6. RENDER SIMILAR PRODUCTS ---
-          const similarContainer = document.getElementById('similarContainer');
-          const similarProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 2);
-          similarProducts.forEach(p => {
-              const simImg = Array.isArray(p.images) ? p.images[0] : (Array.isArray(p.image) ? p.image[0] : p.image);
-              similarContainer.innerHTML += `
-                  <div class="similar-item" onclick="window.location.href='product-detail.html?id=${p.id}'">
-                      <img src="${simImg}" class="similar-img">
-                      <div class="similar-overlay">
-                          <span class="similar-name">${p.name}</span>
-                      </div>
-                  </div>
-              `;
-          });
-  
-      } else {
-          document.getElementById('productDetailContainer').innerHTML = `<h2>Produk tidak ditemukan.</h2>`;
       }
   
-      // --- FUNGSI HELPER ---
+      // Fungsi tutup cart (tombol X dan klik overlay)
+      if(closeCart) closeCart.addEventListener('click', closeCartSidebar);
+      if(cartOverlay) cartOverlay.addEventListener('click', closeCartSidebar);
+  
+      function openCart() {
+          if(cartSidebar) cartSidebar.classList.add('active');
+          if(cartOverlay) cartOverlay.classList.add('active');
+          if(navbar) navbar.classList.add('cart-open');
+          
+          // Render isi cart jika fungsinya ada (dari file cart.js)
+          if (typeof renderCartItems === 'function') renderCartItems();
+      }
+  
+      function closeCartSidebar() {
+          if(cartSidebar) cartSidebar.classList.remove('active');
+          if(cartOverlay) cartOverlay.classList.remove('active');
+          if(navbar) navbar.classList.remove('cart-open');
+      }
+  
+      // =================================================================
+      // 2. FUNGSI HELPER (DITARUH TENGAH)
+      // =================================================================
+      function formatRupiah(number) {
+          return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+      }
+  
       function renderSpecs(specs) {
           if (!specs) return "<p>Spesifikasi teknis belum tersedia.</p>";
           return Object.entries(specs).map(([key, value]) => `
               <div style="display:flex; justify-content:space-between; padding: 12px 0; border-bottom: 1px solid var(--neutral-100);">
                   <span style="color: var(--text-secondary);">${key}</span>
-                  <span style="font-weight:600;">${value}</span>
+                  <span style="font-weight:600; text-align:right;">${value}</span>
               </div>
           `).join('');
       }
   
       function updateQty(change) {
           const input = document.getElementById('qtyValue');
+          if(!input) return;
           let val = parseInt(input.value) || 1;
           val += change;
-      
-          // Batasi minimal 1 dan maksimal 99
           if (val < 1) val = 1;
           if (val > 99) val = 99;
-          
           input.value = val;
       }
   
@@ -722,18 +630,161 @@
           card.classList.toggle('active');
       }
   
-      function formatRupiah(number) {
-          return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
-      }
-  
       function addToCartDetailed(id) {
-          const qtyValue = document.getElementById('qtyValue').value;
-          const qty = parseInt(qtyValue) || 1;
+          const qtyInput = document.getElementById('qtyValue');
+          const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+          
+          // Masukkan ke cart (memanggil fungsi global addToCart jika ada)
           if (typeof addToCart === 'function') {
               for(let i=0; i<qty; i++) { addToCart(id); }
-              document.getElementById('cartBtn').click();
+              openCart(); // Buka sidebar otomatis setelah add
+          } else {
+              console.warn("Fungsi addToCart tidak ditemukan. Pastikan cart.js sudah ter-load.");
           }
       }
+  
+      // =================================================================
+      // 3. RENDER PRODUK DETAIL (DITARUH BAWAH)
+      // =================================================================
+      document.addEventListener('DOMContentLoaded', () => {
+          // Cek apakah data products ada
+          if (typeof products === 'undefined') {
+              console.error("Data produk tidak ditemukan! Pastikan productData.js sudah di-link.");
+              document.getElementById('productDetailContainer').innerHTML = `<h2>Gagal memuat data produk.</h2>`;
+              return;
+          }
+  
+          const urlParams = new URLSearchParams(window.location.search);
+          const productId = parseInt(urlParams.get('id'));
+          const product = products.find(p => p.id === productId);
+  
+          if (product) {
+              // Update Title
+              document.title = `${product.name} | Feasbake`;
+  
+              // Gambar (Handle array/string)
+              const imageList = Array.isArray(product.images) ? product.images : (Array.isArray(product.image) ? product.image : [product.image]);
+  
+              const container = document.getElementById('productDetailContainer');
+              
+              // --- RENDER HTML ---
+              container.innerHTML = `
+                  <div class="detail-left">
+                      <div class="main-image-wrapper">
+                          <img src="${imageList[0]}" alt="${product.name}" class="main-image" id="mainImage">
+                          <div class="thumbnail-gallery" id="thumbnailGallery"></div>
+                      </div>
+                  </div>
+  
+                  <div class="detail-right">
+                      <div class="detail-card">
+                          <h1 class="product-title">${product.name}</h1>
+                          <div class="product-price">${formatRupiah(product.price)}</div>
+                          
+                          <div class="action-row">
+                              <div class="qty-selector">
+                                  <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                                  <input type="text" class="qty-input" id="qtyValue" value="1">
+                                  <button class="qty-btn" onclick="updateQty(1)">+</button>
+                              </div>
+                              <button class="btn-primary btn-add-cart" onclick="addToCartDetailed(${product.id})">
+                                  MASUKKAN KERANJANG
+                              </button>
+                          </div>
+                      </div>
+  
+                      <div class="detail-card" onclick="toggleAccordion(this)">
+                          <div class="accordion-header">
+                              <span class="accordion-title">Deskripsi</span>
+                              <div class="accordion-icon"></div>
+                          </div>
+                          <div class="accordion-content">
+                              <p>${product.description || "Tidak ada deskripsi."}</p>
+                          </div>
+                      </div>
+  
+                      <div class="detail-card" onclick="toggleAccordion(this)">
+                          <div class="accordion-header">
+                              <span class="accordion-title">Spesifikasi</span>
+                              <div class="accordion-icon"></div>
+                          </div>
+                          <div class="accordion-content">
+                              <div class="specs-list">
+                                  ${renderSpecs(product.specs)}
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="detail-card" onclick="toggleAccordion(this)">
+                          <div class="accordion-header">
+                              <span class="accordion-title">Pengiriman</span>
+                              <div class="accordion-icon"></div>
+                          </div>
+                          <div class="accordion-content">
+                              <p>Gratis ongkir untuk wilayah Jakarta. Pengiriman luar kota menggunakan ekspedisi rekanan.</p>
+                          </div>
+                      </div>
+  
+                      <div class="detail-card">
+                          <span class="accordion-title" style="display:block; margin-bottom:16px;">Produk Serupa</span>
+                          <div class="similar-grid" id="similarContainer"></div>
+                      </div>
+                  </div>
+              `;
+  
+              // --- INPUT LISTENER (Wajib setelah render HTML) ---
+              const qtyInput = document.getElementById('qtyValue');
+              if(qtyInput) {
+                  qtyInput.addEventListener('input', function() {
+                      this.value = this.value.replace(/[^0-9]/g, '');
+                      if (parseInt(this.value) > 99) this.value = 99;
+                  });
+                  qtyInput.addEventListener('blur', function() {
+                      if (this.value === '' || parseInt(this.value) < 1) this.value = 1;
+                  });
+              }
+  
+              // --- RENDER THUMBNAILS ---
+              const thumbGallery = document.getElementById('thumbnailGallery');
+              if(thumbGallery) {
+                  imageList.forEach((imgSrc, index) => {
+                      const thumb = document.createElement('div');
+                      thumb.className = `thumb-item ${index === 0 ? 'active' : ''}`;
+                      thumb.innerHTML = `<img src="${imgSrc}" class="thumb-img">`;
+                      thumb.onclick = (e) => {
+                          e.stopPropagation();
+                          document.getElementById('mainImage').src = imgSrc;
+                          document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+                          thumb.classList.add('active');
+                      };
+                      thumbGallery.appendChild(thumb);
+                  });
+              }
+  
+              // --- RENDER SIMILAR PRODUCTS (FIX 2 ITEMS) ---
+              const similarContainer = document.getElementById('similarContainer');
+              if(similarContainer) {
+                  const similarProducts = products
+                      .filter(p => p.category === product.category && p.id !== product.id)
+                      .slice(0, 2);
+                  
+                  similarProducts.forEach(p => {
+                      const simImg = Array.isArray(p.images) ? p.images[0] : (Array.isArray(p.image) ? p.image[0] : p.image);
+                      similarContainer.innerHTML += `
+                          <div class="similar-item" onclick="window.location.href='product-detail.html?id=${p.id}'">
+                              <img src="${simImg}" class="similar-img">
+                              <div class="similar-overlay">
+                                  <span class="similar-name">${p.name}</span>
+                              </div>
+                          </div>
+                      `;
+                  });
+              }
+  
+          } else {
+              document.getElementById('productDetailContainer').innerHTML = `<h2>Produk tidak ditemukan.</h2>`;
+          }
+      });
   </script>
 </body>
 </html>
