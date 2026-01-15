@@ -112,9 +112,38 @@ function renderCartItems() {
                         </div>
                         
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <button onclick="updateCartQty(${item.id}, -1)" style="width:16px; height:16px; border:1px solid #ddd; background:#fff; font-size: 10px; cursor:pointer;">-</button>
-                            <span style="font-weight:600; font-size: 12px;">${item.qty}</span>
-                            <button onclick="updateCartQty(${item.id}, 1)" style="width:20px; height:20px; border:1px solid #ddd; background:#fff; font-size: 10px; cursor:pointer;">+</button>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button onclick="updateCartQty(${item.id}, -1)" style="
+                                    width: 16px !important; 
+                                    height: 16px !important; 
+                                    min-width: 16px; 
+                                    min-height: 16px; 
+                                    padding: 0 !important; 
+                                    font-size: 10px; 
+                                    display: flex; 
+                                    align-items: center; 
+                                    justify-content: center; 
+                                    border: 1px solid #ddd; 
+                                    background: #fff; 
+                                    cursor: pointer;
+                                    border-radius: 4px;
+                                ">-</button>
+                                <span style="font-weight:600; font-size: 12px;">${item.qty}</span>
+                                <button onclick="updateCartQty(${item.id}, 1)" style="
+                                    width: 20px !important; 
+                                    height: 20px !important; 
+                                    min-width: 20px; 
+                                    min-height: 20px; 
+                                    padding: 0 !important; 
+                                    font-size: 10px; 
+                                    display: flex; 
+                                    align-items: center; 
+                                    justify-content: center; 
+                                    border: 1px solid #ddd; 
+                                    background: #fff; 
+                                    cursor: pointer;
+                                    border-radius: 4px;
+                                ">+</button>
                         </div>
                     </div>
 
