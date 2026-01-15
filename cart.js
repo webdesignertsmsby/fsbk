@@ -102,68 +102,46 @@ function renderCartItems() {
             totalPrice += item.price * item.qty;
 
             cartContainer.innerHTML += `
-                <div class="cart-item" style="display:flex; gap:12px; margin-bottom:16px; padding:10px; border-bottom:1px solid #eee;">
+                <div class="cart-item" style="display:flex; gap:12px; margin-bottom:16px; padding:10px; border-bottom:1px solid #eee; position: relative;">
+                    
                     <img src="${item.image}" alt="${item.name}" style="width:80px; height:80px; object-fit:cover; border-radius:8px;">
                     
                     <div style="flex:1;">
-                        <h4 style="font-size:18px; margin-bottom:4px; font-weight:600;">${item.name}</h4>
+                        <h4 style="font-size:18px; margin-bottom:4px; font-weight:600; padding-right: 25px;">${item.name}</h4>
                         <div style="color:var(--brand-600); font-weight:700; font-size:16px; margin-bottom:8px;">
                             ${formatRupiah(item.price)}
                         </div>
                         
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                <button onclick="updateCartQty(${item.id}, -1)" style="
-                                    width: 24px !important; 
-                                    height: 24px !important; 
-                                    padding: 0 !important; 
-                                    font-size: 10px; 
-                                    display: flex; 
-                                    align-items: center; 
-                                    justify-content: center; 
-                                    border: 1px solid #ddd; 
-                                    background: #fff; 
-                                    cursor: pointer;
-                                    border-radius: 4px;
-                                ">-</button>
-                                <span style="font-weight:600; font-size: 12px;">${item.qty}</span>
-                                <button onclick="updateCartQty(${item.id}, 1)" style="
-                                    width: 24px !important; 
-                                    height: 24px !important; 
-                                    padding: 0 !important; 
-                                    font-size: 10px; 
-                                    display: flex; 
-                                    align-items: center; 
-                                    justify-content: center; 
-                                    border: 1px solid #ddd; 
-                                    background: #fff; 
-                                    cursor: pointer;
-                                    border-radius: 4px;
-                                ">+</button>
+                            <button onclick="updateCartQty(${item.id}, -1)" style="width:18px !important; height:18px !important; padding:0 !important; border:1px solid #ddd; background:#fff; font-size: 10px; cursor:pointer; display:flex; align-items:center; justify-content:center; border-radius:4px;">-</button>
+                            <span style="font-weight:600; font-size: 12px;">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" style="width:18px !important; height:18px !important; padding:0 !important; border:1px solid #ddd; background:#fff; font-size: 10px; cursor:pointer; display:flex; align-items:center; justify-content:center; border-radius:4px;">+</button>
                         </div>
                     </div>
 
                     <button onclick="removeFromCart(${item.id})" style="
-                        position: absolute;
-                        top: 10px;
-                        right: 10px;
-                        width: 20px !important;
-                        height: 20px !important;
-                        padding: 0 !important;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        background: white;
-                        border: 1px solid #ff4d4d !important; /* Border merah */
-                        color: #ff4d4d;
-                        border-radius: 4px;
-                        font-size: 16px;
-                        line-height: 1;
+                        position: absolute; 
+                        top: 10px; 
+                        right: 10px; 
+                        width: 22px !important; 
+                        height: 22px !important; 
+                        padding: 0 !important; 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        background: white; 
+                        border: 1px solid #ff4d4d !important; 
+                        color: #ff4d4d; 
+                        border-radius: 4px; 
+                        font-size: 16px; 
+                        line-height: 1; 
                         cursor: pointer;
+                        z-index: 5;
                     ">&times;</button>
                 </div>
             `;
         });
+        
 
         // UPDATE FOOTER DENGAN TOMBOL CHECKOUT
         if (cartFooter) {
