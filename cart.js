@@ -131,7 +131,7 @@ function renderCartItems() {
                         justify-content: center; 
                         background: white; 
                         border: 1px solid var(--border-default) !important; 
-                        color: #ff4d4d; 
+                        color: var(--text-secondary); 
                         border-radius: 4px; 
                         font-size: 16px; 
                         line-height: 1; 
