@@ -143,7 +143,25 @@ function renderCartItems() {
                         </div>
                     </div>
 
-                    <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:#ff4d4d; font-size:18px; cursor:pointer;">&times;</button>
+                    /* 2. Tombol X Hapus dengan Absolute Positioning & Border */
+                    <button onclick="removeFromCart(${item.id})" style="
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        width: 20px !important;
+                        height: 20px !important;
+                        padding: 0 !important;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: white;
+                        border: 1px solid #ff4d4d !important; /* Border merah */
+                        color: #ff4d4d;
+                        border-radius: 4px;
+                        font-size: 16px;
+                        line-height: 1;
+                        cursor: pointer;
+                    ">&times;</button>
                 </div>
             `;
         });
