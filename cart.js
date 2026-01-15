@@ -103,18 +103,18 @@ function renderCartItems() {
 
             cartContainer.innerHTML += `
                 <div class="cart-item" style="display:flex; gap:12px; margin-bottom:16px; padding:10px; border-bottom:1px solid #eee;">
-                    <img src="${item.image}" alt="${item.name}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
+                    <img src="${item.image}" alt="${item.name}" style="width:80px; height:80px; object-fit:cover; border-radius:8px;">
                     
                     <div style="flex:1;">
-                        <h4 style="font-size:14px; margin-bottom:4px; font-weight:600;">${item.name}</h4>
-                        <div style="color:var(--brand-600); font-weight:700; font-size:14px; margin-bottom:8px;">
+                        <h4 style="font-size:18px; margin-bottom:4px; font-weight:600;">${item.name}</h4>
+                        <div style="color:var(--brand-600); font-weight:700; font-size:16px; margin-bottom:8px;">
                             ${formatRupiah(item.price)}
                         </div>
                         
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <button onclick="updateCartQty(${item.id}, -1)" style="width:24px; height:24px; border:1px solid #ddd; background:#fff; cursor:pointer;">-</button>
+                            <button onclick="updateCartQty(${item.id}, -1)" style="width:20px; height:20px; border:1px solid #ddd; background:#fff; cursor:pointer;">-</button>
                             <span style="font-weight:600;">${item.qty}</span>
-                            <button onclick="updateCartQty(${item.id}, 1)" style="width:24px; height:24px; border:1px solid #ddd; background:#fff; cursor:pointer;">+</button>
+                            <button onclick="updateCartQty(${item.id}, 1)" style="width:20px; height:20px; border:1px solid #ddd; background:#fff; cursor:pointer;">+</button>
                         </div>
                     </div>
 
