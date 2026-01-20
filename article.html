@@ -116,6 +116,113 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
+    /* ===================== ARTIKEL GRID (Sama seperti Index) ===================== */
+    .artikel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .artikel-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .artikel-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+
+    .artikel-img-wrapper {
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .artikel-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .artikel-card:hover .artikel-img {
+        transform: scale(1.05);
+    }
+
+    .artikel-info {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .artikel-meta {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--brand-600);
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .artikel-date {
+        color: var(--text-secondary);
+        font-weight: 400;
+    }
+
+    .artikel-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 12px;
+        line-height: 1.4;
+        
+        /* Limit 2 lines */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .artikel-excerpt {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 24px;
+        line-height: 1.6;
+        
+        /* Limit 3 lines */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .btn-read-more {
+        margin-top: auto;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--brand-600);
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -133,6 +240,8 @@
       .hero {
         height: 80vh; 
       }
+
+      .artikel-grid { grid-template-columns: 1fr; }
     }
     
   </style>
@@ -308,8 +417,8 @@
       </div>
     </section>
 
-    <section id="artikel-grid">
-      
+    <section class="container">
+        <div class="artikel-grid" id="articleContainer"></div>
     </section>
     
   </main>
@@ -539,6 +648,135 @@
           // Render Default
           renderMachineGrid('Bakery');
       });
+
+    // --- 1. DATA ARTIKEL (Edit di sini) ---
+    const articlesData = [
+        {
+            id: 1,
+            title: "Tips Merawat Oven Deck Agar Awet Bertahun-tahun",
+            category: "Maintenance",
+            date: "20 Jan 2026",
+            excerpt: "Oven deck adalah investasi besar. Pelajari cara membersihkan kerak karbon dan menjaga suhu tetap stabil agar produksi tidak terganggu.",
+            image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800&auto=format&fit=crop",
+            link: "#"
+        },
+        {
+            id: 2,
+            title: "Planetary vs Spiral Mixer: Mana yang Cocok untuk Anda?",
+            category: "Tips Memilih",
+            date: "18 Jan 2026",
+            excerpt: "Bingung memilih mixer? Kami bedah tuntas perbedaan mekanisme pengadukan dan kapasitas adonan untuk kedua jenis mixer ini.",
+            image: "https://images.unsplash.com/photo-1595246140625-573b715d11dc?q=80&w=800&auto=format&fit=crop",
+            link: "#"
+        },
+        {
+            id: 3,
+            title: "Kisah Sukses: Dari Dapur Sempit Menjadi Pabrik Roti",
+            category: "Success Story",
+            date: "15 Jan 2026",
+            excerpt: "Simak perjalanan Pak Budi mengembangkan 'Roti Gempol' menggunakan mesin Feasbake dan strategi marketing sederhananya.",
+            image: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=800&auto=format&fit=crop",
+            link: "#"
+        },
+        {
+            id: 4,
+            title: "Pentingnya Proofer dalam Menghasilkan Roti yang Empuk",
+            category: "Teknik Baking",
+            date: "10 Jan 2026",
+            excerpt: "Suhu dan kelembaban adalah kunci fermentasi. Mengapa handuk basah saja tidak cukup untuk produksi skala besar?",
+            image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop",
+            link: "#"
+        },
+        {
+            id: 5,
+            title: "Menghitung HPP Roti Manis untuk Pemula",
+            category: "Bisnis",
+            date: "05 Jan 2026",
+            excerpt: "Jangan sampai rugi! Panduan lengkap menghitung biaya bahan baku, listrik, tenaga kerja, dan penyusutan mesin.",
+            image: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=800&auto=format&fit=crop",
+            link: "#"
+        },
+        {
+            id: 6,
+            title: "Tren Roti Sobek Jepang yang Sedang Hits",
+            category: "Tren Pasar",
+            date: "01 Jan 2026",
+            excerpt: "Mengapa roti sobek tekstur kapas ini sangat diminati? Dan bagaimana cara membuatnya menggunakan mixer heavy duty.",
+            image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=800&auto=format&fit=crop",
+            link: "#"
+        }
+    ];
+
+    // --- 2. RENDER ARTIKEL ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('articleContainer');
+        
+        if (container) {
+            container.innerHTML = articlesData.map(item => `
+                <div class="artikel-card" onclick="window.location.href='${item.link}'">
+                    <div class="artikel-img-wrapper">
+                        <img src="${item.image}" alt="${item.title}" class="artikel-img">
+                    </div>
+                    <div class="artikel-info">
+                        <div class="artikel-meta">
+                            <span>${item.category}</span>
+                            <span class="artikel-date">${item.date}</span>
+                        </div>
+                        <h3 class="artikel-title">${item.title}</h3>
+                        <p class="artikel-excerpt">${item.excerpt}</p>
+                        <button class="btn-read-more">
+                            BACA SELENGKAPNYA 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- 3. LOGIKA UI LAINNYA (Navbar & Cart) ---
+        // Setup tombol mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if(menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+        }
+
+        // Setup tombol cart (Event listener dasar, logika isi cart ada di cart.js)
+        const cartBtn = document.getElementById('cartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const closeCart = document.getElementById('closeCart');
+
+        if(cartBtn && cartSidebar) {
+            cartBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                cartSidebar.classList.add('active');
+                if(cartOverlay) cartOverlay.classList.add('active');
+                if(typeof renderCartItems === 'function') renderCartItems();
+            });
+        }
+
+        const closeActions = [closeCart, cartOverlay];
+        closeActions.forEach(el => {
+            if(el) {
+                el.addEventListener('click', () => {
+                    cartSidebar.classList.remove('active');
+                    if(cartOverlay) cartOverlay.classList.remove('active');
+                });
+            }
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('mainNavbar');
+        const heroSection = document.getElementById('hero');
+        window.addEventListener('scroll', () => {
+            if (heroSection && window.scrollY > heroSection.offsetHeight - 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    });
     </script>
 
   </body>
