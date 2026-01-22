@@ -29,6 +29,102 @@
       padding: 100px; /* Padding atas disesuaikan untuk navbar fixed */
     }
 
+    /* ===================== ARTICLE DETAIL STYLES ===================== */
+    .article-wrapper {
+      max-width: 900px; /* Lebar maksimal agar enak dibaca (fokus) */
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* 1. HERO IMAGE (Rounded & Wide) */
+    .detail-image-wrapper {
+      width: 100%;
+      aspect-ratio: 16/9; /* Rasio sinematik */
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .detail-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 2. HEADER (Date & Title) */
+    .detail-header {
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--neutral-200);
+    }
+
+    .detail-date {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brand-600);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .detail-title {
+      font-size: clamp(32px, 5vw, 48px); /* Responsif font size */
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    /* 3. CONTENT (HTML Custom) */
+    .detail-content {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      text-align: left;
+      padding: 0 16px;
+    }
+
+    /* Styling elemen HTML di dalam konten */
+    .detail-content p {
+      margin-bottom: 24px;
+    }
+
+    .detail-content h3 {
+      font-size: 24px;
+      color: var(--text-primary);
+      margin-top: 40px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .detail-content ul {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+
+    .detail-content li {
+      margin-bottom: 8px;
+    }
+
+    /* Tombol Kembali */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin-bottom: 24px;
+      transition: color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      color: var(--brand-500);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 1024px) {
       .container { padding: 100px 40px; }
@@ -38,6 +134,8 @@
       .container { 
         padding: 100px 16px;
       }
+      .detail-image-wrapper { border-radius: 12px; }
+      .detail-content { padding: 0; font-size: 16px; }
     }
   </style>
 </head>
@@ -154,6 +252,12 @@
             </nav>
         </div>
 
+        <main>
+          <section class="container">
+            <div id="articleDetailContainer"></div>
+          </section>
+        </main>
+
         <div class="footer-bottom">
             <div class="footer-info-wrapper">
                 <div class="company-group body-s">
@@ -224,45 +328,210 @@
     </div>
 </footer>
 
-
-  <script src="productData.js"></script>
   <script src="cart.js"></script>
   <script>
-      // =================================================================
-      // 1. LOGIKA NAVBAR & CART (PRIORITAS UTAMA - DITARUH DI ATAS)
-      // =================================================================
-      const cartBtn = document.getElementById('cartBtn');
-      const cartSidebar = document.getElementById('cartSidebar');
-      const cartOverlay = document.getElementById('cartOverlay');
-      const closeCart = document.getElementById('closeCart');
-      const navbar = document.querySelector('.navbar'); // Pastikan class navbar benar
-      
-      // Fungsi buka cart
-      if(cartBtn) {
-          cartBtn.addEventListener('click', (e) => {
-              e.preventDefault(); // Mencegah link lompat
-              openCart();
-          });
-      }
-  
-      // Fungsi tutup cart (tombol X dan klik overlay)
-      if(closeCart) closeCart.addEventListener('click', closeCartSidebar);
-      if(cartOverlay) cartOverlay.addEventListener('click', closeCartSidebar);
-  
-      function openCart() {
-          if(cartSidebar) cartSidebar.classList.add('active');
-          if(cartOverlay) cartOverlay.classList.add('active');
-          if(navbar) navbar.classList.add('cart-open');
-          
-          // Render isi cart jika fungsinya ada (dari file cart.js)
-          if (typeof renderCartItems === 'function') renderCartItems();
-      }
-  
-      function closeCartSidebar() {
-          if(cartSidebar) cartSidebar.classList.remove('active');
-          if(cartOverlay) cartOverlay.classList.remove('active');
-          if(navbar) navbar.classList.remove('cart-open');
-      }
+    // ----------------------------------------------------------------------
+    // 1. DATA ARTIKEL
+    // ----------------------------------------------------------------------
+    // Perhatikan: properti 'content' menggunakan backticks (`) agar bisa multi-line HTML.
+    const articlesData = [
+        {
+            id: 1,
+            title: "Tips Merawat Oven Deck Agar Awet Bertahun-tahun",
+            date: "20 JAN 2026",
+            image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=1200",
+            content: `
+                <p>Oven deck adalah jantung dari setiap bakery profesional. Tanpa perawatan yang tepat, efisiensi panas bisa menurun drastis dan tagihan listrik atau gas bisa membengkak tanpa disadari. Berikut adalah panduan lengkap merawat mesin vital ini.</p>
+                
+                <h3>1. Bersihkan Kerak Karbon Secara Rutin</h3>
+                <p>Sisa tepung, gula, atau adonan yang jatuh ke dasar oven akan terbakar dan menjadi kerak karbon. Jika dibiarkan, kerak ini akan menghambat distribusi panas. Bersihkan setiap hari setelah operasional saat oven sudah dingin menggunakan sikat kawat halus atau scraper khusus.</p>
+                
+                <h3>2. Periksa Karet Pintu (Door Seal)</h3>
+                <p>Pastikan karet pintu masih rapat dan elastis. Kebocoran panas sedikit saja bisa membuat suhu tidak stabil, yang berakibat pada hasil panggangan yang tidak merata (bantat di satu sisi, gosong di sisi lain). Ganti seal karet setidaknya 1-2 tahun sekali tergantung intensitas pemakaian.</p>
+                
+                <h3>3. Kalibrasi Suhu Berkala</h3>
+                <p>Terkadang termostat digital di panel depan menunjukkan angka yang berbeda dengan suhu aktual di dalam ruang panggang. Gunakan termometer oven independen untuk mengecek akurasi suhu setidaknya sebulan sekali.</p>
+
+                <p>Dengan perawatan rutin, mesin Feasbake Anda bisa bertahan hingga lebih dari 10 tahun penggunaan intensif, menjaga investasi bisnis Anda tetap aman.</p>
+            `
+        },
+        {
+            id: 2,
+            title: "Planetary vs Spiral Mixer: Mana yang Cocok untuk Anda?",
+            date: "18 JAN 2026",
+            image: "https://images.unsplash.com/photo-1595246140625-573b715d11dc?q=80&w=1200",
+            content: `
+                <p>Memilih mixer yang salah adalah kesalahan paling umum yang dilakukan pengusaha bakery pemula. Mari kita bedah tuntas perbedaan mendasar antara Planetary Mixer dan Spiral Mixer agar Anda tidak salah beli.</p>
+                
+                <h3>Spiral Mixer: Si Raja Adonan Berat</h3>
+                <p>Spiral mixer dirancang khusus untuk adonan roti (yeast dough). Keunikannya terletak pada mangkuk (bowl) yang ikut berputar saat pengadukan. Mekanisme ini meniru gerakan tangan mengulen manual, menjaga suhu adonan tetap rendah (tidak cepat panas) sehingga ragi bekerja optimal. Sangat cocok untuk Roti Manis, Roti Tawar, Baguette, dan Donat.</p>
+                
+                <h3>Planetary Mixer: Si Serbaguna</h3>
+                <p>Dinamakan planetary karena pengaduknya berputar mengelilingi mangkuk seperti planet mengelilingi matahari, sementara mangkuknya diam. Kelebihannya adalah fleksibilitas. Dengan 3 attachment berbeda (Hook, Beater, Whisk), Anda bisa mengaduk roti, cake, cookies, hingga mengocok telur dan cream. Cocok untuk toko kue atau bakery yang memproduksi varian menu beragam.</p>
+                
+                <p><strong>Kesimpulan:</strong> Jika fokus Anda 80% roti, pilih Spiral. Jika Anda membuat segalanya (roti, cake, cookies), Planetary adalah wajib.</p>
+            `
+        },
+        {
+            id: 3,
+            title: "Kisah Sukses: Dari Dapur Sempit Menjadi Pabrik Roti",
+            date: "15 JAN 2026",
+            image: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=1200",
+            content: `
+                <p>Memulai bisnis bakery tidak harus langsung besar. Inilah yang diyakini Pak Budi, pemilik "Roti Gempol" yang kini memproduksi 5.000 pcs roti per hari menggunakan mesin Feasbake.</p>
+                
+                <h3>Awal Mula yang Sederhana</h3>
+                <p>Dimulai dari garasi rumah berukuran 3x4 meter, Pak Budi hanya menggunakan mixer tangan rumahan. Pesanan mulai membludak saat ia menemukan resep roti sisir yang sangat lembut. Namun, kapasitas produksi menjadi kendala utama.</p>
+                
+                <h3>Titik Balik Bersama Feasbake</h3>
+                <p>"Saya ingat betul, investasi pertama saya adalah Oven Deck 1 Loyang dari Feasbake. Hasil panggangannya jauh lebih stabil dibanding oven tangkring saya sebelumnya," ujar Pak Budi. Efisiensi waktu meningkat 200%, memungkinkannya menerima pesanan katering instansi.</p>
+                
+                <p>Kini, pabrik Roti Gempol telah memiliki lini produksi lengkap dengan Proofer, Spiral Mixer 20kg, dan Dough Divider. Kuncinya? Konsistensi kualitas dan keberanian untuk upgrade teknologi di waktu yang tepat.</p>
+            `
+        },
+        {
+            id: 4,
+            title: "Pentingnya Proofer dalam Menghasilkan Roti yang Empuk",
+            date: "10 JAN 2026",
+            image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200",
+            content: `
+                <p>Seringkah Anda mendapati roti Anda kulitnya kering atau bagian dalamnya kurang mengembang maksimal? Masalahnya mungkin bukan pada resep, tapi pada proses fermentasi (proofing).</p>
+                
+                <h3>Mengapa Suhu Ruang Saja Tidak Cukup?</h3>
+                <p>Ragi membutuhkan suhu (35-40°C) dan kelembaban (80-85%) yang spesifik untuk bekerja maksimal. Di Indonesia, meski suhunya hangat, kelembabannya seringkali tidak stabil (terutama di ruangan ber-AC). Mengandalkan "tutup kain basah" seringkali tidak konsisten.</p>
+                
+                <h3>Peran Mesin Proofer</h3>
+                <p>Mesin proofer menciptakan ruang inkubasi yang sempurna. Uap air yang dihasilkan menjaga kulit adonan tetap lembab (elastis) sehingga bisa mengembang maksimal tanpa pecah saat dipanggang. Hasilnya? Roti yang jauh lebih empuk, serat halus, dan volume yang besar.</p>
+            `
+        },
+        {
+            id: 5,
+            title: "Menghitung HPP Roti Manis untuk Pemula",
+            date: "05 JAN 2026",
+            image: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=1200",
+            content: `
+                <p>Banyak pengusaha bakery pemula yang merasa "laku keras" tapi di akhir bulan uangnya tidak terkumpul. Besar kemungkinan, perhitungan HPP (Harga Pokok Penjualan) Anda meleset.</p>
+                
+                <h3>Komponen Biaya Tersembunyi</h3>
+                <p>Jangan hanya menghitung Tepung, Telur, dan Mentega. HPP yang benar harus mencakup:</p>
+                <ul>
+                    <li><strong>Overhead:</strong> Listrik, Air, Gas (sekitar 5-10% dari omzet).</li>
+                    <li><strong>Tenaga Kerja:</strong> Gaji karyawan (atau gaji Anda sendiri jika mengerjakannya sendiri).</li>
+                    <li><strong>Penyusutan Alat:</strong> Mesin mixer dan oven memiliki masa pakai. Sisihkan biaya ini untuk perbaikan atau pembelian baru di masa depan.</li>
+                    <li><strong>Packaging & Marketing:</strong> Plastik, stiker, dan kuota internet untuk promosi.</li>
+                </ul>
+                
+                <p>Rumus sederhana: (Total Biaya Bahan + Overhead + Tenaga Kerja) / Jumlah Roti Jadi = HPP per pcs. Setelah ketemu HPP, baru tentukan margin keuntungan yang diinginkan (biasanya 30-50%).</p>
+            `
+        },
+        {
+            id: 6,
+            title: "Tren Roti Sobek Jepang yang Sedang Hits",
+            date: "01 JAN 2026",
+            image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200",
+            content: `
+                <p>Japanese Milk Bread atau Roti Sobek Jepang sedang merajai media sosial. Teksturnya yang seperti kapas (cottony) dan seratnya yang bisa ditarik panjang (stringy) membuatnya sangat disukai pasar Indonesia.</p>
+                
+                <h3>Rahasia Tekstur Kapas</h3>
+                <p>Kuncinya ada pada teknik <em>Tangzhong</em> (water roux) atau <em>Yudane</em>. Ini adalah teknik memasak sebagian tepung dengan air panas hingga menjadi pasta sebelum dicampur ke adonan utama. Teknik ini membuat tepung mampu menyerap air lebih banyak.</p>
+                
+                <h3>Tantangan Produksi</h3>
+                <p>Karena kadar airnya tinggi (high hydration), adonan ini sangat lengket dan berat. Menguleninya dengan tangan hampir mustahil untuk hasil konsisten. Diperlukan Spiral Mixer berkualitas seperti Feasbake FS-Series untuk menguleni adonan basah ini hingga kalis elastis (windowpane stage) tanpa memanaskan adonan.</p>
+            `
+        }
+    ];
+
+    // ----------------------------------------------------------------------
+    // 2. LOGIKA RENDER HALAMAN
+    // ----------------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = parseInt(urlParams.get('id'));
+        const container = document.getElementById('articleDetailContainer');
+
+        // Cari artikel berdasarkan ID
+        const article = articlesData.find(a => a.id === articleId);
+
+        if (article) {
+            // Update Judul Tab Browser
+            document.title = `${article.title} | Feasbake Artikel`;
+
+            // Inject HTML sesuai urutan: Image -> Header (Date+Title) -> Content
+            container.innerHTML = `
+                <div class="article-wrapper">
+                    <a href="article.html" class="back-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        KEMBALI KE ARTIKEL
+                    </a>
+
+                    <div class="detail-image-wrapper">
+                        <img src="${article.image}" alt="${article.title}" class="detail-image">
+                    </div>
+
+                    <div class="detail-header">
+                        <span class="detail-date">${article.date}</span>
+                        <h1 class="detail-title">${article.title}</h1>
+                    </div>
+
+                    <div class="detail-content">
+                        ${article.content}
+                    </div>
+                </div>
+            `;
+        } else {
+            // Jika ID tidak ditemukan atau URL tanpa ID
+            container.innerHTML = `
+                <div style="text-align:center; padding: 60px 0;">
+                    <h2 style="margin-bottom:16px;">Artikel tidak ditemukan</h2>
+                    <p style="margin-bottom:24px; color:var(--text-secondary);">Artikel yang Anda cari mungkin telah dihapus atau link yang Anda tuju salah.</p>
+                    <a href="article.html" class="btn-primary" style="text-decoration:none;">KEMBALI KE DAFTAR ARTIKEL</a>
+                </div>
+            `;
+        }
+
+        // --- SETUP NAVBAR SCROLL ---
+        const navbar = document.getElementById('mainNavbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // --- SETUP MENU & CART (Copy dari script global) ---
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if(menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+            });
+        }
+
+        const cartBtn = document.getElementById('cartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const closeCart = document.getElementById('closeCart');
+
+        if(cartBtn && cartSidebar) {
+            cartBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                cartSidebar.classList.add('active');
+                if(cartOverlay) cartOverlay.classList.add('active');
+                if(typeof renderCartItems === 'function') renderCartItems();
+            });
+        }
+
+        const closeActions = [closeCart, cartOverlay];
+        closeActions.forEach(el => {
+            if(el) {
+                el.addEventListener('click', () => {
+                    cartSidebar.classList.remove('active');
+                    if(cartOverlay) cartOverlay.classList.remove('active');
+                });
+            }
+        });
+    });
   </script>
 </body>
 </html>
