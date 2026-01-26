@@ -222,6 +222,42 @@
       width: 100%;
       justify-content: center;
     }
+
+    .contact-info-container {
+      width: 100%;
+      max-width: 1200px;
+      /* REQ #6: Padding left/right 48px, top/bottom 64px */
+      padding: 64px 48px; 
+      
+      display: flex;
+      justify-content: space-between; /* Agar tersebar rata */
+      flex-wrap: wrap; /* Agar responsif turun ke bawah */
+      gap: 48px;
+    }
+
+    .info-item {
+      flex: 1;
+      min-width: 250px; /* Lebar minimum per item */
+    }
+
+    /* REQ #7: Text Large = class h4 */
+    .info-title {
+      font-family: var(--font-heading); /* Asumsi dari style.css */
+      font-weight: 700;
+      font-size: 24px; /* Ukuran H4 umum, atau sesuaikan var(--h4) jika ada */
+      line-height: 1.4;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* REQ #8: Text Small = class body-m */
+    .info-text {
+      font-family: var(--font-body);
+      font-size: var(--body-m); 
+      color: var(--text-primary); /* Atau text-secondary jika ingin agak abu */
+      line-height: 1.6;
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -240,6 +276,11 @@
         height: 80vh; 
       }
 
+      .contact-grid {
+        grid-template-columns: 1fr; 
+        padding: 48px 24px 0 24px;
+      }
+
       .contact-wrapper {
         grid-template-columns: 1fr; /* Stack ke bawah di mobile/tablet */
       }
@@ -247,6 +288,12 @@
         min-height: 300px;
       }
       .contact-section {
+        padding: 48px 24px;
+      }
+
+      contact-info-container {
+        flex-direction: column; /* Stack ke bawah di HP */
+        gap: 32px;
         padding: 48px 24px;
       }
     }
