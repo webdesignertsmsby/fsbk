@@ -116,6 +116,112 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
+    .contact-section {
+      background-color: var(--brand-50); /* Background halaman */
+      padding: 64px 48px; /* Padding top-bottom 64, left-right 48 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Wrapper untuk membatasi lebar agar rapi di layar besar */
+    .contact-wrapper {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Split 50:50 antara Gambar & Form */
+      gap: 0; /* Kita buat nempel atau gap kecil sesuai selera, di sini 0 agar menyatu jika mau, atau beri gap */
+      gap: 32px; 
+      align-items: stretch;
+    }
+
+    /* 2. GAMBAR (REQ #1) */
+    .contact-image-container {
+      width: 100%;
+      height: 100%;
+      min-height: 500px; /* Tinggi minimal agar tidak gepeng */
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #ddd; /* Placeholder color */
+    }
+
+    .contact-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Agar gambar mengisi area tanpa gepeng */
+    }
+
+    /* 3. FORM CONTAINER (REQ #2) */
+    .form-card {
+      background-color: var(--neutral-50);
+      padding: 48px 32px; /* Top-Bot 48px, Left-Right 32px */
+      border-radius: 8px;
+      border: 1px solid var(--border-default);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* 4. TEXT HEADER (REQ #7 & #8) */
+    .contact-title {
+      margin-bottom: 8px;
+      /* Menggunakan class h4 dari HTML, tapi kita pastikan warnanya */
+      color: var(--text-primary);
+    }
+
+    .contact-description {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    /* 5. FORM ELEMENT STYLES */
+    .form-group {
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    /* LABEL (REQ #3) */
+    .form-label {
+      display: block;
+      font-size: var(--body-s); /* Class body-s */
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    /* INPUT (REQ #4) */
+    .form-input {
+      width: 100%; /* Fill container */
+      background-color: var(--neutral-50);
+      border-radius: 4px;
+      border: 1px solid var(--border-default);
+      font-size: var(--body-m);
+      color: var(--text-primary); /* Text color when typing */
+      padding: 16px 12px; /* Top-Bot 16px, Left-Right 12px */
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-input::placeholder {
+      color: var(--text-tertiary); /* Placeholder color */
+    }
+
+    .form-input:focus {
+      border-color: var(--brand-500); /* Focus effect standard */
+    }
+
+    /* MESSAGE INPUT (REQ #4 part 2) */
+    textarea.form-input {
+      resize: vertical;
+      min-height: 160px; /* Height * 3 approx (normal input ~50px) */
+    }
+
+    /* BUTTON (REQ #5) */
+    .btn-submit {
+      width: 100%;
+      justify-content: center;
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -132,6 +238,16 @@
 
       .hero {
         height: 80vh; 
+      }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr; /* Stack ke bawah di mobile/tablet */
+      }
+      .contact-image-container {
+        min-height: 300px;
+      }
+      .contact-section {
+        padding: 48px 24px;
       }
     }
     
@@ -305,11 +421,49 @@
           Hubungi kami untuk informasi produk, layanan, atau penawaran khusus.
         </p>
       </div>
-    </section>
-
-    <section>
+      </section>
+    
+    <section class="contact-section">
+    <div class="contact-wrapper">
       
-    </section>
+      <div class="contact-image-container">
+        <img 
+          src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=1000" 
+          alt="Contact Support" 
+          class="contact-image"
+        >
+      </div>
+
+      <div class="form-card">
+        <h2 class="h4 contact-title">Kirim Pesan</h2>
+        <p class="body-m contact-description">Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda.</p>
+
+        <form action="#" method="POST">
+          
+          <div class="form-group">
+            <label for="name" class="form-label">Nama Lengkap</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="Masukkan nama Anda">
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="nama@email.com">
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Pesan</label>
+            <textarea id="message" name="message" class="form-input" placeholder="Tuliskan pesan atau pertanyaan Anda di sini..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit">
+            Kirim Pesan
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
   </main>
 
   <footer id="main-footer">
