@@ -302,6 +302,21 @@
       .contact-image-container {
         min-height: 300px;
       }
+
+      contact-info-container {
+        flex-direction: column; /* Stack ke bawah di HP */
+      }
+
+      .info-item {
+        border-right: none;
+        border-bottom: 1px dashed rgba(var(--border-default-rgb), 0.5);
+        padding-bottom: 24px;
+        padding-right: 0;
+      }
+      .info-item:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+      }
     } 
 
     @media (max-width: 480px) {
@@ -318,20 +333,8 @@
       }
 
       contact-info-container {
-        flex-direction: column; /* Stack ke bawah di HP */
         gap: 32px;
         padding: 48px 24px;
-      }
-
-      .info-item {
-        border-right: none;
-        border-bottom: 1px dashed rgba(var(--border-default-rgb), 0.5);
-        padding-bottom: 24px;
-        padding-right: 0;
-      }
-      .info-item:last-child {
-          border-bottom: none;
-          padding-bottom: 0;
       }
     }
     
