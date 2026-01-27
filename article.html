@@ -697,48 +697,6 @@
                 </div>
             `).join('');
         }
-
-        // --- 1. LOGIKA NAVBAR SCROLL ---
-        const navbar = document.getElementById('mainNavbar');
-        const heroSection = document.getElementById('hero');
-        
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > heroSection.offsetHeight - 80) {
-            navbar.classList.add('scrolled');
-          } else {
-            navbar.classList.remove('scrolled');
-          }
-        });
-        
-        // --- 2. LOGIKA BUKA/TUTUP CART ---
-        const cartBtn = document.getElementById('cartBtn');
-        const cartSidebar = document.getElementById('cartSidebar');
-        const cartOverlay = document.getElementById('cartOverlay');
-        const closeCart = document.getElementById('closeCart');
-        
-        cartBtn.addEventListener('click', () => {
-          cartSidebar.classList.add('active');
-          cartOverlay.classList.add('active');
-          navbar.classList.add('cart-open');
-          renderCartItems(); // TAMBAHAN: Update tampilan isi keranjang saat dibuka
-        });
-        
-        [closeCart, cartOverlay].forEach(el => {
-          el.addEventListener('click', () => {
-            cartSidebar.classList.remove('active');
-            cartOverlay.classList.remove('active');
-            navbar.classList.remove('cart-open');
-          });
-        });
-        
-        // --- 3. LOGIKA MOBILE MENU ---
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        menuBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('active');
-          navbar.classList.toggle('menu-open');
-        });
     });
     </script>
 
