@@ -201,10 +201,6 @@
       overflow: hidden;
       text-decoration: none;
     }
-    
-    .category-card-item:hover {
-        transform: translateY(-8px); /* Efek hover kecil */
-    }
 
     /* Buat wrapper gambar mengisi seluruh area card */
     .category-img-wrapper {
@@ -214,6 +210,7 @@
       width: 100%;
       height: 100%;
       z-index: 1; /* Di belakang teks */
+      overflow: hidden;
     }
 
     /* 3. Overlay Gelap agar teks terbaca */
@@ -234,6 +231,10 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .category-img-wrapper:hover .category-img {
+      transform: scale(1.1); /* Zoom sebesar 10% */
     }
 
     .category-card-item h6 {
@@ -756,9 +757,9 @@
     <a href="#" class="nav-link active">BERANDA</a>
     <a href="machine.html" class="nav-link">MESIN</a>
     <a href="#" class="nav-link">TENTANG KAMI</a>
-    <a href="#" class="nav-link">RESEP</a>
-    <a href="#" class="nav-link">ARTIKEL</a>
-    <a href="#" class="nav-link">HUBUNGI KAMI</a>
+    <a href="recipe.html" class="nav-link">RESEP</a>
+    <a href="article.html" class="nav-link">ARTIKEL</a>
+    <a href="contact.html" class="nav-link">HUBUNGI KAMI</a>
   </div>
 
   <div class="overlay" id="cartOverlay"></div>
@@ -802,7 +803,7 @@
                     <div class="hero-content">
                         <h2>Bikin Roti Jadi Lebih Mudah</h2>
                         <p class="body-xl">Mesin bakery yang dirancang untuk membuat proses produksi lebih cepat, stabil, dan efisien</p>
-                        <button class="btn-secondary">JELAJAHI MESIN →</button>
+                        <a href="machine.html" class="btn-secondary">JELAJAHI MESIN →</a>
                     </div>
                 </div>
     
@@ -814,6 +815,7 @@
                         <h2>Fresh Tanpa Ribet</h2>
                         <p class="body-xl">Operasional mudah, hemat waktu, dan tetap menghasilkan kualitas terbaik.</p>
                         <button class="btn-secondary">JELAJAHI MESIN →</button>
+                        <a href="machine.html" class="btn-secondary">JELAJAHI MESIN →</a>
                     </div>
                 </div>
                 
@@ -824,7 +826,7 @@
                     <div class="hero-content">
                         <h2>Konsisten di Setiap Hidangan</h2>
                         <p class="body-xl">Mesin berkualitas premium yang mampu menjaga konsistensi rasa, tekstur, dan tampilan hidangan.</p>
-                        <button class="btn-secondary">JELAJAHI MESIN →</button>
+                        <a href="machine.html" class="btn-secondary">JELAJAHI MESIN →</a>
                     </div>
                 </div>
             </div>
@@ -851,21 +853,21 @@
       </div>
 
       <div class="category-card-grid">
-        <a href="#" class="category-card-item">
+        <a href="machine.html" class="category-card-item">
           <div class="category-img-wrapper">
             <img src="https://i.imgur.com/aR65qAp.jpeg" alt="Oven" class="category-img">
           </div>
           <h6>BAKERY</h6>
         </a>
 
-        <a href="#" class="category-card-item">
+        <a href="machine.html" class="category-card-item">
           <div class="category-img-wrapper">
             <img src="https://i.imgur.com/ulxVgcM.jpg" alt="Oven" class="category-img">
           </div>
           <h6>CAFE</h6>
         </a>
 
-        <a href="#" class="category-card-item">
+        <a href="machine.html" class="category-card-item">
           <div class="category-img-wrapper">
             <img src="https://i.imgur.com/tzU2IJL.jpeg" alt="Oven" class="category-img">
           </div>
@@ -1016,8 +1018,7 @@
             <p class="body-s">Daya tahan tinggi untuk jangka panjang</p>
           </div>
         </div>
-
-        <button class="btn btn-primary">TENTANG KAMI →</button>
+        <a href="#" class="btn btn-primary">TENTANG KAMI →</a>
       </div>
     </div>
   </div>
@@ -1052,7 +1053,7 @@
     </div>
 
     <div class="recipe-action">
-      <button class="btn-recipe-secondary">LIHAT SEMUA RESEP</button>
+      <a href="recipe.html" class="btn-recipe-secondary">LIHAT SEMUA RESEP</a>
     </div>
   </div>
 </section>
@@ -1069,7 +1070,7 @@
       </span>
       <h4 class="section-title">Wawasan Seputar Mesin & Industri Bakery</h4>
       <p class="body-l">Pelajari tips, panduan, dan informasi terbaru seputar mesin bakery untuk membantu Anda mengambil keputusan yang lebih tepat bagi bisnis.</p>
-      <button class="btn-primary">BACA SEMUA ARTIKEL →</button>
+      <a href="article.html" class="btn-primary">BACA SEMUA ARTIKEL →</a>
     </div>
 
     <div class="artikel-grid">
@@ -1081,7 +1082,7 @@
         <div class="article-card-info">
           <div class="article-meta body-m">1 Jan 2026</div>
           <h3 class="article-title body-xl">Judul artikel</h3>
-          <button class="btn-tertiary">BACA ARTIKEL →</button>
+          <a href="article-detail.html?id=1 class="btn-tertiary">BACA ARTIKEL →</a>
         </div>
       </div>
 
@@ -1092,7 +1093,7 @@
         <div class="article-card-info">
           <div class="article-meta body-m">1 Jan 2026</div>
           <h3 class="article-title body-xl">Judul artikel</h3>
-          <button class="btn-tertiary">BACA ARTIKEL →</button>
+          <a href="article-detail.html?id=2 class="btn-tertiary">BACA ARTIKEL →</a>
         </div>
       </div>
 
@@ -1103,7 +1104,7 @@
         <div class="article-card-info">
           <div class="article-meta body-m">1 Jan 2026</div>
           <h3 class="article-title body-xl">Judul artikel</h3>
-          <button class="btn-tertiary">BACA ARTIKEL →</button>
+          <a href="article-detail.html?id=3 class="btn-tertiary">BACA ARTIKEL →</a>
         </div>
       </div>
 
@@ -1145,8 +1146,8 @@
                 <a href="#" class="nav-item body-l">BERANDA</a>
                 <a href="machine.html" class="nav-item body-l">MESIN</a>
                 <a href="#" class="nav-item body-l">TENTANG KAMI</a>
-                <a href="#" class="nav-item body-l">RESEP</a>
-                <a href="#" class="nav-item body-l">ARTIKEL</a>
+                <a href="recipe.html" class="nav-item body-l">RESEP</a>
+                <a href="article.html" class="nav-item body-l">ARTIKEL</a>
             </nav>
         </div>
 
