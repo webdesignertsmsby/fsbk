@@ -412,8 +412,8 @@
         <a href="index.html" class="nav-link">BERANDA</a>
         <a href="machine.html" class="nav-link active">MESIN</a>
         <a href="#" class="nav-link">TENTANG KAMI</a>
-        <a href="#" class="nav-link">RESEP</a>
-        <a href="#" class="nav-link">ARTIKEL</a>
+        <a href="recipe.html" class="nav-link">RESEP</a>
+        <a href="article.html" class="nav-link">ARTIKEL</a>
       </div>
 
       <div class="nav-actions">
@@ -430,7 +430,13 @@
   </nav>
 
   <div class="mobile-menu-overlay" id="mobileMenu">
-    </div>
+    <a href="#" class="nav-link active">BERANDA</a>
+    <a href="machine.html" class="nav-link">MESIN</a>
+    <a href="#" class="nav-link">TENTANG KAMI</a>
+    <a href="recipe.html" class="nav-link">RESEP</a>
+    <a href="article.html" class="nav-link">ARTIKEL</a>
+    <a href="contact.html" class="nav-link">HUBUNGI KAMI</a>
+  </div>
 
   <div class="overlay" id="cartOverlay"></div>
   <aside class="cart-sidebar" id="cartSidebar">
@@ -484,8 +490,8 @@
                 <a href="index.html" class="nav-item body-l">BERANDA</a>
                 <a href="#" class="nav-item body-l">MESIN</a>
                 <a href="#" class="nav-item body-l">TENTANG KAMI</a>
-                <a href="#" class="nav-item body-l">RESEP</a>
-                <a href="#" class="nav-item body-l">ARTIKEL</a>
+                <a href="recipe.html" class="nav-item body-l">RESEP</a>
+                <a href="article.html" class="nav-item body-l">ARTIKEL</a>
             </nav>
         </div>
 
@@ -563,41 +569,47 @@
   <script src="productData.js"></script>
   <script src="cart.js"></script>
   <script>
-      // =================================================================
-      // 1. LOGIKA NAVBAR & CART (PRIORITAS UTAMA - DITARUH DI ATAS)
-      // =================================================================
+      // --- 1. LOGIKA NAVBAR SCROLL ---
+      const navbar = document.getElementById('mainNavbar');
+      const heroSection = document.getElementById('hero');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > heroSection.offsetHeight - 80) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+      
+      // --- 2. LOGIKA BUKA/TUTUP CART ---
       const cartBtn = document.getElementById('cartBtn');
       const cartSidebar = document.getElementById('cartSidebar');
       const cartOverlay = document.getElementById('cartOverlay');
       const closeCart = document.getElementById('closeCart');
-      const navbar = document.querySelector('.navbar'); // Pastikan class navbar benar
       
-      // Fungsi buka cart
-      if(cartBtn) {
-          cartBtn.addEventListener('click', (e) => {
-              e.preventDefault(); // Mencegah link lompat
-              openCart();
-          });
-      }
-  
-      // Fungsi tutup cart (tombol X dan klik overlay)
-      if(closeCart) closeCart.addEventListener('click', closeCartSidebar);
-      if(cartOverlay) cartOverlay.addEventListener('click', closeCartSidebar);
-  
-      function openCart() {
-          if(cartSidebar) cartSidebar.classList.add('active');
-          if(cartOverlay) cartOverlay.classList.add('active');
-          if(navbar) navbar.classList.add('cart-open');
-          
-          // Render isi cart jika fungsinya ada (dari file cart.js)
-          if (typeof renderCartItems === 'function') renderCartItems();
-      }
-  
-      function closeCartSidebar() {
-          if(cartSidebar) cartSidebar.classList.remove('active');
-          if(cartOverlay) cartOverlay.classList.remove('active');
-          if(navbar) navbar.classList.remove('cart-open');
-      }
+      cartBtn.addEventListener('click', () => {
+        cartSidebar.classList.add('active');
+        cartOverlay.classList.add('active');
+        navbar.classList.add('cart-open');
+        renderCartItems(); // TAMBAHAN: Update tampilan isi keranjang saat dibuka
+      });
+      
+      [closeCart, cartOverlay].forEach(el => {
+        el.addEventListener('click', () => {
+          cartSidebar.classList.remove('active');
+          cartOverlay.classList.remove('active');
+          navbar.classList.remove('cart-open');
+        });
+      });
+      
+      // --- 3. LOGIKA MOBILE MENU ---
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        navbar.classList.toggle('menu-open');
+      });
   
       // =================================================================
       // 2. FUNGSI HELPER (DITARUH TENGAH)
