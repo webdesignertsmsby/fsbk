@@ -161,20 +161,14 @@
     vision-section {
       width: 100%;
       height: 100vh; /* 1 layar penuh */
+      padding: 64px;
       background-color: #ffffff; /* Background dasar putih */
-    }
-    
-    .vision-white-padding {
-      padding: 64px; /* Padding putih sesuai spesifikasi */
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
     }
     
     .vision-container {
       width: 100%;
       height: 100%;
-      background-color: var(--brand-500); /* Ganti dengan warna gelap pilihanmu */
+      background: linear-gradient(180deg, var(--brand-500) 0%, var(--brand-800) 100%);
       border-radius: 16px; /* Opsional: sedikit melengkung agar modern */
       position: relative;
       display: flex;
@@ -186,16 +180,12 @@
     
     .vision-content {
       max-width: 800px; /* Agar teks tidak terlalu lebar ke samping */
+      color: var(--text-invert);
     }
     
-    .vision-content h5 {
+    .vision-content section-title {
       margin-bottom: 24px;
       letter-spacing: 2px;
-    }
-    
-    .text-invert {
-      color: #ffffff; /* Sesuai req warna invert */
-    }
     
     /* Penempatan Icon Quotes */
     .quote-icon {
@@ -417,7 +407,6 @@
     </section>
 
     <section class="vision-section">
-      <div class="vision-white-padding">
         <div class="vision-container">
           
           <div class="quote-icon icon-top">
@@ -427,8 +416,8 @@
           </div>
     
           <div class="vision-content">
-            <h5 class="h5 text-invert">VISI KAMI</h5>
-            <p class="body-L text-invert">
+            <h5 class="section-title">Visi Kami</h5>
+            <p class="body-l">
               Menjadi mitra terpercaya dalam industri pengolahan makanan dengan menghadirkan solusi mesin yang inovatif, efisien, dan berkualitas tinggi untuk mendukung pertumbuhan bisnis kuliner di Indonesia.
             </p>
           </div>
@@ -440,7 +429,6 @@
           </div>
     
         </div>
-      </div>
     </section>
     
   </main>
