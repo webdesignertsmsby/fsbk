@@ -156,6 +156,62 @@
       align-items: flex-start; /* INI KUNCINYA: Membuat semua elemen di dalamnya rapat kiri */
       text-align: left;
     }
+
+    /* ===================== VISION SECTION ===================== */
+    vision-section {
+      width: 100%;
+      height: 100vh; /* 1 layar penuh */
+      background-color: #ffffff; /* Background dasar putih */
+    }
+    
+    .vision-white-padding {
+      padding: 64px; /* Padding putih sesuai spesifikasi */
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    
+    .vision-container {
+      width: 100%;
+      height: 100%;
+      background-color: var(--brand-500); /* Ganti dengan warna gelap pilihanmu */
+      border-radius: 16px; /* Opsional: sedikit melengkung agar modern */
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    }
+    
+    .vision-content {
+      max-width: 800px; /* Agar teks tidak terlalu lebar ke samping */
+    }
+    
+    .vision-content h5 {
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+    }
+    
+    .text-invert {
+      color: #ffffff; /* Sesuai req warna invert */
+    }
+    
+    /* Penempatan Icon Quotes */
+    .quote-icon {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.2); /* Warna transparan agar tidak mengganggu teks */
+    }
+    
+    .icon-top {
+      top: 48px;
+      left: 48px;
+    }
+    
+    .icon-bottom {
+      bottom: 48px;
+      right: 48px;
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -360,8 +416,31 @@
       </div>
     </section>
 
-    <section id="vision" class="section-padding">
-      
+    <section class="vision-section">
+      <div class="vision-white-padding">
+        <div class="vision-container">
+          
+          <div class="quote-icon icon-top">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.017 21L14.017 18C14.017 15.2386 16.2556 13 19.017 13H21V21H14.017ZM3 21L3 18C3 15.2386 5.23858 13 8 13H10V21H3ZM10 13C10 9.13401 6.86599 6 3 6V3C7.97056 3 12 7.02944 12 12V13H10ZM21 13C21 9.13401 17.866 6 14 6V3C18.9706 3 23 7.02944 23 12V13H21Z" fill="currentColor"/>
+            </svg>
+          </div>
+    
+          <div class="vision-content">
+            <h5 class="h5 text-invert">VISI KAMI</h5>
+            <p class="body-L text-invert">
+              Menjadi mitra terpercaya dalam industri pengolahan makanan dengan menghadirkan solusi mesin yang inovatif, efisien, dan berkualitas tinggi untuk mendukung pertumbuhan bisnis kuliner di Indonesia.
+            </p>
+          </div>
+    
+          <div class="quote-icon icon-bottom">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+              <path d="M14.017 21L14.017 18C14.017 15.2386 16.2556 13 19.017 13H21V21H14.017ZM3 21L3 18C3 15.2386 5.23858 13 8 13H10V21H3ZM10 13C10 9.13401 6.86599 6 3 6V3C7.97056 3 12 7.02944 12 12V13H10ZM21 13C21 9.13401 17.866 6 14 6V3C18.9706 3 23 7.02944 23 12V13H21Z" fill="currentColor"/>
+            </svg>
+          </div>
+    
+        </div>
+      </div>
     </section>
     
   </main>
