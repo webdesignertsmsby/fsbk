@@ -199,6 +199,50 @@
       bottom: 48px;
       right: 48px;
     }
+
+    /* ===================== SOLUTION SECTION ===================== */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    
+    /* Base Card Style */
+    .solution-card {
+      position: relative;
+      height: 400px; /* Tinggi kartu */
+      border-radius: 12px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end; /* Teks di bawah kartu */
+      padding: 32px;
+      transition: transform 0.3s ease;
+    }
+    
+    /* Dark Overlay */
+    .solution-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
+    }
+    
+    /* Card Content (Text) */
+    .solution-card-content {
+      position: relative;
+      z-index: 2; /* Di atas overlay */
+      color: var(--text-invert);
+    }
+    
+    .solution-card-content .card-title {
+      margin-bottom: 8px;
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -426,8 +470,47 @@
         </div>
     </section>
 
-    <section class="solution">
-      
+    <section id="solution" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h4 class="section-title">Spesialisasi dan Solusi Lengkap Kami</h4>
+          <p class="body-l">Memahami bahwa setiap segmen usaha memiliki tantangan unik, Feasbake menyediakan solusi peralatan yang dirancang untuk menjawab kebutuhan spesifik.</p>
+        </div>
+    
+        <div class="solution-grid">
+          <div class="solution-card" style="background-image: url('path-to-image1.jpg');">
+            <div class="solution-overlay"></div>
+            <div class="solution-card-content">
+              <h6 class="card-title">Untuk Hotel</h6>
+              <p class="body-m">Mampu merancang kebutuhan dapur Anda dan didesain secara khusus dengan standard foodgrade untuk memastikan bahwa produk layak memenuhi kebersihan dan kepuasan sampai ke tangan pelanggan.</p>
+            </div>
+          </div>
+    
+          <div class="solution-card" style="background-image: url('path-to-image2.jpg');">
+            <div class="solution-overlay"></div>
+            <div class="solution-card-content">
+              <h6 class="card-title">Untuk Bakery</h6>
+              <p class="body-m">Kami menyediakan berbagai peralatan bakery profesional mulai dari spiral mixer, planetary mixer, deck oven, rotary oven, proofer, hingga dough sheeter. Setiap produk dipilih dengan cermat untuk memastikan konsistensi adonan dan hasil pemanggangan yang sempurna.</p>
+            </div>
+          </div>
+    
+          <div class="solution-card" style="background-image: url('path-to-image3.jpg');">
+            <div class="solution-overlay"></div>
+            <div class="solution-card-content">
+              <h6 class="card-title">Untuk Cafe</h6>
+              <p class="body-m">Dari mesin espresso komersial, grinder berkualitas tinggi, blender premium, hingga water boiler dan peralatan brew manual—Feasbake menghadirkan perlengkapan yang dibutuhkan untuk menyajikan kopi dan minuman berkualitas kafe.</p>
+            </div>
+          </div>
+    
+          <div class="solution-card" style="background-image: url('path-to-image4.jpg');">
+            <div class="solution-overlay"></div>
+            <div class="solution-card-content">
+              <h6 class="card-title">Untuk Restaurant</h6>
+              <p class="body-m">Kami melengkapi dapur restoran dengan peralatan heavy-duty seperti commercial freezer, refrigerator, gas range, deep fryer, griddle, dan dishwasher yang dirancang untuk menahan jam operasional panjang dan menghasilkan performa konsisten.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     
   </main>
