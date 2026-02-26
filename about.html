@@ -243,6 +243,45 @@
     .solution-card-content .card-title {
       margin-bottom: 8px;
     }
+
+    #why-choose-us {
+      text-align: center;
+      background-color: var(--neutral-50); /* Atau warna latar yang kamu inginkan */
+    }
+    
+    .why-choose-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 48px;
+      gap: 0; /* Gap 0 karena kita pakai border sebagai pemisah */
+    }
+    
+    .why-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      gap: 16px;
+      /* Garis patah-patah di sisi kanan */
+      border-right: 2px dashed var(--border-default);
+    }
+    
+    /* Hilangkan garis pada item terakhir agar rapi */
+    .why-item:last-child {
+      border-right: none;
+    }
+    
+    .why-icon {
+      color: var(--brand-500);
+      margin-bottom: 8px;
+    }
+    
+    .why-item h6 {
+      margin: 0;
+      color: var(--neutral-900);
+    }
     
     @media (max-width: 1024px) {
       .container {
@@ -514,7 +553,39 @@
     </section>
 
     <section id="why-choose-us" class="section-padding">
-      
+      <div class="container">
+        <h4 class="section-title">Mengapa Memilih Feasbake?</h4>
+        
+        <div class="why-choose-grid">
+          <div class="why-item">
+            <div class="why-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h6 class="h6">Kualitas Terjamin</h6>
+          </div>
+    
+          <div class="why-item">
+            <div class="why-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <h6 class="h6">Dukungan Teknis 24/7</h6>
+          </div>
+    
+          <div class="why-item">
+            <div class="why-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
+            <h6 class="h6">Pengiriman Cepat</h6>
+          </div>
+    
+          <div class="why-item">
+            <div class="why-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+            </div>
+            <h6 class="h6">Suku Cadang Asli</h6>
+          </div>
+        </div>
+      </div>
     </section>
     
   </main>
