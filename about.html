@@ -274,8 +274,18 @@
     }
     
     .why-icon {
-      color: var(--brand-500);
-      margin-bottom: 8px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    
+    .why-icon svg {
+      width: 40px; /* Paksa lebar menjadi 40px */
+      height: 40px; /* Paksa tinggi menjadi 40px */
+      flex-shrink: 0; /* Mencegah SVG gepeng/tertekuk */
     }
     
     .why-item h6 {
