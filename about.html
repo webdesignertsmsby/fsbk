@@ -342,13 +342,25 @@
         padding: 60px 40px;
       }
 
-      .container .about-wrapper {
-        flex-direction: column; 
-        gap: 48px; 
+      .container.about-wrapper {
+        flex-direction: column !important; 
+        padding: 64px 24px !important;  
+        gap: 40px;                        
       }
-    
-      .about-image, .about-text {
-        width: 100%; 
+
+      .about-content, 
+      .about-image {
+        width: 100% !important;          
+        max-width: 100%;
+      }
+
+      .about-image {
+        order: 1; 
+      }
+      
+      .about-content {
+        order: 2;
+        text-align: center;              
       }
     
       #about .container {
