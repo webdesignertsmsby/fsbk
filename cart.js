@@ -151,27 +151,12 @@ function renderCartItems() {
                     <h6 id="cartTotalPrice" style="font-size:18px; font-weight:700; margin:0;">${formatRupiah(totalPrice)}</h6>
                 </div>
                 
-                <a href="checkout.html" style="text-decoration: none; display: block; width: 100%;">
-                    <button class="btn-primary" style="width: 100%;">
-                        BELANJA SEKARANG
-                    </button>
-                </a>
+                <button onclick="handleCheckout()" class="btn-primary" style="width: 100%; cursor: pointer;">
+                    BELANJA SEKARANG
+                </button>
             `;
         }
     }
-}
-
-// Tambahkan fungsi checkout sederhana biar keren
-function checkoutWhatsApp() {
-    let message = "Halo Feasbake, saya ingin memesan:\n\n";
-    cart.forEach(item => {
-        message += `- ${item.name} (x${item.qty})\n`;
-    });
-    const total = document.getElementById('cartTotalPrice').innerText;
-    message += `\nTotal: ${total}`;
-    
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/628123456789?text=${encodedMessage}`, '_blank'); // Ganti nomor WA kamu
 }
 
 // --- 7. UPDATE BADGE DI NAVBAR ---
