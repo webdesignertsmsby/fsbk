@@ -195,39 +195,33 @@ function formatRupiah(number) {
 }
 
 function handleCheckout() {
-    // 1. Ambil data dari keranjang (localStorage)
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // Gunakan 'feasbakeCart' agar sama dengan inisialisasi di atas
+    const currentCart = JSON.parse(localStorage.getItem('feasbakeCart')) || [];
     
-    if (cart.length === 0) {
+    if (currentCart.length === 0) {
         alert("Keranjang Anda masih kosong!");
         return;
     }
 
-    // 2. Siapkan variabel untuk menampung data pesanan
     let daftarMesin = "";
     let daftarHarga = "";
     let daftarQty = "";
     let grandTotal = 0;
 
-    // 3. Loop untuk menyusun data jika ada lebih dari 1 barang
-    cart.forEach((item, index) => {
+    currentCart.forEach((item, index) => {
         daftarMesin += `${index + 1}. ${item.name}\n`;
         daftarHarga += `Rp ${item.price.toLocaleString('id-ID')}\n`;
-        daftarQty += `${item.quantity} Unit\n`;
-        grandTotal += item.price * item.quantity;
+        daftarQty += `${item.qty} Unit\n`; // Pakai .qty (sesuai data cart kamu)
+        grandTotal += item.price * item.qty;
     });
 
-    // 4. URL Dasar Google Form Anda
     const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSci2vWnJQ_VePVe1lDLWpoP6pVY94JXvZs-f6s-TcJwIASHJw/viewform?usp=pp_url";
-
-    // 5. Gabungkan dengan ID Entry yang sudah kita dapatkan
     const queryParams = 
         `&entry.861431396=${encodeURIComponent(daftarMesin.trim())}` + 
         `&entry.1072563135=${encodeURIComponent(daftarHarga.trim())}` + 
         `&entry.459074460=${encodeURIComponent(daftarQty.trim())}` + 
         `&entry.1643100959=${encodeURIComponent("Rp " + grandTotal.toLocaleString('id-ID'))}`;
 
-    // 6. Arahkan user ke Google Form (membuka di tab baru)
     window.open(baseUrl + queryParams, '_blank');
 }
 
