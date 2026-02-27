@@ -180,7 +180,7 @@ function formatRupiah(number) {
 }
 
 function handleCheckout() {
-    // Gunakan 'feasbakeCart' agar sama dengan inisialisasi di atas
+    // Ambil data dari key yang benar
     const currentCart = JSON.parse(localStorage.getItem('feasbakeCart')) || [];
     
     if (currentCart.length === 0) {
@@ -196,7 +196,7 @@ function handleCheckout() {
     currentCart.forEach((item, index) => {
         daftarMesin += `${index + 1}. ${item.name}\n`;
         daftarHarga += `Rp ${item.price.toLocaleString('id-ID')}\n`;
-        daftarQty += `${item.qty} Unit\n`; // Pakai .qty (sesuai data cart kamu)
+        daftarQty += `${item.qty} Unit\n`; 
         grandTotal += item.price * item.qty;
     });
 
@@ -207,6 +207,7 @@ function handleCheckout() {
         `&entry.459074460=${encodeURIComponent(daftarQty.trim())}` + 
         `&entry.1643100959=${encodeURIComponent("Rp " + grandTotal.toLocaleString('id-ID'))}`;
 
+    // BUKA DI TAB BARU
     window.open(baseUrl + queryParams, '_blank');
 }
 
