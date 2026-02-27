@@ -230,3 +230,14 @@ function handleCheckout() {
     // 6. Arahkan user ke Google Form (membuka di tab baru)
     window.open(baseUrl + queryParams, '_blank');
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            // Memanggil fungsi yang merangkum data ke Google Form
+            handleCheckout();
+        });
+    }
+});
