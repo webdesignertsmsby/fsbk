@@ -128,4 +128,28 @@ const products = [
         image: [ "https://i.imgur.com/U8S17RM.png", "https://i.imgur.com/I8Op4x8.png" ],
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
+    {
+        id: 14,
+        name: "Rotary Rack Oven",
+        category: "Bakery",
+        price: 220000000,
+        image: [ "https://i.imgur.com/NsfuGif.jpeg"],
+        description: "FEASBAKE Rotary Rack Oven 32 Tray merupakan mesin pemanggang profesional yang dirancang untuk memenuhi kebutuhan produksi bakery dalam skala menengah hingga besar. Dilengkapi dengan sistem rak berputar (rotating rack), oven ini membantu menghasilkan proses pemanggangan yang lebih merata pada seluruh tray. Kapasitas hingga 32 tray memungkinkan pengguna memanggang produk dalam jumlah besar sekaligus, sehingga meningkatkan efisiensi dan produktivitas produksi. Cocok digunakan untuk memanggang berbagai jenis produk seperti roti, pastry, cookies, cake, dan aneka produk bakery lainnya. Dengan kapasitas besar dan sistem pemanggangan yang praktis, Rotary Rack Oven FEASBAKE menjadi solusi ideal untuk bakery komersial, pabrik roti, hotel, restoran, dan bisnis HORECA.",
+        specs: {
+        "Tipe": "FB-32RG",
+        "Kapasitas": "32 Tray",
+        "Ukuran Tray": "400 × 600 mm",
+        "Sistem Pemanggangan": "Rotary / Rak Berputar",
+        "Rentang Suhu": "20–300°C",
+        "Voltage": "380 V",
+        "Dimensi Mesin": "1660 × 2600 × 2420 mm",
+        "Aplikasi": "Pemanggangan Komersial dan Industri",
+        "Jenis Produk": "Roti, Pastry, Cookies, Cake, dan Produk Bakery Lainnya",
+        "Sistem Pemanas": "Menyesuaikan tipe mesin",
+        "Sumber Energi": "Menyesuaikan tipe mesin",
+        "Daya Listrik": "Hubungi tim FEASBAKE",
+        "Konsumsi Gas": "Hubungi tim FEASBAKE",
+        "Tipe Lainnya": "FB-12RG (12 Tray), FB-16RG (16 Tray), FB-64RG (64 Tray)"
+        }
+    },
 ];
