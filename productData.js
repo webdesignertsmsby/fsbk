@@ -2,19 +2,19 @@
 const products = [
     {
         id: 1,
-        name: "Oven Single Deck",
+        name: "Oven Single Deck 2 Tray",
         category: "Bakery",
-        price: 9999999999,
-        image: [ "https://i.imgur.com/z5ZtZK8.png", "https://i.imgur.com/tizJB8F.png" ],
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        price: 7500000,
+        image: [ "https://i.imgur.com/m7XPTgw.png"],
+        description: "FEASBAKE Oven Single Deck merupakan mesin pemanggang profesional yang dirancang untuk memenuhi kebutuhan produksi bakery dan bisnis HORECA. Dilengkapi dengan sistem pengaturan suhu bagian atas dan bawah secara terpisah, mesin ini memberikan fleksibilitas dalam proses pemanggangan berbagai jenis produk. Dengan kapasitas 2 tray dan rentang suhu hingga 300°C, oven ini cocok digunakan untuk memanggang roti, pastry, cookies, brownies, cake, dan berbagai produk bakery lainnya. Memiliki desain yang compact serta konsumsi daya listrik hanya 100 watt, oven ini menjadi pilihan praktis untuk mendukung operasional bakery, café, restoran, dan usaha kuliner."
     },
     {
         id: 2,
         name: "Oven Double Deck",
         category: "Bakery",
-        price: 9999999999,
+        price: 14000000,
         image: [ "https://i.imgur.com/DigWh5J.png", "https://i.imgur.com/nCikQaF.png" ],
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        description: "FEASBAKE Oven Double Deck merupakan mesin pemanggang profesional yang dirancang untuk mendukung kebutuhan produksi bakery dan bisnis HORECA dengan kapasitas lebih besar. Dilengkapi dengan dua ruang pemanggangan (deck), mesin ini memungkinkan proses pemanggangan dilakukan secara bersamaan sehingga membantu meningkatkan efisiensi dan produktivitas kerja. Cocok digunakan untuk memanggang berbagai jenis produk seperti roti, cake, cookies, brownies, pastry, dan aneka produk bakery lainnya. Dengan desain yang praktis dan kapasitas pemanggangan yang lebih optimal, oven ini menjadi pilihan tepat untuk bakery, café, restoran, hotel, maupun usaha kuliner."
     },
     {
         id: 3,
