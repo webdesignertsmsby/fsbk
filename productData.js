@@ -6,7 +6,23 @@ const products = [
         category: "Bakery",
         price: 7500000,
         image: [ "https://i.imgur.com/m7XPTgw.png"],
-        description: "FEASBAKE Oven Single Deck merupakan mesin pemanggang profesional yang dirancang untuk memenuhi kebutuhan produksi bakery dan bisnis HORECA. Dilengkapi dengan sistem pengaturan suhu bagian atas dan bawah secara terpisah, mesin ini memberikan fleksibilitas dalam proses pemanggangan berbagai jenis produk. Dengan kapasitas 2 tray dan rentang suhu hingga 300°C, oven ini cocok digunakan untuk memanggang roti, pastry, cookies, brownies, cake, dan berbagai produk bakery lainnya. Memiliki desain yang compact serta konsumsi daya listrik hanya 100 watt, oven ini menjadi pilihan praktis untuk mendukung operasional bakery, café, restoran, dan usaha kuliner."
+        description: "FEASBAKE Oven Single Deck merupakan mesin pemanggang profesional yang dirancang untuk memenuhi kebutuhan produksi bakery dan bisnis HORECA. Dilengkapi dengan sistem pengaturan suhu bagian atas dan bawah secara terpisah, mesin ini memberikan fleksibilitas dalam proses pemanggangan berbagai jenis produk. Dengan kapasitas 2 tray dan rentang suhu hingga 300°C, oven ini cocok digunakan untuk memanggang roti, pastry, cookies, brownies, cake, dan berbagai produk bakery lainnya. Memiliki desain yang compact serta konsumsi daya listrik hanya 100 watt, oven ini menjadi pilihan praktis untuk mendukung operasional bakery, café, restoran, dan usaha kuliner.",
+        specs: {
+        "Model": "FB0D102G",
+        "Tray Capacity": "2 Trays",
+        "Temperature Range": "0–300°C",
+        "Temperature Control": "Digital Touchscreen",
+        "Heating Control": "Independent Top & Bottom Temperature",
+        "Heating System": "Gas",
+        "Gas Consumption": "30 MJ/h",
+        "Electrical Power": "100 W",
+        "Voltage": "220 V",
+        "Dough Capacity": "20 kg",
+        "Net Weight": "109 kg",
+        "Machine Dimensions": "1340 × 900 × 620 mm",
+        "Warranty": "1 Year",
+        "Application": "Commercial Bakery & HORECA"
+        }
     },
     {
         id: 2,
@@ -14,7 +30,15 @@ const products = [
         category: "Bakery",
         price: 14000000,
         image: [ "https://i.imgur.com/DigWh5J.png", "https://i.imgur.com/nCikQaF.png" ],
-        description: "FEASBAKE Oven Double Deck merupakan mesin pemanggang profesional yang dirancang untuk mendukung kebutuhan produksi bakery dan bisnis HORECA dengan kapasitas lebih besar. Dilengkapi dengan dua ruang pemanggangan (deck), mesin ini memungkinkan proses pemanggangan dilakukan secara bersamaan sehingga membantu meningkatkan efisiensi dan produktivitas kerja. Cocok digunakan untuk memanggang berbagai jenis produk seperti roti, cake, cookies, brownies, pastry, dan aneka produk bakery lainnya. Dengan desain yang praktis dan kapasitas pemanggangan yang lebih optimal, oven ini menjadi pilihan tepat untuk bakery, café, restoran, hotel, maupun usaha kuliner."
+        description: "FEASBAKE Oven Double Deck merupakan mesin pemanggang profesional yang dirancang untuk mendukung kebutuhan produksi bakery dan bisnis HORECA dengan kapasitas lebih besar. Dilengkapi dengan dua ruang pemanggangan (deck), mesin ini memungkinkan proses pemanggangan dilakukan secara bersamaan sehingga membantu meningkatkan efisiensi dan produktivitas kerja. Cocok digunakan untuk memanggang berbagai jenis produk seperti roti, cake, cookies, brownies, pastry, dan aneka produk bakery lainnya. Dengan desain yang praktis dan kapasitas pemanggangan yang lebih optimal, oven ini menjadi pilihan tepat untuk bakery, café, restoran, hotel, maupun usaha kuliner.",
+        specs: {
+        "Kategori": "Mesin Bakery",
+        "Jenis Mesin": "Oven Double Deck",
+        "Konfigurasi": "2 Tingkat Pemanggangan",
+        "Aplikasi": "Pemanggangan Komersial",
+        "Penggunaan": "Bakery, Café, Restoran, Hotel, dan HORECA",
+        "Informasi Teknis": "Untuk informasi mengenai kapasitas, dimensi, daya listrik, konsumsi gas, dan fitur mesin, silakan hubungi tim sales FEASBAKE."
+        }
     },
     {
         id: 3,
