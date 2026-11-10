@@ -28,7 +28,7 @@ const products = [
         id: 2,
         name: "Oven Double Deck",
         category: "Bakery",
-        price: 14000000,
+        price: 15000000,
         image: [ "https://i.imgur.com/DigWh5J.png", "https://i.imgur.com/nCikQaF.png" ],
         description: "FEASBAKE Oven Double Deck merupakan mesin pemanggang profesional yang dirancang untuk mendukung kebutuhan produksi bakery dan bisnis HORECA dengan kapasitas lebih besar. Dilengkapi dengan dua ruang pemanggangan (deck), mesin ini memungkinkan proses pemanggangan dilakukan secara bersamaan sehingga membantu meningkatkan efisiensi dan produktivitas kerja. Cocok digunakan untuk memanggang berbagai jenis produk seperti roti, cake, cookies, brownies, pastry, dan aneka produk bakery lainnya. Dengan desain yang praktis dan kapasitas pemanggangan yang lebih optimal, oven ini menjadi pilihan tepat untuk bakery, café, restoran, hotel, maupun usaha kuliner.",
         specs: {
@@ -52,7 +52,7 @@ const products = [
         id: 4,
         name: "Meja Tray",
         category: "Bakery",
-        price: 9999999999,
+        price: 4000000,
         image: [ "https://i.imgur.com/gwYXsER.png" , "https://i.imgur.com/cPsEVOh.png" ],
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
